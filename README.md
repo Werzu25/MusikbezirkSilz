@@ -7,17 +7,15 @@
 # Arbeitaufteilung
 ## Frontend:
  ### Leon
-     * Arbeitsauftrag
+  - Arbeitsauftrag
  ### Julian
-     * Arbeitsauftrag
+  - Arbeitsauftrag
 ## Backend:
  ### Christian
-     * Erstellung der Generierseite
-     * Projektleitung
+  - Erstellung der Generierseite
+  - Projektleitung
  ### Peter
-     * Erstellen der Datenbank
-     * Weiterhelfen bei Team welches am wenigsten weit ist
+  - Erstellen der Datenbank
+  - Weiterhelfen bei Team welches am wenigsten weit ist
  ### Raphi 
-     * Erstellen der main PHP Logik/Seite
-  
-  
+  - Erstellen der main PHP Logik/Seite
