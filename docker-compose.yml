@@ -1,9 +1,9 @@
 services:
-  xampp:
-    image: tomsik68/xampp
-    container_name: xampp
-    ports:
-      - "41061:22"
-      - "41062:80"
-    volumes:
-      - ./src:/src
+    xampp:
+        image: tomsik68/xampp
+        container_name: xampp
+        ports:
+            - '41061:22'
+            - '41062:80'
+        volumes:
+            - ./src:/src
