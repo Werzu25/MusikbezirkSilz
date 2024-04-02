@@ -7,9 +7,7 @@
     "format": "npx prettier ./src --write && docker run -v $(pwd):/code ghcr.io/php-cs-fixer/php-cs-fixer:${FIXER_VERSION:-3-php8.3} fix ./src"
   },
   "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 2,
+    "tabWidth": 4,
     "printWidth": 80
   }
 }
