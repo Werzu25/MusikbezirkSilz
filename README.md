@@ -1,5 +1,7 @@
 <div align="center">
-  <h1>Website Projekt für den Musikbezirk Silz</h1>
+  <h1>Website Musikbezirk-Silz</h1>
 </div>
 
-Arbeitaufteilung
+[alte website](https://musikbezirk-silz.at)
+
+## Arbeitaufteilung
