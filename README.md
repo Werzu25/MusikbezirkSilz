@@ -5,19 +5,29 @@
 [alte website](https://musikbezirk-silz.at)
 
 ### Arbeitaufteilung
+
 ## Frontend:
- # Leon
+
+# Leon
+
      * Arbeitsauftrag
- # Julian
+
+# Julian
+
      * Arbeitsauftrag
+
 ## Backend:
- # Christian
+
+# Christian
+
      * Erstellung der Generierseite
      * Projektleitung
- # Peter
+
+# Peter
+
      * Erstellen der Datenbank
      * Weiterhelfen bei Team welches am wenigsten weit ist
- # Raphi 
+
+# Raphi
+
      * Erstellen der main PHP Logik/Seite
-  
-  
