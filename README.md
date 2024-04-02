@@ -8,7 +8,7 @@
 ## Frontend:
  # Leon
      * Arbeitsauftrag
- # Peter
+ # Julian
      * Arbeitsauftrag
 ## Backend:
  # Christian
