@@ -21,16 +21,7 @@
                         <span class="mdi mdi-calendar-month"></span> Events
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li>
-                            <a class="dropdown-item" href="#">Another action</a>
-                        </li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                                >Something else here</a
-                            >
-                        </li>
+                        <li><a class="dropdown-item" href="#">Bezirksmusikfest</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown border-start">
@@ -111,21 +102,19 @@
 
 <style lang="scss">
     .dropdown-menu {
-        display: none;
-        opacity: 0;
         &.show {
             display: block;
-            animation: dropdown-expand 0.5s
+            animation: dropdown-expand 0.5s;
         }
     }
     @keyframes dropdown-expand {
         from {
             opacity: 0;
-            height: 0;
+            transform: translateY(-15px);
         }
         to {
-            opacity: 100%;
-            height: 100%;
+            opacity: 1;
+            transform: translateY(0px);
         }
     }
 </style>

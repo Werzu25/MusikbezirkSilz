@@ -4,30 +4,34 @@
 
 [alte website](https://musikbezirk-silz.at)
 
-### Arbeitaufteilung
+# Dependencies
+- nodejs
+- docker
+
+# Arbeitaufteilung
 
 ## Frontend:
 
-# Leon
+### Leon
 
-     * Arbeitsauftrag
+- Arbeitsauftrag
 
-# Julian
+### Julian
 
-     * Arbeitsauftrag
+- Arbeitsauftrag
 
 ## Backend:
 
-# Christian
+### Christian
 
-     * Erstellung der Generierseite
-     * Projektleitung
+- Erstellung der Generierseite
+- Projektleitung
 
-# Peter
+### Peter
 
-     * Erstellen der Datenbank
-     * Weiterhelfen bei Team welches am wenigsten weit ist
+- Erstellen der Datenbank
+- Weiterhelfen bei Team welches am wenigsten weit ist
 
-# Raphi
+### Raphi
 
-     * Erstellen der main PHP Logik/Seite
+- Erstellen der main PHP Logik/Seite
