@@ -1,37 +1,39 @@
-<div align="center">
-  <h1>Website Musikbezirk-Silz</h1>
-</div>
+# MusikbezirkSilz
 
-[alte website](https://musikbezirk-silz.at)
+This template should help get you started developing with Vue 3 in Vite.
 
-# Dependencies
-- nodejs
-- docker
+## Recommended IDE Setup
 
-# Arbeitaufteilung
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Frontend:
+## Type Support for `.vue` Imports in TS
 
-### Leon
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
 
-- Arbeitsauftrag
+## Customize configuration
 
-### Julian
+See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-- Arbeitsauftrag
+## Project Setup
 
-## Backend:
+```sh
+npm install
+```
 
-### Christian
+### Compile and Hot-Reload for Development
 
-- Erstellung der Generierseite
-- Projektleitung
+```sh
+npm run dev
+```
 
-### Peter
+### Type-Check, Compile and Minify for Production
 
-- Erstellen der Datenbank
-- Weiterhelfen bei Team welches am wenigsten weit ist
+```sh
+npm run build
+```
 
-### Raphi
+### Lint with [ESLint](https://eslint.org/)
 
-- Erstellen der main PHP Logik/Seite
+```sh
+npm run lint
+```
