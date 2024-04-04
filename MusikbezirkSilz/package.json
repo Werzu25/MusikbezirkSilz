@@ -13,11 +13,13 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "mysql": "^2.18.1",
     "vue": "^3.4.21"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.3.3",
     "@tsconfig/node20": "^20.1.2",
+    "@types/mysql": "^2.15.26",
     "@types/node": "^20.11.28",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-prettier": "^8.0.0",
