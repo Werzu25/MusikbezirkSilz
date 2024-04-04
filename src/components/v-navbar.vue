@@ -3,8 +3,6 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiAccount } from '@mdi/js'
 </script>
 
-<template>
-
-</template>
+<template></template>
 
 <style scoped></style>
