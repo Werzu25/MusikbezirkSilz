@@ -1,13 +1,12 @@
 <script setup>
-import VFooter from './components/v-footer.vue'
+import AFooter from './components/A-Footer.vue'
 </script>
 
 <template>
-  <header></header>
 
   <main>
-    <v-footer>
-    </v-footer>
+    <a-footer>
+    </a-footer>
   </main>
 </template>
 
