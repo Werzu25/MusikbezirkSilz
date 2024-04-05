@@ -12,7 +12,7 @@ import * as directives from 'vuetify/directives'
 
 const vuetify = createVuetify({
   components,
-  directives,
+  directives
 })
 
 createApp(App).use(vuetify).mount('#app')
