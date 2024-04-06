@@ -8,5 +8,4 @@ import SceneBuilder from '@/components/SceneBuilder.vue'
   <a-footer></a-footer>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

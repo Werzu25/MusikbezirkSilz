@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 
-let components =  ref([]);
+let components = ref([])
 
 function dragStart(event) {
-  event.dataTransfer.dropEffect = "copy"
-  event.dataTransfer.effectAllowed = "copy"
+  event.dataTransfer.dropEffect = 'copy'
+  event.dataTransfer.effectAllowed = 'copy'
 }
 
 function dropEvent() {
@@ -19,21 +19,18 @@ ToDo:
 3. Fix the divider
 
 */
-
 </script>
 
 <template>
   <v-container class="sb-container">
     <v-row>
       <v-col>
-        <div draggable="true" @dragstart="dragStart($event,item)" class="componentMenu">
-
-        </div>
+        <div draggable="true" @dragstart="dragStart($event, item)" class="componentMenu"></div>
       </v-col>
       <v-divider :thickness="2" class="border-opacity-100 divider" vertical></v-divider>
       <v-col @drop="dropEvent($event)">
-        <div  class="componentList" v-for="items in components" :key="items">
-          {{items}}
+        <div class="componentList" v-for="items in components" :key="items">
+          {{ items }}
         </div>
       </v-col>
     </v-row>
