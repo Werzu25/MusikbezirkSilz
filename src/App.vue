@@ -1,11 +1,15 @@
 <script setup>
-import AFooter from './components/A-Footer.vue'
+import ASceneBuilderWrapper from '@/components/SceneBuilderWrapper.vue'
 </script>
 
 <template>
   <main>
-    <a-footer> </a-footer>
+    <a-scene-builder-wrapper class="sb"></a-scene-builder-wrapper>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.sb {
+  width: 100%;
+}
+</style>
