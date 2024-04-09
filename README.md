@@ -9,7 +9,7 @@
 - Vue & Bootstrap
 - nodejs
 - mariadb
-- docker (noch keine bestätigung von klotz also maybe alles umsonst)
+- docker & docker-compose (noch keine bestätigung von klotz also maybe alles umsonst)
 
 # Arbeitsaufteilung
 
