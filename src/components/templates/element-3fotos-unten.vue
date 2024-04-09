@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+
+</script>
 
 <template>
   <div class="container-fluid">
@@ -6,7 +8,12 @@
     <div class="text-center">Placeholder_content</div>
     <div class="container-fluid d-flex justify-content-center">
       <!-- Bild 1 mit Modal -->
-      <img src="Placeholder.png" class="grow m-2" data-bs-toggle="modal" data-bs-target="#modal1" />
+      <img
+        src="src/assets/placeholder.webp"
+        class="grow m-2"
+        data-bs-toggle="modal"
+        data-bs-target="#modal1"
+      />
 
       <!-- Modal für Bild 1 -->
       <div
@@ -19,7 +26,9 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel1">Bild 1 Vergrößerung</h5>
+              <h5 class="modal-title" id="modalLabel1">
+                Bild 1 Vergrößerung
+              </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -28,14 +37,19 @@
               ></button>
             </div>
             <div class="modal-body">
-              <img src="Placeholder.png" class="img-fluid" />
+              <img src="src/assets/placeholder.webp" class="img-fluid" />
             </div>
           </div>
         </div>
       </div>
 
       <!-- Bild 2 mit Modal -->
-      <img src="Placeholder.png" class="grow m-2" data-bs-toggle="modal" data-bs-target="#modal2" />
+      <img
+        src="src/assets/placeholder.webp"
+        class="grow m-2"
+        data-bs-toggle="modal"
+        data-bs-target="#modal2"
+      />
 
       <!-- Modal für Bild 2 -->
       <div
@@ -48,7 +62,9 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel2">Bild 2 Vergrößerung</h5>
+              <h5 class="modal-title" id="modalLabel2">
+                Bild 2 Vergrößerung
+              </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -57,14 +73,19 @@
               ></button>
             </div>
             <div class="modal-body">
-              <img src="Placeholder.png" class="img-fluid" />
+              <img src="src/assets/placeholder.webp" class="img-fluid" />
             </div>
           </div>
         </div>
       </div>
 
       <!-- Bild 3 mit Modal -->
-      <img src="Placeholder.png" class="grow m-2" data-bs-toggle="modal" data-bs-target="#modal3" />
+      <img
+        src="src/assets/placeholder.webp"
+        class="grow m-2"
+        data-bs-toggle="modal"
+        data-bs-target="#modal3"
+      />
 
       <!-- Modal für Bild 3 -->
       <div
@@ -77,7 +98,9 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel3">Bild 3 Vergrößerung</h5>
+              <h5 class="modal-title" id="modalLabel3">
+                Bild 3 Vergrößerung
+              </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -86,7 +109,7 @@
               ></button>
             </div>
             <div class="modal-body">
-              <img src="Placeholder.png" class="img-fluid" />
+              <img src="src/assets/placeholder.webp" class="img-fluid" />
             </div>
           </div>
         </div>
