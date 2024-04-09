@@ -1,35 +1,12 @@
-# vue-project
+<div align="center">
+  <h1>Website Musikbezirk-Silz</h1>
+</div>
 
-This template should help get you started developing with Vue 3 in Vite.
+[alte website](https://musikbezirk-silz.at)
 
-## Recommended IDE Setup
+# Techstack
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Vue & Bootstrap
+- nodejs
+- mariadb
+- docker (noch keine bestätigung von klotz also maybe alles umsonst)
