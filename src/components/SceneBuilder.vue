@@ -6,10 +6,14 @@ let components = ref([])
 function dragStart(event) {
   event.dataTransfer.dropEffect = 'copy'
   event.dataTransfer.effectAllowed = 'copy'
+  event.dataTransfer.setData('text/html', event.target.outerHTML)
+  debugger
 }
 
-function dropEvent() {
-  components.value.push(this.items)
+function dropEvent(event) {
+  let data = event.dataTransfer.getData('text/html')
+  components.value.push(data)
+  debugger
 }
 
 /*
@@ -25,12 +29,26 @@ ToDo:
   <v-container class="sb-container">
     <v-row>
       <v-col>
-        <div draggable="true" @dragstart="dragStart($event, item)" class="componentMenu"></div>
+        <v-img
+          src="src/assets/placeholder.webp"
+          draggable="true"
+          @dragenter="$event.preventDefault()"
+          @dragleave="$event.preventDefault()"
+          @dragover="$event.preventDefault()"
+          @dragstart="dragStart($event)"
+          class="componentMenu h-100 w-100"
+        ></v-img>
       </v-col>
       <v-divider :thickness="2" class="border-opacity-100 divider" vertical></v-divider>
-      <v-col @drop="dropEvent($event)">
-        <div class="componentList" v-for="items in components" :key="items">
-          {{ items }}
+      <v-col
+        @dragenter="$event.preventDefault()"
+        @dragleave="$event.preventDefault()"
+        @dragover="$event.preventDefault()"
+        @dragstart="$event.preventDefault()"
+        @drop="dropEvent($event)"
+      >
+        <div class="componentList" v-for="items in components">
+          {{items}}
         </div>
       </v-col>
     </v-row>

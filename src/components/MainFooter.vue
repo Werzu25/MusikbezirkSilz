@@ -21,7 +21,7 @@
 
 <style scoped>
 .container {
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
 

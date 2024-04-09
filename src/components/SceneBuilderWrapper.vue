@@ -5,7 +5,6 @@ import SceneBuilder from '@/components/SceneBuilder.vue'
 
 <template>
   <scene-builder></scene-builder>
-  <a-footer></a-footer>
 </template>
 
 <style scoped></style>
