@@ -10,3 +10,9 @@
 - nodejs
 - mariadb
 - docker (noch keine bestätigung von klotz also maybe alles umsonst)
+
+# Arbeitsaufteilung
+
+- Leon (macht auch noch ein bissi backend) & Julian Frontend
+- Raphael (Docker) & Chris Backend
+- Peter Database (hilft danach da wo hilfe benötigt wird)
