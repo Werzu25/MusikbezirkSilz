@@ -2,11 +2,12 @@
 import { ref } from 'vue'
 
 let components = ref([])
+let parser = new DOMParser()
 
 function dragStart(event) {
   event.dataTransfer.dropEffect = 'copy'
   event.dataTransfer.effectAllowed = 'copy'
-  event.dataTransfer.setData('text/html', event.target.outerHTML)
+  event.dataTransfer.setData("", event.target.outerHTML)
   debugger
 }
 
@@ -48,7 +49,7 @@ ToDo:
         @drop="dropEvent($event)"
       >
         <div class="componentList" v-for="items in components">
-          {{items}}
+          {{parser.parseFromString(items,"text/html")}}
         </div>
       </v-col>
     </v-row>
