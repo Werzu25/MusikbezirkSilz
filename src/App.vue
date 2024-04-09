@@ -1,12 +1,12 @@
 <script setup>
 import ASceneBuilderWrapper from '@/components/SceneBuilderWrapper.vue'
 import AFooter from '@/components/MainFooter.vue'
+import Element3FotosUnten from '@/components/templates/element-3fotos-unten.vue'
 </script>
 
 <template>
   <main>
-    <a-scene-builder-wrapper class="sb"></a-scene-builder-wrapper>
-    <a-footer></a-footer>
+    <element-3fotos-unten-vue></element-3fotos-unten-vue>
   </main>
 </template>
 
