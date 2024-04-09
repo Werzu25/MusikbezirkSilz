@@ -1,14 +1,16 @@
 <script setup>
 import AppFooter from '@/components/AppFooter.vue'
 import AppNavbar from '@/components/AppNavbar.vue'
-import elementfotolinks from '@/components/templates/ImageLeft.vue'
+import ImageLeft from '@/components/templates/ImageLeft.vue'
+import ImageRight from '@/components/templates/ImageRight.vue'
 </script>
 
 <template>
   <main>
     <AppNavbar></AppNavbar>
     <AppFooter></AppFooter>
-    <elementfotolinks></elementfotolinks>
+    <image-left></image-left>
+    <image-right></image-right>
   </main>
 </template>
 
