@@ -9,7 +9,7 @@
     <div class="container-fluid d-flex justify-content-center">
       <!-- Bild 1 mit Modal -->
       <img
-        src="Placeholder.png"
+        src="src/assets/placeholder.webp"
         class="grow m-2"
         data-bs-toggle="modal"
         data-bs-target="#modal1"
@@ -37,7 +37,7 @@
               ></button>
             </div>
             <div class="modal-body">
-              <img src="Placeholder.png" class="img-fluid" />
+              <img src="src/assets/placeholder.webp" class="img-fluid" />
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
 
       <!-- Bild 2 mit Modal -->
       <img
-        src="Placeholder.png"
+        src="src/assets/placeholder.webp"
         class="grow m-2"
         data-bs-toggle="modal"
         data-bs-target="#modal2"
@@ -73,7 +73,7 @@
               ></button>
             </div>
             <div class="modal-body">
-              <img src="Placeholder.png" class="img-fluid" />
+              <img src="src/assets/placeholder.webp" class="img-fluid" />
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@
 
       <!-- Bild 3 mit Modal -->
       <img
-        src="Placeholder.png"
+        src="src/assets/placeholder.webp"
         class="grow m-2"
         data-bs-toggle="modal"
         data-bs-target="#modal3"
@@ -109,7 +109,7 @@
               ></button>
             </div>
             <div class="modal-body">
-              <img src="Placeholder.png" class="img-fluid" />
+              <img src="src/assets/placeholder.webp" class="img-fluid" />
             </div>
           </div>
         </div>
