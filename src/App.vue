@@ -1,12 +1,13 @@
 <script setup>
-import ASceneBuilderWrapper from '@/components/SceneBuilderWrapper.vue'
-import AFooter from '@/components/MainFooter.vue'
+import Footer from '@/components/Footer.vue'
+import Navbar from '@/components/Navbar.vue'
 </script>
 
 <template>
   <main>
-    <a-footer></a-footer>
+    <navbar></navbar>
   </main>
+  <footer></footer>
 </template>
 
 <style scoped>
