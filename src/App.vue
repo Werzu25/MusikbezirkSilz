@@ -1,13 +1,13 @@
 <script setup>
-import Footer from '@/components/Footer.vue'
-import Navbar from '@/components/Navbar.vue'
+import AppFooter from '@/components/AppFooter.vue'
+import AppNavbar from '@/components/AppNavbar.vue'
 </script>
 
 <template>
   <main>
-    <navbar></navbar>
+    <AppNavbar />
+    <AppFooter />
   </main>
-  <footer></footer>
 </template>
 
 <style scoped>
