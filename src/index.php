@@ -3,9 +3,9 @@
 <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 
 <?php
-require_once "header.html";
-require_once "navbar.html";
-require_once "footer.html";
+require_once 'templates/header.php';
+require_once 'templates/navbar.php';
+require_once 'templates/footer.php';
 ?>
 <!doctype html>
 <html lang="en">
