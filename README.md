@@ -4,34 +4,15 @@
 
 [alte website](https://musikbezirk-silz.at)
 
-# Dependencies
+# Techstack
+
+- Vue & Bootstrap
 - nodejs
-- docker
+- mariadb
+- docker & docker-compose (Bestäigt von Klotz Hannes)
 
-# Arbeitaufteilung
+# Arbeitsaufteilung
 
-## Frontend:
-
-### Leon
-
-- Arbeitsauftrag
-
-### Julian
-
-- Arbeitsauftrag
-
-## Backend:
-
-### Christian
-
-- Erstellung der Generierseite
-- Projektleitung
-
-### Peter
-
-- Erstellen der Datenbank
-- Weiterhelfen bei Team welches am wenigsten weit ist
-
-### Raphi
-
-- Erstellen der main PHP Logik/Seite
+- Leon (macht auch noch ein bissi backend) & Julian Frontend
+- Raphael (Docker) & Chris Backend
+- Peter Database (hilft danach da wo hilfe benötigt wird)

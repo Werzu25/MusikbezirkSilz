@@ -1,0 +1,8 @@
+@import 'base.css';
+
+#app {
+  width: 100vw;
+}
+.material-icons {
+  padding-bottom: 2px;
+}
