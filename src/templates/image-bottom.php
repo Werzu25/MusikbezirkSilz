@@ -1,5 +1,3 @@
-
-
 <div class="container-fluid">
     <h4 class="text-center text-danger card-title">Content_titel</h4>
     <div class="text-center">Placeholder_content</div>
