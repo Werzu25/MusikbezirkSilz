@@ -22,5 +22,3 @@ function renderimageleft($title,$content,$picture,$time){
     </div>
 </div>';
 }
-
-?>

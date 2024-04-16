@@ -20,5 +20,4 @@ require_once 'templates/footer.php';
 </body>
 
 </html>
-<style>
-</style>
+<style></style>
