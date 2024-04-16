@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-body-secondary">
+<?php
+function renderNavbar()
+{
+    echo '<nav class="navbar navbar-expand-lg bg-body-secondary">
     <div class="container-fluid">
         <div
             class="collapse navbar-collapse justify-content-center"
@@ -111,7 +114,8 @@
         </div>
     </div>
 </nav>
-
+';
+} ?>
 <style lang="scss">
     .dropdown-menu {
         &.show {

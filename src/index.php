@@ -9,9 +9,9 @@
 />
 
 <?php
-require_once "templates/header.php";
-require_once "templates/navbar.php";
-require_once "templates/footer.php";
+require_once 'templates/header.php';
+require_once 'templates/navbar.php';
+require_once 'templates/footer.php';
 ?>
 <!doctype html>
 <html lang="en">
