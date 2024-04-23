@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS gallery (
 
 CREATE TABLE IF NOT EXISTS imgvid (
     imgvidID INT NOT NULL AUTO_INCREMENT primary key,
-    fileURL varchar(460)
+    fileURL TINYTEXT,
 );
 
 CREATE TABLE IF NOT EXISTS subMenuEntry (
@@ -35,4 +35,11 @@ CREATE TABLE IF NOT EXISTS galleryEntry (
     order tinyint UNSIGNED,
     imgvidID int NOT NULL,
     galleryid INT
+);
+
+CREATE TABLE IF NOT EXISTS Table_e (
+    mainID INT NOT NULL AUTO_INCREMENT primary key,
+    text_l TEXT,
+    text_r TEXT,
+
 );
