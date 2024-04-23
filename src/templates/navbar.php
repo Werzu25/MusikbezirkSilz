@@ -1,5 +1,5 @@
 <?php
-require_once 'utils.php';
+require_once '../util.php';
 $MainEntries = fetchTable('mainMenuEntry');
 $SubEntries = fetchTable('subMenuEntry');
 echo '

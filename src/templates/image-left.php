@@ -31,5 +31,3 @@ function renderImageLeft($title, $content, $picture, $time)
     </div>
 </div>';
 }
-
-?>
