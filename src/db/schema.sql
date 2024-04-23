@@ -14,22 +14,25 @@ CREATE TABLE IF NOT EXISTS gallery (
 );
 
 CREATE TABLE IF NOT EXISTS imgvid (
-    mainID INT NOT NULL AUTO_INCREMENT primary key,
+    imgvidID INT NOT NULL AUTO_INCREMENT primary key,
+    fileURL varchar(460)
 );
 
 CREATE TABLE IF NOT EXISTS subMenuEntry (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
-    name
+    name varchar(30),
     order tinyint UNSIGNED
 );
 
 CREATE TABLE IF NOT EXISTS entry (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
     order tinyint UNSIGNED
+
 );
 
 CREATE TABLE IF NOT EXISTS galleryEntry (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
     order tinyint UNSIGNED,
-
+    imgvidID int NOT NULL,
+    galleryid INT
 );
