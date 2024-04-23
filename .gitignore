@@ -1,5 +1,5 @@
 .idea
 .vscode
-launch.json
+dist
 node_modules
 .php-cs-fixer.cache
