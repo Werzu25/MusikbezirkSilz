@@ -4,10 +4,6 @@
 
 [alte website](https://musikbezirk-silz.at)
 
-# Dependencies
-- nodejs
-- docker
-
 # Arbeitaufteilung
 
 ## Frontend:
