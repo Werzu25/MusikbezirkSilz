@@ -34,5 +34,5 @@ CREATE TABLE IF NOT EXISTS galleryEntry (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
     order tinyint UNSIGNED,
     imgvidID int NOT NULL,
-    gallery
+    galleryid INT
 );
