@@ -1,7 +1,7 @@
 <?php
-$TableFetcher = require_once "utils.php";
-$MainEntries = $TableFetcher.fetchTable("");
-$SubEntries = $TableFetcher.fetchTable("");
+$TableFetcher = require_once 'utils.php';
+$MainEntries = $TableFetcher . fetchTable('');
+$SubEntries = $TableFetcher . fetchTable('');
 echo '
 <nav class="navbar navbar-expand-lg bg-body-secondary">
     <div class="container-fluid">
@@ -13,19 +13,25 @@ echo '
         ';
 foreach ($MainEntries as $MainEntry) {
   echo '<li class="nav-item border-start">
-                    <a class="nav-link active"><span class="mdi'.$MainEntry[icon].'">'.$MainEntry[text].'</span></a>
-                </li>';
+            <a class="nav-link active"><span class="mdi' .
+    $MainEntry[icon] .
+    '">' .
+    $MainEntry[text] .
+    '</span></a>
+         </li>';
 }
 foreach ($SubEntries as $SubEntry) {
   echo '<li class="nav-item dropdown border-start">
-                    <a
+            <a
                             class="nav-link dropdown-toggle"
                             href="#"
                             role="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                     >
-                    <span>'.$SubEntry[text].'</span>
+                    <span>' .
+    $SubEntry[text] .
+    '</span>
                     </a>';
 }
 echo '
