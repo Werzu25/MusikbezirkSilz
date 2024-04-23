@@ -1,5 +1,5 @@
 <?php
-function renderimageright($title, $content, $picture, $time)
+function renderImageRight($title, $content, $picture, $time)
 {
   echo '<div class="card mb-3 border-light" style="max-width: 540px">
     <div class="row g-0">
