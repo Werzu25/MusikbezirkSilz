@@ -1,5 +1,5 @@
 <?php
-function fetchTable(string $table)
+function fetchTable($table)
 {
     $conn = new mysqli("localhost", getenv("USERNAME"), getenv("PASSWORD"), "database");
 
@@ -18,3 +18,23 @@ function fetchTable(string $table)
     $conn->close();
     return $tableData;
 }
+
+function customSelect($select)
+{
+    $conn = new mysqli("localhost", getenv("USERNAME"), getenv("PASSWORD"), "database");
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $result = $conn->query($select);
+
+    $tableData = array();
+    while ($row = $result->fetch_assoc()) {
+        $tableData[] = $row;
+    }
+
+    $conn->close();
+    return $tableData;
+}
+
