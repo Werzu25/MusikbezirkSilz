@@ -1,4 +1,7 @@
 <?php
+$TableFetcher = require_once "utils.php";
+$MainEntries = $TableFetcher.fetchTable("");
+$SubEntries = $TableFetcher.fetchTable("");
 echo '
 <nav class="navbar navbar-expand-lg bg-body-secondary">
     <div class="container-fluid">
