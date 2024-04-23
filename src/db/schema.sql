@@ -15,18 +15,30 @@ CREATE TABLE IF NOT EXISTS gallery (
 
 CREATE TABLE IF NOT EXISTS imgvid (
     imgvidID INT NOT NULL AUTO_INCREMENT primary key,
-    fileURL TINYTEXT,
+    fileURL varchar(510),
 );
 
 CREATE TABLE IF NOT EXISTS subMenuEntry (
-    mainID INT NOT NULL AUTO_INCREMENT primary key,
+    subID INT NOT NULL AUTO_INCREMENT primary key,
     name varchar(30),
     order tinyint UNSIGNED
+    mainID int,
+    FOREIGN KEY (mainID) REFERENCES mainMenuEntry(mainID)
 );
 
 CREATE TABLE IF NOT EXISTS entry (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
-    order tinyint UNSIGNED
+    order tinyint UNSIGNED,
+    title varchar(255),
+    subtitle varchar(255),
+    text_entry text,
+    TemplateName varchar(60),
+    has_gallery BOOLEAN,
+    has_imgvid BOOLEAN,
+    is_table BOOLEAN,
+    subID int,
+    
+    FOREIGN KEY (TemplateName) REFERENCES template(TemplateName),
 
 );
 
