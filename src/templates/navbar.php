@@ -1,7 +1,7 @@
 <?php
 require_once 'utils.php';
-$MainEntries = fetchTable('main_entries');
-$SubEntries = fetchTable('sub_entries');
+$MainEntries = fetchTable('mainMenuEntry');
+$SubEntries = fetchTable('subMenuEntry');
 echo '
 <nav class="navbar navbar-expand-lg bg-body-secondary">
     <div class="container-fluid">
