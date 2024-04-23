@@ -13,7 +13,7 @@ echo '
         ';
 foreach ($MainEntries as $MainEntry) {
     echo '<li class="nav-item border-start">
-                    <a class="nav-link active"><span class="mdi' . $MainEntry[icon] . '">' . $MainEntry[text] . '</span></a>
+                    <a class="nav-link active"><span class="mdi' . $MainEntry[0] . '">' . $MainEntry[1] . '</span></a>
                 </li>';
 }
 foreach ($SubEntries as $SubEntry) {
@@ -25,7 +25,7 @@ foreach ($SubEntries as $SubEntry) {
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                     >
-                    <span>' . $SubEntry[text] . '</span>
+                    <span>' . $SubEntry[1] . '</span>
                     </a>';
 }
 echo '

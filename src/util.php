@@ -37,4 +37,3 @@ function customSelect($select)
     $conn->close();
     return $tableData;
 }
-
