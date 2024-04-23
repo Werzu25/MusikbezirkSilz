@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS MusikbezirkSilz;
+
+USE MusikbezirkSilz;
+
 CREATE TABLE IF NOT EXISTS mainMenuEntry (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
     name varchar(30),
@@ -27,7 +31,7 @@ CREATE TABLE IF NOT EXISTS subMenuEntry (
 );
 
 CREATE TABLE IF NOT EXISTS entry (
-    mainID INT NOT NULL AUTO_INCREMENT primary key,
+    entryID INT NOT NULL AUTO_INCREMENT primary key,
     order tinyint UNSIGNED,
     title varchar(255),
     subtitle varchar(255),
@@ -36,22 +40,28 @@ CREATE TABLE IF NOT EXISTS entry (
     has_gallery BOOLEAN,
     has_imgvid BOOLEAN,
     is_table BOOLEAN,
-    subID int,
-    
+    subID INT,
+    galleryID INT,
+    imgvidID INT,
     FOREIGN KEY (TemplateName) REFERENCES template(TemplateName),
-
+    FOREIGN KEY (subID) REFERENCES  subMenuEntry (subID),
+    FOREIGN KEY (galleryID) REFERENCES gallery(galleryID),
+    FOREIGN KEY (imgvidID) REFERENCES imgvid(imgvidID)
 );
 
 CREATE TABLE IF NOT EXISTS galleryEntry (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
     order tinyint UNSIGNED,
     imgvidID int NOT NULL,
-    galleryid INT
+    galleryID INT,
+    FOREIGN KEY (imgvidID) REFERENCES imgvid(imgvidID),
+    FOREIGN KEY (galleryID) REFERENCES gallery(galleryID)
 );
 
 CREATE TABLE IF NOT EXISTS Table_e (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
     text_l TEXT,
     text_r TEXT,
-
+    entryID int NOT NULL,
+    FOREIGN KEY (entryID) REFERENCES entry(entryID)
 );
