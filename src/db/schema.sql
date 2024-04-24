@@ -12,11 +12,6 @@ CREATE TABLE IF NOT EXISTS template (
     TemplateName varchar(60) NOT NULL primary key
 );
 
-CREATE TABLE IF NOT EXISTS gallery (
-    galleryID INT NOT NULL AUTO_INCREMENT primary key,
-    name varchar(255)
-);
-
 CREATE TABLE IF NOT EXISTS imgvid (
     imgvidID INT NOT NULL AUTO_INCREMENT primary key,
     fileURL varchar(510)
@@ -41,11 +36,9 @@ CREATE TABLE IF NOT EXISTS entry (
     has_imgvid BOOLEAN,
     is_table BOOLEAN,
     subID INT,
-    galleryID INT,
     imgvidID INT,
     FOREIGN KEY (TemplateName) REFERENCES template(TemplateName),
     FOREIGN KEY (subID) REFERENCES  subMenuEntry (subID),
-    FOREIGN KEY (galleryID) REFERENCES gallery(galleryID),
     FOREIGN KEY (imgvidID) REFERENCES imgvid(imgvidID)
 );
 
@@ -57,6 +50,14 @@ CREATE TABLE IF NOT EXISTS galleryEntry (
     FOREIGN KEY (imgvidID) REFERENCES imgvid(imgvidID),
     FOREIGN KEY (galleryID) REFERENCES gallery(galleryID)
 );
+
+CREATE TABLE IF NOT EXISTS gallery (
+    galleryID INT NOT NULL AUTO_INCREMENT primary key,
+    name varchar(255),
+    entryID INT,
+    FOREIGN KEY (entryID) REFERENCES entry(entryID)
+);
+
 
 CREATE TABLE IF NOT EXISTS Table_e (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
