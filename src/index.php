@@ -4,7 +4,9 @@
 
 <?php
 require_once 'templates/header.php';
-require_once 'templates/navbar.php';
+
+$image_left =  require_once 'templates/image-left.php';
+$image_left.renderImageLeft("test","etst","../../assets/images/logo.png","0");
 require_once 'templates/footer.php';
 ?>
 <!doctype html>
