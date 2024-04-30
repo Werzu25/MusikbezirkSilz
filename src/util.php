@@ -1,8 +1,8 @@
 <?php
 function fetchTable(string $table)
 {
-  $conn = new mysqli('localhost', getenv('USERNAME'), getenv('PASSWORD'), 'database');
-
+  //$conn = new mysqli('localhost', getenv('USERNAME'), getenv('PASSWORD'), 'MusikbezirkSilz');
+  $conn = new mysqli('localhost', 'root', '', 'MusikbezirkSilz'); //TODO auf ENV vars umstellen 
   if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
   }
@@ -21,8 +21,8 @@ function fetchTable(string $table)
 
 function customSelect(string $sql)
 {
-  $conn = new mysqli('localhost', getenv('USERNAME'), getenv('PASSWORD'), 'database');
-
+  //$conn = new mysqli('localhost', getenv('USERNAME'), getenv('PASSWORD'), 'MusikbezirkSilz');
+  $conn = new mysqli('localhost', 'root', '', 'MusikbezirkSilz'); //TODO auf ENV vars umstellen 
   if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
   }
