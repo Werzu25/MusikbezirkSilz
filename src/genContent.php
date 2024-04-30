@@ -26,19 +26,20 @@ switch ($templateName) {
   case 'image-left':
     $title = $entrys['title'];
     $content = $entrys['text_entry'];
-    $picture = $entrys['picture'];
+    $pictureId = $entrys['imgvidID'];
+    $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0]['fileURL'];
     $time = /*$entrys['time']*/0;
     include 'templates/image-left.php';
-
     renderImageLeft($title, $content, $picture, $time);
     break;
+
   case 'image-right':
     $title = $entrys['title'];
-    $content = $entrys['content'];
-    $picture = $entrys['picture'];
+    $content = $entrys['text_entry'];
+    $pictureId = $entrys['imgvidID'];
+    $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0]['fileURL'];
     $time = /*$entrys['time']*/0;
     include 'templates/image-right.php';
-
     renderImageRight($title, $content, $picture, $time);
     break;
 }
