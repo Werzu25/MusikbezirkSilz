@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS entry (
     is_table BOOLEAN,
     subID INT,
     FOREIGN KEY (TemplateName) REFERENCES template(TemplateName),
-    FOREIGN KEY (subID) REFERENCES  subMenuEntry (subID),
+    FOREIGN KEY (subID) REFERENCES  subMenuEntry (subID)
 );
 
 CREATE TABLE IF NOT EXISTS imgvid_entry (
@@ -46,14 +46,6 @@ CREATE TABLE IF NOT EXISTS imgvid_entry (
     primary key (imgvidID, entryID),
     FOREIGN KEY (imgvidID) REFERENCES imgvid(imgvidID),
     FOREIGN KEY (entryID) REFERENCES entry(entryID)
-
-CREATE TABLE IF NOT EXISTS galleryEntry (
-    mainID INT NOT NULL AUTO_INCREMENT primary key,
-    structure tinyint UNSIGNED,
-    imgvidID int NOT NULL,
-    galleryID INT,
-    FOREIGN KEY (imgvidID) REFERENCES imgvid(imgvidID),
-    FOREIGN KEY (galleryID) REFERENCES gallery(galleryID)
 );
 
 CREATE TABLE IF NOT EXISTS gallery (
@@ -63,7 +55,14 @@ CREATE TABLE IF NOT EXISTS gallery (
     FOREIGN KEY (entryID) REFERENCES entry(entryID)
 );
 
-
+CREATE TABLE IF NOT EXISTS galleryEntry (
+    mainID INT NOT NULL AUTO_INCREMENT primary key,
+    structure tinyint UNSIGNED,
+    imgvidID int NOT NULL,
+    galleryID INT,
+    FOREIGN KEY (imgvidID) REFERENCES imgvid(imgvidID),
+    FOREIGN KEY (galleryID) REFERENCES gallery(galleryID)
+);
 CREATE TABLE IF NOT EXISTS Table_e (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
     text_l TEXT,
