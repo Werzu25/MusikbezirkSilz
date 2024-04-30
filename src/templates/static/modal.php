@@ -5,15 +5,15 @@ $imageUrl = $modalData["imageUrl"];
 $title = $modalData["title"];
 $modalText = $modalData["modalText"];
 echo '
-<link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<link href="../../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+<link href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<link href="../../../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 
 <div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popup" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">'.$title.'</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">' .$title.'</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
