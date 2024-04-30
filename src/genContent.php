@@ -1,7 +1,7 @@
 <?php
 include 'util.php';
-include 'templates/header.php';
-//include 'templates/navbar.php';
+include 'templates/static/header.php';
+//include 'templates/dynamic/navbar.php';
 
 if (isset($_REQUEST['sideId'])) {
   $sideId = $_REQUEST['sideId'];
@@ -19,9 +19,6 @@ $entrys = $entrys[0];
 
 $templateName = $entrys['TemplateName'];
 
-echo $templateName;
-
-
 switch ($templateName) {
   case 'image-left':
     $title = $entrys['title'];
@@ -29,7 +26,7 @@ switch ($templateName) {
     $pictureId = $entrys['imgvidID'];
     $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0]['fileURL'];
     $time = /*$entrys['time']*/0;
-    include 'templates/image-left.php';
+    include 'templates/dynamic/image-left.php';
     renderImageLeft($title, $content, $picture, $time);
     break;
 
@@ -39,7 +36,7 @@ switch ($templateName) {
     $pictureId = $entrys['imgvidID'];
     $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0]['fileURL'];
     $time = /*$entrys['time']*/0;
-    include 'templates/image-right.php';
+    include 'templates/dynamic/image-right.php';
     renderImageRight($title, $content, $picture, $time);
     break;
 }
