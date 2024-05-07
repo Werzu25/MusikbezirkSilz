@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS entry (
     title varchar(255),
     subtitle varchar(255),
     text_entry text,
+    crdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     TemplateName varchar(60),
     has_gallery BOOLEAN,
     has_imgvid BOOLEAN,
@@ -66,6 +67,7 @@ CREATE TABLE IF NOT EXISTS galleryEntry (
 CREATE TABLE IF NOT EXISTS Table_e (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
     text_l TEXT,
+    text_m TEXT,
     text_r TEXT,
     entryID int NOT NULL,
     FOREIGN KEY (entryID) REFERENCES entry(entryID)
