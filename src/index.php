@@ -5,7 +5,7 @@
 <?php
 require_once 'templates/header.php';
 
-$image_left =  require_once 'templates/image-left.php';
+$image_left =  require_once 'templates/image-text.php';
 $image_left.renderImageLeft("test","etst","../../assets/images/logo.png","0");
 require_once 'templates/footer.php';
 ?>

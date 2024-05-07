@@ -26,7 +26,7 @@ switch ($templateName) {
     $pictureId = $entrys['imgvidID'];
     $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0]['fileURL'];
     $time = /*$entrys['time']*/0;
-    include 'templates/dynamic/image-left.php';
+    include 'templates/dynamic/image-text.php';
     renderImageLeft($title, $content, $picture, $time);
     break;
 
