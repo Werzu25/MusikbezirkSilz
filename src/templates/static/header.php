@@ -6,7 +6,7 @@
     <div class="row align-items-center">
         <div class="col">
 
-            <img class="img-fluid logoImage" alt="Musikbezirk Silz Logo" src="../../assets/images/Logo-MB-Silz-mini2.jpeg" />
+            <img class="img-fluid logoImage" alt="Musikbezirk Silz Logo" src="../assets/images/Logo-MB-Silz-mini2.jpeg" />
         </div>
         <div class="col">
             <p class="h1">Musikbezirk Silz</p>
