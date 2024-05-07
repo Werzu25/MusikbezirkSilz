@@ -1,5 +1,4 @@
 <?php
-require_once '../util.php';
 $MainEntries = fetchTable('mainMenuEntry');
 $SubEntries = fetchTable('subMenuEntry');
 $icon = 0;
