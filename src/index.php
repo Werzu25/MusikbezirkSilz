@@ -3,11 +3,9 @@
 <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 
 <?php
-require_once 'util.php';
+require_once 'util.php';-
 require_once 'templates/static/header.php';
 require_once 'templates/dynamic/navbar.php';
-$image_left =  require_once 'templates/dynamic/image-left.php';
-$image_left.renderImageLeft("test","etst","../assets/images/logo.png","0");
 require_once 'templates/static/footer.php';
 ?>
 <!doctype html

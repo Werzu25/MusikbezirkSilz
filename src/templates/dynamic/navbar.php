@@ -1,8 +1,6 @@
 <?php
 $MainEntries = fetchTable('mainMenuEntry');
 $SubEntries = fetchTable('subMenuEntry');
-$icon = 0;
-$text = 1;
 echo '
 <nav class="navbar navbar-expand-lg bg-body-secondary">
     <div class="container-fluid">
@@ -15,9 +13,9 @@ echo '
 foreach ($MainEntries as $MainEntry) {
   echo '<li class="nav-item border-start">
             <a class="nav-link active"><span class="mdi' .
-    $MainEntry[$icon] .
+    $MainEntry["icon"] .
     '">' .
-    $MainEntry[$text] .
+    $MainEntry["name"] .
     '</span></a>
          </li>';
 }
@@ -31,7 +29,7 @@ foreach ($SubEntries as $SubEntry) {
                             aria-expanded="false"
                     >
                     <span>' .
-    $SubEntry[1] .
+    $SubEntry["name"] .
     '</span>
                     </a>';
 }
