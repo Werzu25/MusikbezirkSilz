@@ -5,6 +5,7 @@ USE MusikbezirkSilz;
 CREATE TABLE IF NOT EXISTS mainMenuEntry (
     mainID INT NOT NULL AUTO_INCREMENT primary key,
     name VARCHAR(30),
+    icon varchar(60),
     structure tinyint UNSIGNED
 );
 
