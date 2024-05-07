@@ -35,4 +35,14 @@ window.onload = () => {
 
 </script>
 ';
+
+function changeModalData($title,$modalText,$imageURL) {
+    $data = array(
+        "title" => $title,
+        "modalText" => $modalText,
+        "imageUrl" => $imageURL
+    );
+    $jsonData = json_encode($data);
+    file_put_contents('../../assets/modal.json', $jsonData);
+}
 ?>
