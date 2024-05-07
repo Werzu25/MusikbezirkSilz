@@ -9,8 +9,26 @@ if (isset($_REQUEST['sideId'])) {
   $sideId = 0;
   header('Location: index.php');
 }
+$amountOfEntrys = customSelect("SELECT COUNT(*) FROM entry WHERE entry.subID = $sideId")[0]['COUNT(*)'];
+$AllEntry = customSelect("SELECT * FROM entry WHERE entry.subID = $sideId");
+for ($i = 1; $i <= $amountOfEntrys; $i++) {
+  $entry = $AllEntry[$i - 1];
+  
+  $templateName = $entrys['TemplateName'];
 
-$entrys = customSelect("SELECT * FROM entry WHERE entry.subID = $sideId");
+  switch ($templateName) {
+    case 'image-left':
+      $title = $entrys['title'];
+      $content = $entrys['text_entry'];
+      $pictureId = $entrys['imgvidID'];
+      echo $title;
+      break;
+}
+
+  
+}
+
+/*$entrys = customSelect("SELECT * FROM entry WHERE entry.subID = $sideId");
 
 if(count($entrys) == 0){
   header('Location: index.php');
@@ -25,8 +43,8 @@ switch ($templateName) {
     $content = $entrys['text_entry'];
     $pictureId = $entrys['imgvidID'];
     $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0]['fileURL'];
-    $time = /*$entrys['time']*/0;
-    include 'templates/dynamic/image-text.php';
+    $time = $entrys['time']0;
+    include 'templates/dynamic/image-left.php';
     renderImageLeft($title, $content, $picture, $time);
     break;
 
@@ -35,10 +53,10 @@ switch ($templateName) {
     $content = $entrys['text_entry'];
     $pictureId = $entrys['imgvidID'];
     $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0]['fileURL'];
-    $time = /*$entrys['time']*/0;
+    $time = $entrys['time']0;
     include 'templates/dynamic/image-right.php';
     renderImageRight($title, $content, $picture, $time);
     break;
-}
+}*/
 
 include 'template/footer.php';

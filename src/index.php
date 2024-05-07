@@ -3,13 +3,13 @@
 <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 
 <?php
-require_once 'templates/header.php';
+require_once 'templates/static/header.php';
 
-$image_left =  require_once 'templates/image-text.php';
-$image_left.renderImageLeft("test","etst","../../assets/images/logo.png","0");
-require_once 'templates/footer.php';
+$image_left =  require_once 'templates/dynamic/image-left.php';
+$image_left.renderImageLeft("test","etst","../assets/images/logo.png","0");
+require_once 'templates/static/footer.php';
 ?>
-<!doctype html>
+<!doctype html
 <html lang="en">
 
 <head>

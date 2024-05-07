@@ -18,4 +18,4 @@ Insert into entry (structure, title, subtitle, text_entry, TemplateName, has_gal
 
 Insert into imgvid_entry (entryID, imgvidID) Values (2,1);
 Insert into gallery (name, entryID) VALUES ('Leon und Kinder', 2);
-Insert into galleryEntry (structure, imgvidID, galeryID) VALUES (1, 1, 1), (2, 2, 1), (1, 2, 1);
+Insert into galleryEntry (structure, imgvidID, galleryID) VALUES (1, 1, 1), (2, 2, 1), (1, 2, 1);
