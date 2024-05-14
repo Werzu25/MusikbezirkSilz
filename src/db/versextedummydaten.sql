@@ -11,11 +11,11 @@ Insert into subMenuEntry (name, structure, mainID) VALUES ('kleine Schwester',1 
 Insert into imgvid (fileURL) VALUES ('../assets/images/03_jugendcamp-mb-silz_online.jpg'), 
     ('../assets/images/Eva.jpg'), ('../assets/images/stacks-image-995e324.jpg'),
     ('../assets/images/stacks-image-dcf67d4'), ('../assets/images/f-ogo_RGB_HEX-58');
-Insert into entry (structure, title, subtitle, text_entry, TemplateName, has_gallery, has_imgvid, is_table, subID) VALUES
-    (1, 'Leon im Kindergarten', '', 'Hier sind bilder von leon beim letzen ausflug mit dem Kindergarten', 'image-carousel', true, false, false, 2),
-    (1, 'Leon sext seine kleine Schwester', 'versextes bild zu beispiel', '', 'image-text', false, true, false, 1),
-    (1, 'Raphaels saug geschichte', '', 'versexte schwänze in Raphaels haus', 'image-text', false, true, false, 3),
-    (2, 'Leon im Kindergarten', 'abcdef', 'abcdef', 'mediaContentWrapper', false, true, false, 2),
+Insert into entry (structure, title, subtitle, text_entry, TemplateName, templateinfo, has_gallery, has_imgvid, is_table, subID) VALUES
+    (1, 'Leon im Kindergarten', '', 'Hier sind bilder von leon beim letzen ausflug mit dem Kindergarten', 'image-carousel', '', true, false, false, 2),
+    (1, 'Leon sext seine kleine Schwester', 'versextes bild zu beispiel', '', 'image-text', 'L', false, true, false, 1),
+    (1, 'Raphaels saug geschichte', '', 'versexte schwänze in Raphaels haus', 'image-text', 'R',false, true, false, 3),
+    (2, 'Leon im Kindergarten', 'abcdef', 'abcdef', 'mediaContentWrapper', 'Y', false, ture, false, 2),
     (3, 'Leon im Kindergarten', 'abcdef', 'abcdef', 'table', false, false, true, 2),
     (4, 'Leon im Kindergarten', 'abcdef', 'abcdef', 'text-with-link', false, false, false, 2);
 

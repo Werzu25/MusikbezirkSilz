@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS entry (
     text_entry text,
     crdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     TemplateName varchar(60),
+    templateinfo varchar(255),
     has_gallery BOOLEAN,
     has_imgvid BOOLEAN,
     is_table BOOLEAN,
