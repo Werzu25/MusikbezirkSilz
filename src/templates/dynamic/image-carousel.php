@@ -3,7 +3,7 @@
 <link href="../../../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 <?php
 
-include_once '../../util.php';
+
 if (!function_exists('renderimaecarousel')) {
     function renderimaecarousel($images)
     {
