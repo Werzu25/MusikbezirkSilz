@@ -16,6 +16,5 @@
 </html>
 <script>
   let templateRenderer = document.getElementById("templateRender");
-  <?php
-  ?>
+  <?php  ?>
 </script>

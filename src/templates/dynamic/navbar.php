@@ -13,9 +13,9 @@ echo '
 foreach ($MainEntries as $MainEntry) {
   echo '<li class="nav-item border-start">
             <a class="nav-link active"><span class="mdi' .
-    $MainEntry["icon"] .
+    $MainEntry['icon'] .
     '">' .
-    $MainEntry["name"] .
+    $MainEntry['name'] .
     '</span></a>
          </li>';
 }
@@ -29,7 +29,7 @@ foreach ($SubEntries as $SubEntry) {
                             aria-expanded="false"
                     >
                     <span>' .
-    $SubEntry["name"] .
+    $SubEntry['name'] .
     '</span>
                     </a>';
 }

@@ -1,6 +1,7 @@
 <?php
-function renderTable() {
-    echo '<table class="table">
+function renderTable()
+{
+  echo '<table class="table">
   <thead>
     <tr>
     </tr>

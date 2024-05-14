@@ -13,11 +13,10 @@
 <body>
 
 <?php
-require_once 'util.php';-
-require_once 'templates/static/header.php';
+require_once 'util.php';
+-require_once 'templates/static/header.php';
 require_once 'templates/dynamic/navbar.php';
 include 'templates/dynamic/mediaContentWrapper.php';
-
 
 if (isset($_REQUEST['sideId'])) {
   $sideId = $_REQUEST['sideId'];
@@ -25,7 +24,9 @@ if (isset($_REQUEST['sideId'])) {
   $sideId = 0;
   //header('Location: index.php');
 }
-$amountOfEntrys = customSelect("SELECT COUNT(*) FROM entry WHERE entry.subID = $sideId")[0]['COUNT(*)'];
+$amountOfEntrys = customSelect("SELECT COUNT(*) FROM entry WHERE entry.subID = $sideId")[0][
+  'COUNT(*)'
+];
 $AllEntry = customSelect("SELECT * FROM entry WHERE entry.subID = $sideId");
 for ($i = 0; $i <= $amountOfEntrys; $i++) {
   $templateName = $AllEntry[$i]['TemplateName'];
@@ -35,14 +36,18 @@ for ($i = 0; $i <= $amountOfEntrys; $i++) {
   switch ($templateName) {
     case 'image-left':
       $entryId = $entrys['entryID'];
-      $pictureId = customSelect("SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId")[0]['imgvidID'];
-      $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0]['fileURL'];
-      
+      $pictureId = customSelect(
+        "SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId"
+      )[0]['imgvidID'];
+      $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0][
+        'fileURL'
+      ];
+
       $title = $entrys['title'];
       $content = $entrys['text_entry'];
-      $time = /*$entrys['time']*/0;
+      $time = /*$entrys['time']*/ 0;
       //renderImageLeft($title, $content, $picture, $time);
-      
+
       break;
   }
 }
