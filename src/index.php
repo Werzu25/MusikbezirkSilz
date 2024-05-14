@@ -33,7 +33,7 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
   $templateName = $AllEntry[$i]['TemplateName'];
   $entrys = $AllEntry[$i];
   switch ($templateName) {
-    case 'image-left':
+    case 'content-left':
       $entryId = $entrys['entryID'];
       $pictureId = customSelect(
         "SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId"
@@ -45,8 +45,22 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
       $title = $entrys['title'];
       $content = $entrys['text_entry'];
       $time = /*$entrys['time']*/ 0;
-      mediaRight($title, $content, $picture, $time, MediaType::Image);
+      mediaLeft($title, $content, $picture, $time, MediaType::Image);
       break;
+    case 'content-right':
+        $entryId = $entrys['entryID'];
+        $pictureId = customSelect(
+          "SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId"
+        )[0]['imgvidID'];
+        $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0][
+          'fileURL'
+        ];
+  
+        $title = $entrys['title'];
+        $content = $entrys['text_entry'];
+        $time = /*$entrys['time']*/ 0;
+        mediaRight($title, $content, $picture, $time, MediaType::Image);
+        break;
   }
 }
 
