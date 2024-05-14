@@ -16,23 +16,22 @@
 require_once 'util.php';
 -require_once 'templates/static/header.php';
 require_once 'templates/dynamic/navbar.php';
-include 'templates/dynamic/mediaContentWrapper.php';
+require_once 'templates/dynamic/mediaContentWrapper.php';
+include 'templates/dynamic/image-text.php';
 
 if (isset($_REQUEST['sideId'])) {
   $sideId = $_REQUEST['sideId'];
 } else {
-  $sideId = 0;
-  //header('Location: index.php');
+  $sideId = 1;
 }
 $amountOfEntrys = customSelect("SELECT COUNT(*) FROM entry WHERE entry.subID = $sideId")[0][
   'COUNT(*)'
 ];
 $AllEntry = customSelect("SELECT * FROM entry WHERE entry.subID = $sideId");
-for ($i = 0; $i <= $amountOfEntrys; $i++) {
+echo $amountOfEntrys; // DEBUG
+for ($i = 0; $i < $amountOfEntrys; $i++) {
   $templateName = $AllEntry[$i]['TemplateName'];
   $entrys = $AllEntry[$i];
-  echo $templateName;
-  echo $i;
   switch ($templateName) {
     case 'image-left':
       $entryId = $entrys['entryID'];
@@ -46,8 +45,7 @@ for ($i = 0; $i <= $amountOfEntrys; $i++) {
       $title = $entrys['title'];
       $content = $entrys['text_entry'];
       $time = /*$entrys['time']*/ 0;
-      //renderImageLeft($title, $content, $picture, $time);
-
+      mediaRight($title, $content, $picture, $time, MediaType::Image);
       break;
   }
 }
