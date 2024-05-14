@@ -2,7 +2,7 @@ Insert into template Values ('footer'), ('header'), ('image-carousel'), ('image-
 
 # erstes ist tamplates, sinnvoll für wieder verwendung nachfolgendes sind beispiel einträge
 
-Insert into mainMenuEntry (name, structure) VALUES ('Leon X kleine Kinder', 1), ('Raphi futanari', 2);
+Insert into mainMenuEntry (name, structure, icon) VALUES ('Leon X kleine Kinder', 1, 'mdi-human-male-child'), ('Raphi futanari', 2, 'mdi-thermostat');
 Insert into subMenuEntry (name, structure, mainID) VALUES ('kleine Schwester',1 , 1),
     ('Kindergarten', 2, 1), ('Fette Dinger', 1, 2);
 
