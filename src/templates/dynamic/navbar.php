@@ -1,40 +1,31 @@
 <?php
 $MainEntries = fetchTable('mainMenuEntry');
-$SubEntries = fetchTable('subMenuEntry');
-echo '
+$content = '
 <nav class="navbar navbar-expand-lg bg-body-secondary">
     <div class="container-fluid">
-        <div
-            class="collapse navbar-collapse justify-content-center"
-            id="navbarNav"
-        >
-         <ul class="navbar-nav">
-        ';
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">';
 foreach ($MainEntries as $MainEntry) {
-  echo '<li class="nav-item border-start">
-            <a class="nav-link active"><span class="mdi' .
-    $MainEntry['icon'] .
-    '">' .
-    $MainEntry['name'] .
-    '</span></a>
-         </li>';
+    $sql = 'SELECT * FROM subMenuEntry where mainID = '.$MainEntry["mainID"];
+    $SubEntries = customSelect($sql);
+    $content .= '
+                <li class="nav-item dropdown border-start">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="mdi ' . $MainEntry["icon"] . '">' . $MainEntry["name"] . '</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                    ';
+    foreach ($SubEntries as $SubEntry) {
+        $content .= '<li><a class="dropdown-item" href="index.php?sideId=' . $SubEntry["subID"] . '">' . $SubEntry["name"] . '</a></li>';
+    }
+    $content .= '
+                   </ul>
+                </li>
+                ';
 }
-foreach ($SubEntries as $SubEntry) {
-  echo '<li class="nav-item dropdown border-start">
-            <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                    >
-                    <span>' .
-    $SubEntry['name'] .
-    '</span>
-                    </a>';
-}
-echo '
-        </ul>
+
+$content .= '
+            </ul>
         </div>
     </div>
 </nav>
@@ -57,3 +48,5 @@ echo '
     }
 </style>
 ';
+
+echo $content;

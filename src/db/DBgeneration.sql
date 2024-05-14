@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS MusikbezirkSilz;
 CREATE DATABASE IF NOT EXISTS MusikbezirkSilz;
 
 USE MusikbezirkSilz;

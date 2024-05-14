@@ -1,3 +1,4 @@
+USE musikbezirksilz;
 Insert into template Values ('image-carousel'), ('image-text'), ('mediaContentWrapper'), ('navbar'), ('table'), ('text-with-link');
 
 # erstes ist tamplates, sinnvoll für wieder verwendung nachfolgendes sind beispiel einträge
