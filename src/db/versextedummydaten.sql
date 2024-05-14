@@ -1,3 +1,4 @@
+USE musikbezirksilz;
 Insert into template Values ('image-carousel'), ('image-text'), ('mediaContentWrapper'), ('navbar'), ('table'), ('text-with-link');
 
 # erstes ist tamplates, sinnvoll für wieder verwendung nachfolgendes sind beispiel einträge
@@ -14,7 +15,7 @@ Insert into entry (structure, title, subtitle, text_entry, TemplateName, has_gal
     (1, 'Leon im Kindergarten', '', 'Hier sind bilder von leon beim letzen ausflug mit dem Kindergarten', 'image-carousel', true, false, false, 2),
     (1, 'Leon sext seine kleine Schwester', 'versextes bild zu beispiel', '', 'image-text', false, true, false, 1),
     (1, 'Raphaels saug geschichte', '', 'versexte schwänze in Raphaels haus', 'image-text', false, true, false, 3),
-    (2, 'Leon im Kindergarten', 'abcdef', 'abcdef', 'mediaContentWrapper', false, ture, false, 2),
+    (2, 'Leon im Kindergarten', 'abcdef', 'abcdef', 'mediaContentWrapper', false, true, false, 2),
     (3, 'Leon im Kindergarten', 'abcdef', 'abcdef', 'table', false, false, true, 2),
     (4, 'Leon im Kindergarten', 'abcdef', 'abcdef', 'text-with-link', false, false, false, 2);
 

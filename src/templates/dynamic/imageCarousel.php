@@ -47,4 +47,5 @@ renderimaecarousel([
   '../../../assets/images/Logo-MB-Silz-mini2.jpeg',
 ]);
 
+
 ?>
