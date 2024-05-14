@@ -33,21 +33,24 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
   $templateName = $AllEntry[$i]['TemplateName'];
   $entrys = $AllEntry[$i];
   switch ($templateName) {
-    case 'content-left':
-      $entryId = $entrys['entryID'];
-      $pictureId = customSelect(
-        "SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId"
-      )[0]['imgvidID'];
-      $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0][
-        'fileURL'
-      ];
+    case 'image-text':
+      $entryInfo = $entrys['templateinfo'];
+      if($entryInfo == "R"){
+        $entryId = $entrys['entryID'];
+        $pictureId = customSelect(
+          "SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId"
+        )[0]['imgvidID'];
+        $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0][
+          'fileURL'
+        ];
 
-      $title = $entrys['title'];
-      $content = $entrys['text_entry'];
-      $time = /*$entrys['time']*/ 0;
-      mediaLeft($title, $content, $picture, $time, MediaType::Image);
-      break;
-    case 'content-right':
+        $title = $entrys['title'];
+        $content = $entrys['text_entry'];
+        $time = $entrys['crdate'];
+        mediaLeft($title, $content, $picture, $time, MediaType::Image);
+        break;
+      }
+      elseif($entryInfo == "L"){
         $entryId = $entrys['entryID'];
         $pictureId = customSelect(
           "SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId"
@@ -58,9 +61,13 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
   
         $title = $entrys['title'];
         $content = $entrys['text_entry'];
-        $time = /*$entrys['time']*/ 0;
+        $time = $entrys['crdate'];
         mediaRight($title, $content, $picture, $time, MediaType::Image);
         break;
+      }
+      else {
+        echo "Template Info not in L or R";
+      }
   }
 }
 
