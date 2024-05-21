@@ -3,75 +3,36 @@ CREATE DATABASE IF NOT EXISTS MusikbezirkSilz;
 
 USE MusikbezirkSilz;
 
-CREATE TABLE IF NOT EXISTS mainMenuEntry (
-    mainID INT NOT NULL AUTO_INCREMENT primary key,
-    name VARCHAR(30),
-    icon varchar(60),
-    structure tinyint UNSIGNED
+CREATE TABLE mainMenuEntry (
+    mmeID INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255),
+    icon VARCHAR(255),
+    displayOrder INT,
+    PRIMARY KEY (mmeID)
+);
+CREATE TABLE subMenuEntry (
+    smeID INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255),
+    mmeID INT,
+    displayOrder INT,
+    PRIMARY KEY (smeID),
+    FOREIGN KEY (mmeID) REFERENCES mainMenuEntry(mmeID)
 );
 
-CREATE TABLE IF NOT EXISTS template (
-    TemplateName varchar(60) NOT NULL primary key
+CREATE TABLE artikel (
+    artID INT AUTO_INCREMENT NOT NULL,
+    creationsDate TIMESTAMP,
+    smeID INT,
+    PRIMARY KEY (artID),
+    FOREIGN KEY (smeID) REFERENCES subMenuEntry(smeID)
 );
 
-CREATE TABLE IF NOT EXISTS imgvid (
-    imgvidID INT NOT NULL AUTO_INCREMENT primary key,
-    fileURL varchar(510)
-);
-
-CREATE TABLE IF NOT EXISTS subMenuEntry (
-    subID INT NOT NULL AUTO_INCREMENT primary key,
-    name varchar(30),
-    structure tinyint UNSIGNED,
-    mainID int,
-    FOREIGN KEY (mainID) REFERENCES mainMenuEntry(mainID)
-);
-
-CREATE TABLE IF NOT EXISTS entry (
-    entryID INT NOT NULL AUTO_INCREMENT primary key,
-    structure tinyint UNSIGNED,
-    title varchar(255),
-    subtitle varchar(255),
-    text_entry text,
-    crdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    TemplateName varchar(60),
-    templateinfo varchar(255),
-    has_gallery BOOLEAN,
-    has_imgvid BOOLEAN,
-    is_table BOOLEAN,
-    subID INT,
-    FOREIGN KEY (TemplateName) REFERENCES template(TemplateName),
-    FOREIGN KEY (subID) REFERENCES  subMenuEntry (subID)
-);
-
-CREATE TABLE IF NOT EXISTS imgvid_entry (
-    imgvidID INT,
-    entryID INT,
-    primary key (imgvidID, entryID),
-    FOREIGN KEY (imgvidID) REFERENCES imgvid(imgvidID),
-    FOREIGN KEY (entryID) REFERENCES entry(entryID)
-);
-
-CREATE TABLE IF NOT EXISTS gallery (
-    galleryID INT NOT NULL AUTO_INCREMENT primary key,
-    name varchar(255),
-    entryID INT,
-    FOREIGN KEY (entryID) REFERENCES entry(entryID)
-);
-
-CREATE TABLE IF NOT EXISTS galleryEntry (
-    mainID INT NOT NULL AUTO_INCREMENT primary key,
-    structure tinyint UNSIGNED,
-    imgvidID int NOT NULL,
-    galleryID INT,
-    FOREIGN KEY (imgvidID) REFERENCES imgvid(imgvidID),
-    FOREIGN KEY (galleryID) REFERENCES gallery(galleryID)
-);
-CREATE TABLE IF NOT EXISTS Table_e (
-    mainID INT NOT NULL AUTO_INCREMENT primary key,
-    text_l TEXT,
-    text_m TEXT,
-    text_r TEXT,
-    entryID int NOT NULL,
-    FOREIGN KEY (entryID) REFERENCES entry(entryID)
+CREATE TABLE components (
+    cmpID INT AUTO_INCREMENT NOT NULL,
+    artID INT,
+    type ENUM('imgL', 'imgR','ytL', 'ytR', 'fbL', 'fbR', 'text', 'title', 'subtitle', 'table', 'link', 'gallery', 'galleryEntry', 'tableEntry1', 'tableEntry2', 'tableEntry3', 'tableEntry4', 'tableEntry5')
+    content TEXT,
+    displayOrder INT,
+    PRIMARY KEY (cmpID),
+    FOREIGN KEY (artID) REFERENCES artikel(artID)
 );
