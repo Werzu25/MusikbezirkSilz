@@ -1,6 +1,5 @@
 <?php
-if (!function_exists('renderimaecarousel')) {
-  function renderimaecarousel($images)
+function renderimaecarousel($images)
   {
     echo '<div id="carouselExampleIndicators" class="carousel slide">
     <div class="carousel-indicators">
@@ -35,7 +34,5 @@ if (!function_exists('renderimaecarousel')) {
         <span class="visually-hidden">Next</span>
     </button>
 </div>';
-  }
 }
-
 ?>
