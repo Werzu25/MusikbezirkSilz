@@ -41,11 +41,4 @@ if (!function_exists('renderimaecarousel')) {
   }
 }
 
-renderimaecarousel([
-  '../../../assets/images/Logo-MB-Silz-mini2.jpeg',
-  '../../../assets/images/Logo-MB-Silz-mini2.jpeg',
-  '../../../assets/images/Logo-MB-Silz-mini2.jpeg',
-]);
-
-
 ?>
