@@ -1,11 +1,14 @@
-<link href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-<script src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<link href="../../../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-
-        <div class="col w-50 align-text-center m-2">
-            <h1 class="head" >Musikbezirk Silz</h1>
-            <p class="fst-italic text-body-secondary">Es klingt Musik...</p>
-        </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-1">
+      <img src="assets/images/Logo-MB-Silz-banner.jpeg" class="logoImage" alt="Logo">
+    </div>
+    <div class="col-8 w-50 align-text-center m-2 ">
+      <h1 class="head" >Musikbezirk Silz</h1>
+      <p class="fst-italic text-body-secondary">Es klingt Musik...</p>
+    </div>
+  </div>
+</div>
 <style>
     .logoImage {
         max-width: 30%;

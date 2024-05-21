@@ -1,5 +1,5 @@
 <?php
-require_once 'src/wrappers/mediaContentWrapper.php';
+require_once 'wrappers/mediaContentWrapper.php';
 
 function mediaLeft($title, $content, $link, $time, $mediaType)
 {
@@ -7,10 +7,8 @@ function mediaLeft($title, $content, $link, $time, $mediaType)
   echo '<div class="card mb-3 border-light" style="max-width: 540px">
     <div class="row g-0">
         <div class="col-md-4">
-        ' .
-    $link .
-    '
-  iv>
+        ' . $link . '
+  <div>
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title text-danger">' .
@@ -50,10 +48,7 @@ function mediaRight($title, $content, $link, $time, $mediaType)
         </div>
       </div>
       <div class="col-md-4">
-      ' .
-    $mediaContent->chooseMediaType($mediaType) .
-    '
-  >
+      ' . $mediaContent->chooseMediaType($mediaType) . '
     </div>
   </div>';
 }
