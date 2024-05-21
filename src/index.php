@@ -17,7 +17,8 @@ require_once 'util.php';
 require_once 'templates/static/header.php';
 require_once 'templates/dynamic/navbar.php';
 require_once 'wrappers/mediaContentWrapper.php';
-include 'templates/dynamic/imageText.php';
+require_once 'templates/dynamic/imageText.php';
+require_once 'templates/dynamic/imageCarousel.php';
 
 if (isset($_REQUEST['sideId'])) {
   $sideId = $_REQUEST['sideId'];
@@ -52,7 +53,7 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
       } elseif ($entryInfo == 'L') {
         $entryId = $entrys['entryID'];
         $pictureId = customSelect(
-          "SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId"
+          "SELECT * FROM imgvid_entry WHERE entryID = $entryId"
         )[0]['imgvidID'];
         $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0][
           'fileURL'
@@ -66,6 +67,10 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
       } else {
         echo 'Template Info not in L or R';
       }
+    case 'image-carousel':
+        $imgs = customSelect("SELECT * FROM gallery JOIN galleryEntry ON gallery.galleryID = galleryEntry.galaryID JOIN imgvid ON imgvid.imgvidID = imgvidID");
+        renderimaecarousel($imgs);
+        break;
   }
 }
 
