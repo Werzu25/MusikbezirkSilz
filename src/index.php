@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="/node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -35,7 +35,7 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
   switch ($templateName) {
     case 'image-text':
       $entryInfo = $entrys['templateinfo'];
-      if($entryInfo == "R"){
+      if ($entryInfo == 'R') {
         $entryId = $entrys['entryID'];
         $pictureId = customSelect(
           "SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId"
@@ -49,8 +49,7 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
         $time = $entrys['crdate'];
         mediaLeft($title, $content, $picture, $time, MediaType::Image);
         break;
-      }
-      elseif($entryInfo == "L"){
+      } elseif ($entryInfo == 'L') {
         $entryId = $entrys['entryID'];
         $pictureId = customSelect(
           "SELECT * FROM imgvid_entry WHERE imgvid_entry.entryID = $entryId"
@@ -58,15 +57,14 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
         $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0][
           'fileURL'
         ];
-  
+
         $title = $entrys['title'];
         $content = $entrys['text_entry'];
         $time = $entrys['crdate'];
         mediaRight($title, $content, $picture, $time, MediaType::Image);
         break;
-      }
-      else {
-        echo "Template Info not in L or R";
+      } else {
+        echo 'Template Info not in L or R';
       }
   }
 }

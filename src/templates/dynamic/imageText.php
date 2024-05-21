@@ -1,5 +1,5 @@
 <?php
-require_once 'mediaContentWrapper.php';
+require_once 'src/wrappers/mediaContentWrapper.php';
 
 function mediaLeft($title, $content, $link, $time, $mediaType)
 {
