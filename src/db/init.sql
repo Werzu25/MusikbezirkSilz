@@ -1,36 +1,35 @@
 DROP DATABASE IF EXISTS mbs;
 CREATE DATABASE IF NOT EXISTS mbs;
-
 USE mbs;
 
 CREATE TABLE mainMenuEntry (
-    mmeID INT AUTO_INCREMENT NOT NULL,
+    mmeId INT AUTO_INCREMENT NOT NULL,
     name VARCHAR(255),
     icon VARCHAR(255),
-    PRIMARY KEY (mmeID)
+    PRIMARY KEY (mmeId)
 );
 CREATE TABLE subMenuEntry (
-    smeID INT AUTO_INCREMENT NOT NULL,
+    smeId INT AUTO_INCREMENT NOT NULL,
     name VARCHAR(255),
-    mmeID INT,
-    PRIMARY KEY (smeID),
-    FOREIGN KEY (mmeID) REFERENCES mainMenuEntry(mmeID)
+    mmeId INT,
+    PRIMARY KEY (smeId),
+    FOREIGN KEY (mmeId) REFERENCES mainMenuEntry(mmeId)
 );
 
 CREATE TABLE artikel (
-    artID INT AUTO_INCREMENT NOT NULL,
+    artId INT AUTO_INCREMENT NOT NULL,
     creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    smeID INT,
-    PRIMARY KEY (artID),
-    FOREIGN KEY (smeID) REFERENCES subMenuEntry(smeID)
+    smeId INT,
+    PRIMARY KEY (artId),
+    FOREIGN KEY (smeId) REFERENCES subMenuEntry(smeId)
 );
 
 CREATE TABLE components (
-    cmpID INT AUTO_INCREMENT NOT NULL,
-    artID INT,
+    cmpId INT AUTO_INCREMENT NOT NULL,
+    artId INT,
     type ENUM("img", 'yt', 'fb', 'text', 'title', 'subTitle', 'table', 'link', 'gallery', 'table'),
     content TEXT,
     displayOrder INT,
-    PRIMARY KEY (cmpID),
-    FOREIGN KEY (artID) REFERENCES artikel(artID)
+    PRIMARY KEY (cmpId),
+    FOREIGN KEY (artId) REFERENCES artikel(artId)
 );
