@@ -52,9 +52,9 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
         break;
       } elseif ($entryInfo == 'L') {
         $entryId = $entrys['entryID'];
-        $pictureId = customSelect(
-          "SELECT * FROM imgvid_entry WHERE entryID = $entryId"
-        )[0]['imgvidID'];
+        $pictureId = customSelect("SELECT * FROM imgvid_entry WHERE entryID = $entryId")[0][
+          'imgvidID'
+        ];
         $picture = customSelect("SELECT * FROM imgvid WHERE imgvid.imgvidID = $pictureId")[0][
           'fileURL'
         ];
@@ -68,9 +68,11 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
         echo 'Template Info not in L or R';
       }
     case 'image-carousel':
-        $imgs = customSelect("SELECT * FROM gallery JOIN galleryEntry ON gallery.galleryID = galleryEntry.galaryID JOIN imgvid ON imgvid.imgvidID = imgvidID");
-        renderimaecarousel($imgs);
-        break;
+      $imgs = customSelect(
+        'SELECT * FROM gallery JOIN galleryEntry ON gallery.galleryID = galleryEntry.galaryID JOIN imgvid ON imgvid.imgvidID = imgvidID'
+      );
+      renderimaecarousel($imgs);
+      break;
   }
 }
 

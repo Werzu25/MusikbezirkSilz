@@ -7,7 +7,9 @@ function mediaLeft($title, $content, $link, $time, $mediaType)
   echo '<div class="card mb-3 border-light" style="max-width: 540px">
     <div class="row g-0">
         <div class="col-md-4">
-        ' . $link . '
+        ' .
+    $link .
+    '
   <div>
         <div class="col-md-8">
             <div class="card-body">
@@ -48,7 +50,9 @@ function mediaRight($title, $content, $link, $time, $mediaType)
         </div>
       </div>
       <div class="col-md-4">
-      ' . $mediaContent->chooseMediaType($mediaType) . '
+      ' .
+    $mediaContent->chooseMediaType($mediaType) .
+    '
     </div>
   </div>';
 }
