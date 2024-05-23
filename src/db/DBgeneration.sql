@@ -21,7 +21,7 @@ CREATE TABLE subMenuEntry (
 
 CREATE TABLE artikel (
     artID INT AUTO_INCREMENT NOT NULL,
-    creationsDate TIMESTAMP,
+    creationDate TIMESTAMP,
     smeID INT,
     PRIMARY KEY (artID),
     FOREIGN KEY (smeID) REFERENCES subMenuEntry(smeID)
@@ -30,7 +30,7 @@ CREATE TABLE artikel (
 CREATE TABLE components (
     cmpID INT AUTO_INCREMENT NOT NULL,
     artID INT,
-    type ENUM('imgL', 'imgR','ytL', 'ytR', 'fbL', 'fbR', 'text', 'title', 'subtitle', 'table', 'link', 'gallery', 'galleryEntry', 'tableEntry1', 'tableEntry2', 'tableEntry3', 'tableEntry4', 'tableEntry5')
+    type ENUM('imgL', 'imgR','ytL', 'ytR', 'fbL', 'fbR', 'text', 'title', 'subtitle', 'table', 'link', 'gallery', 'galleryEntry', 'tableEntry1'),
     content TEXT,
     displayOrder INT,
     PRIMARY KEY (cmpID),
