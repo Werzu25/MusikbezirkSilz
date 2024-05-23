@@ -7,4 +7,5 @@
 # Todos
 - [ ] Backend auf neues DB schema anpassen
 - [ ] Scene Builder
-- [ ] Code formatting, useless code removen (julians code) & Bugfixes
+- [ ] Code formatting, useless code removen (julians code) & Bugfixe
+- [ ] kurze DOC schreiben
