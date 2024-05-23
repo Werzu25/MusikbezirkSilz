@@ -6,7 +6,7 @@ $content = '
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">';
 foreach ($MainEntries as $MainEntry) {
-  $sql = 'SELECT * FROM subMenuEntry where mainID = ' . $MainEntry['mainID'];
+  $sql = 'SELECT * FROM subMenuEntry where mmeId = ' . $MainEntry['mmeId'];
   $SubEntries = customSelect($sql);
   $content .=
     '
@@ -23,7 +23,7 @@ foreach ($MainEntries as $MainEntry) {
   foreach ($SubEntries as $SubEntry) {
     $content .=
       '<li><a class="dropdown-item" href="index.php?sideId=' .
-      $SubEntry['subID'] .
+      $SubEntry['smeId'] .
       '">' .
       $SubEntry['name'] .
       '</a></li>';

@@ -4,30 +4,8 @@
 
 [alte website](https://musikbezirk-silz.at)
 
-# Arbeitaufteilung
-
-## Frontend:
-
-### Leon
-
-- Arbeitsauftrag
-
-### Julian
-
-- Arbeitsauftrag
-
-## Backend:
-
-### Christian
-
-- Erstellung der Generierseite
-- Projektleitung
-
-### Peter
-
-- Erstellen der Datenbank
-- Weiterhelfen bei Team welches am wenigsten weit ist
-
-### Raphi
-
-- Erstellen der main PHP Logik/Seite
+# Todos
+- [ ] Backend auf neues DB schema anpassen
+- [ ] Scene Builder
+- [ ] Code formatting, useless code removen (julians code) & Bugfixe
+- [ ] kurze DOC schreiben
