@@ -1,6 +1,5 @@
 
-<?php
-function rendertext_with_link($title, $content, $time, $link, $link_text)
+<?php function rendertext_with_link($title, $content, $time, $link, $link_text)
 {
   echo '
 <div class="container">

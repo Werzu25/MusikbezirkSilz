@@ -1,7 +1,7 @@
 <?php
 $MainEntries = fetchTable('mainMenuEntry');
 $content = '
-<nav class="navbar navbar-expand-lg bg-body-secondary">
+<nav class="navbar navbar-expand  bg-body-secondary">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">';
@@ -10,7 +10,7 @@ foreach ($MainEntries as $MainEntry) {
   $SubEntries = customSelect($sql);
   $content .=
     '
-                <li class="nav-item dropdown border-start">
+                <li class="nav-item dropdown border-start mainEntry">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="mdi ' .
     $MainEntry['icon'] .

@@ -10,7 +10,7 @@
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
 
-<body>
+<body data-bs-theme="light">
 
 <?php
 require_once 'util.php';
@@ -72,6 +72,9 @@ for ($i = 0; $i < $amountOfEntrys; $i++) {
 require_once 'templates/static/footer.php';
 ?>
 </body>
-
 </html>
-<style></style>
+<style>
+  body {
+      width: 100vw;
+  }
+</style>
