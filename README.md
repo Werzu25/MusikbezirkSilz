@@ -10,5 +10,5 @@
   - [ ] imageText & Table templates einbauen
 - [ ] Scene Builder
 - [ ] Code formatting, useless code removen (julians code) & Bugfixes
-- [ ] kurze DOC schreiben
+- [ ] kurze DOC schreiben (CHATGPT)
 - [ ] Issues fixen
