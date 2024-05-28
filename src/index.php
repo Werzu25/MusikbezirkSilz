@@ -17,6 +17,7 @@ require_once 'util.php';
 require_once 'templates/static/header.php';
 require_once 'templates/dynamic/navbar.php';
 require_once 'templates/dynamic/imageCarousel.php';
+require_once 'templates/dynamic/table.php';
 
 if (isset($_REQUEST['sideId'])) {
   $smeID = $_REQUEST['sideId'];
@@ -54,8 +55,10 @@ foreach ($articles as $article) {
           '<a/></p>';
         break;
       case 'table':
+        $table = json_decode($component['content'], true);;
+        renderTable($table["titles"], $table["data"]);
         break;
-      case 'imgText':
+      case 'imageText':
         break;
     }
   }

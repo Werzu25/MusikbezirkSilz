@@ -57,4 +57,10 @@ VALUES
         "link",
         '{"href": "https://reintech.io/blog/php-json-encoding-decoding-web-services", "text": "penis"}',
         3
+    ),
+    (
+        3,
+        "table",
+        '{"titles": ["test", "test1", "leon"], "data": [["gay", "leon"], ["nox"], ["birgit"]]}',
+        4
     );
