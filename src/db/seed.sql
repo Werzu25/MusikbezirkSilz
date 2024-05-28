@@ -49,6 +49,6 @@ VALUES
     (
         1,
         "carousel",
-        '["/path/to/image1.jpg", "/path/to/image2.jpg", "/path/to/image3.jpg"]',
+        '["../assets/images/Eva.jpg", "../assets/images/Alfred.jpeg", "../assets/images/Ausschuss2018.JPG"]',
         3
     );

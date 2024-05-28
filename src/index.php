@@ -43,8 +43,7 @@ foreach ($articles as $article) {
         break;
       case "carousel":
         $imgs = json_decode($component["content"]);
-        echo $imgs[1];
-        //renderImageCarousel($imgs);
+        renderImageCarousel($imgs);
         break;
       case "link":
         $link = json_decode($component["content"]);
