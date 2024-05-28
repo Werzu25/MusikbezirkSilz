@@ -61,6 +61,6 @@ VALUES
     (
         3,
         "table",
-        '{"titles": ["test", "test1", "leon"], "data": [["gay", "leon"], ["nox"], ["birgit"]]}',
+        '{"titles": ["test", "test1", "leon"], "data": [["gay", "leon", ""], ["nox", "", ""], ["birgit", "", ""]]}',
         4
     );
