@@ -54,7 +54,8 @@ Einige mögliche Gründe für ein verschmiertes Aussehen könnten sein:
     Falsche Anwendung: Wenn das Gel nicht gleichmäßig verteilt wird oder nicht richtig in das Haar eingearbeitet wird, kann es zu Klumpenbildung oder ungleichmäßigem Auftrag führen.
     Zu schweres Gel: Manche Styling-Gele haben eine schwere Konsistenz, die das Haar beschweren kann, besonders bei feinem Haar. Dadurch kann das Haar flach und klebrig aussehen.
 
-Insgesamt ist es wichtig, die richtige Menge an Styling-Produkt zu verwenden und es gleichmäßig zu verteilen, um ein gepflegtes Aussehen zu erzielen, ohne dass das Haar "verschmiert" wirkt.",
+Insgesamt ist es wichtig, die richtige Menge an Styling-Produkt zu verwenden und es gleichmäßig zu verteilen, um ein gepflegtes Aussehen zu erzielen, ohne dass das Haar
+verschmiert wirkt.",
         2
     ),
     (3, "title", "Sis", 1),
