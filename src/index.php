@@ -42,10 +42,12 @@ foreach ($articles as $article) {
         echo $component["content"];
         break;
       case "carousel":
-        renderImageCarousel(json_decode($content));
+        $imgs = json_decode($component["content"]);
+        echo $imgs[1];
+        //renderImageCarousel($imgs);
         break;
       case "link":
-        $link = json_decode($component);
+        $link = json_decode($component["content"]);
         echo '<a class="link-opacity-100" href='. $link["href"] .'>'. $link["href"] .'<a/>';
         break;
     }
