@@ -16,8 +16,6 @@
 require_once 'util.php';
 require_once 'templates/static/header.php';
 require_once 'templates/dynamic/navbar.php';
-require_once 'wrappers/mediaContentWrapper.php';
-require_once 'templates/dynamic/imageText.php';
 require_once 'templates/dynamic/imageCarousel.php';
 
 if (isset($_REQUEST['sideId'])) {
@@ -46,8 +44,8 @@ foreach ($articles as $article) {
         renderImageCarousel($imgs);
         break;
       case "link":
-        $link = json_decode($component["content"]);
-        echo '<a class="link-opacity-100" href='. $link["href"] .'>'. $link["href"] .'<a/>';
+        $link = json_decode($component["content"], true);
+        echo '<a class="link-opacity-100" href='. $link["href"] .'>'. $link["text"] .'<a/>';
         break;
     }
   }

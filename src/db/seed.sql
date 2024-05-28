@@ -51,4 +51,10 @@ VALUES
         "carousel",
         '["../assets/images/Eva.jpg", "../assets/images/Alfred.jpeg", "../assets/images/Ausschuss2018.JPG"]',
         3
+    ),
+    (
+        3,
+        "link",
+        '{"href": "https://reintech.io/blog/php-json-encoding-decoding-web-services", "text": "penis"}',
+        3
     );
