@@ -5,7 +5,7 @@
 <?php
 
 
-function renderimaecarousel($images)
+function renderimageCarousel($images)
 {
   echo '<div id="carouselExampleIndicators" class="carousel slide w-25 h-auto"  >
     <div class="carousel-indicators">
