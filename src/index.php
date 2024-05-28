@@ -19,6 +19,7 @@ require_once 'templates/static/header.php';
 require_once 'templates/dynamic/navbar.php';
 require_once 'templates/dynamic/imageCarousel.php';
 require_once 'templates/dynamic/table.php';
+require_once 'templates/dynamic/mediaText.php';
 
 if (isset($_REQUEST['sideId'])) {
   $smeID = $_REQUEST['sideId'];
@@ -56,10 +57,17 @@ foreach ($articles as $article) {
           '<a/></p>';
         break;
       case 'table':
-        $table = json_decode($component['content'], true);;
+        $table = json_decode($component['content'], true);
         renderTable($table["titles"], $table["data"]);
         break;
-      case 'imageText':
+      case 'mediaText':
+        $mediaText = json_decode($component["content"], true);
+        $orientation = $mediaText["orienation"];
+        if ($orientation == 'R') {
+          mediaRight($mediaText["content"], $mediaText["link"], $mediaText["type"]);
+        } elseif ($orientation == 'L') {
+          mediaLeft($mediaText["content"], $mediaText["link"], $mediaText["type"]);
+        }
         break;
     }
   }
