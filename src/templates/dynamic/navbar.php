@@ -10,7 +10,7 @@ foreach ($MainEntries as $MainEntry) {
   $SubEntries = customSelect($sql);
   $content .=
     '
-                <li class="nav-item dropdown border-start mainEntry">
+                <li class="nav-item dropdown mainEntry">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="mdi ' .
     $MainEntry['icon'] .
