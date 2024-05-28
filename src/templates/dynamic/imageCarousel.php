@@ -1,5 +1,5 @@
 <?php
-function renderimaecarousel($images)
+function renderImageCarousel($images)
 {
   echo '<div id="carouselExampleIndicators" class="carousel slide">
     <div class="carousel-indicators">

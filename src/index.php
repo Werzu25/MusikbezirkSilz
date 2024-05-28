@@ -30,27 +30,27 @@ $articles = customSelect("SELECT * FROM articles WHERE smeID = $smeID");
 
 foreach ($articles as $article) {
   $components = customSelect("SELECT * FROM components WHERE artID =" . $article["artId"] . " ORDER BY displayOrder ASC");
+  echo '<div class="m-4">';
   foreach ($components as $component) {
     $type = $component["type"];
-    
+
     switch ($type) {
       case "title":
         echo '<h5 class="card-title text-danger">' . $component["content"] . '</h5>';
         break;
-      case "subTitle":
-        break;
       case "text":
+        echo $component["content"];
         break;
-      case "img":
+      case "carousel":
+        renderImageCarousel(json_decode($content));
         break;
-      case "yt":
-        break;
-      case "fb":
-        break;
-      case "img":
+      case "link":
+        $link = json_decode($component);
+        echo '<a class="link-opacity-100" href='. $link["href"] .'>'. $link["href"] .'<a/>';
         break;
     }
   }
+  echo '</div>';
 }
 
 require_once 'templates/static/footer.php';
