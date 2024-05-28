@@ -49,6 +49,6 @@ VALUES
     (
         1,
         "carousel",
-        '["/path/to/image1.jpg", "/path/to/image2.jpg", "/path/to/image3.jpg"]',
+        '{"images": ["assets/images/IMG_7078.JPG", "assets/images/050-Bezirksmusikfest-Sautens-2018.jpg", "assets/images/03_jugendcamp-mb-silz_online.jpg"]}',
         3
     );
