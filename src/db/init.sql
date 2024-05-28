@@ -27,7 +27,7 @@ CREATE TABLE articles (
 CREATE TABLE components (
     cmpId INT AUTO_INCREMENT NOT NULL,
     artId INT,
-    type ENUM('text', 'title', 'table', 'link', 'carousel', 'imageText'),
+    type ENUM('text', 'title', 'table', 'link', 'carousel', 'mediaText'),
     content TEXT,
     displayOrder INT,
     PRIMARY KEY (cmpId),
