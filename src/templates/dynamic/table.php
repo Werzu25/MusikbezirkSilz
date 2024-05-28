@@ -2,7 +2,7 @@
 <?php if (!function_exists('renderTable')) {
   function renderTable($tabletitle, $tableData)
   {
-    echo ' <div class="container m-5 border-bottom-0">
+    echo ' <div class="container m-0 border-bottom-0">
 <table class="table table-bordered border-black text-center">
   <thead>';
     for ($i = 0; $i < sizeof($tabletitle); $i++) {
