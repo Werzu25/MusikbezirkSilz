@@ -1,3 +1,6 @@
+<?php
+require_once "templates/dynamic/textWithLink.php"
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +11,29 @@
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
 <body>
+<div class="container-fluid bg-body-secondary">
+  <div class="row">
+    <div class="col-9">
+      test1
+    </div>
+    <div class="col-2">
+      <div class="w-50 dropdown">
+        test2
+      </div>
+    </div>
+    <div class="col-1">
+      <button type="button" onclick="fullscreen()" class="btn">Fullscreen</button>
+    </div>
+  </div>
+</div>
 <div class="container-fluid mainContainer h-100vh">
   <div class="row h-100vh">
     <div class="spCol text-center" id="templateRenderer">
     test1
-      <div class="border rounded draggable">
+      <div class="border rounded template">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
-      <div class="border rounded draggable">
+      <div class="border rounded template">
         Raphi hat a skill issue
       </div>
     </div>
@@ -52,27 +70,32 @@
   let templateRenderer = document.getElementById('templateRenderer');
   let pagePreview = document.getElementById('pagePreview');
   let bodyWidth = document.body.clientWidth;
+  let isFullscreen = false;
+  let rightWidth = 0;
 
-  let draggable = document.querySelectorAll('.draggable');
-
-  draggable.forEach((element) => {
-    element.draggable = true;
-    element.addEventListener('dragstart',(e) => templateRendererDragStart(e));
-    element.id = Math.random().toString(36).substring(7);
-  });
-
+  pageDivider.addEventListener("mousedown", mouseDown);
   pageDivider.addEventListener('dragover',(e) => preventDefault(e));
   pagePreview.addEventListener('dragover', (e) => preventDefault(e));
   pagePreview.addEventListener('drop', (e) => drop(e));
 
   templateRenderer.addEventListener('dragover', (e) => preventDefault(e));
   templateRenderer.addEventListener('drop', (e) => deleteElement(e));
+  templateRenderer.childNodes.forEach((element) => {
+    element.draggable = true;
+    element.addEventListener('dragstart',(e) => templateRendererDragStart(e));
+    element.addEventListener('drop', (e) => {
+      e.preventDefault();
+    });
+    element.id = Math.random().toString(36).substring(7);
+  });
 
   function deleteElement(e) {
-    debugger
     e.preventDefault();
-    let data = e.dataTransfer.getData("text");
-    document.getElementById(data).remove();
+    let data = JSON.parse(e.dataTransfer.getData("text"));
+    if (data["source"] === "templateRenderer") {
+      return;
+    }
+    document.getElementById(data["id"]).remove();
   }
 
   function preventDefault(e) {
@@ -80,24 +103,50 @@
   }
 
   function templateRendererDragStart(e) {
-    e.dataTransfer.setData("text", e.target.id);
+    let output = {
+      id: e.target.id,
+      source: e.target.parentNode.id
+    };
     e.dataTransfer.effectAllowed = "copy";
+    e.dataTransfer.setData("text", JSON.stringify(output));
   }
 
   function pagePreviewDragStart(e) {
-    e.dataTransfer.setData("text", e.target.id);
+    let output = {
+      id: e.target.id,
+      source: e.target.parentNode.id
+    };
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text", JSON.stringify(output));
   }
 
   function resetDragBehavior(element)  {
     element.removeEventListener('dragstart',(e) => templateRendererDragStart(e));
+    element.removeEventListener('drop', (e) => {e.preventDefault();});
     element.addEventListener('dragstart',(e) => pagePreviewDragStart(e));
+    element.addEventListener('dblclick', (e) => {
+      e.target.contentEditable = true;
+      e.target.focus();
+    });
+    element.addEventListener('blur', (e) => {
+      e.target.contentEditable = false;
+    });
   }
 
   function drop(e) {
     e.preventDefault();
-    let data = e.dataTransfer.getData("text");
-    let element = document.getElementById(data).cloneNode(true);
-    element.id = Math.random().toString(36).substring(7);
+    let data = JSON.parse(e.dataTransfer.getData("text"));
+    let id = data["id"];
+    let element;
+    if (e.target.classList.contains("template")) {
+      return
+    }
+    if (data["source"] === "templateRenderer") {
+      element = document.getElementById(id).cloneNode(true);
+      element.id = Math.random().toString(36).substring(7);
+    } else if (data["source"] === "pagePreview") {
+      element = document.getElementById(id);
+    }
     e.target.appendChild(element);
     resetDragBehavior(element);
   }
@@ -112,7 +161,7 @@
   function mouseMove(e) {
     let x = e.clientX;
     let leftWidth = x - 1;
-    let rightWidth = bodyWidth - x - 1;
+    rightWidth = bodyWidth - x - 1;
     let minWidth = getComputedStyle(templateRenderer).getPropertyValue("min-width").replace("px", "");
     if (leftWidth < minWidth || rightWidth < minWidth) {
       return;
@@ -128,6 +177,18 @@
     templateRenderer.style.userSelect = "auto";
   }
 
-  pageDivider.addEventListener("mousedown", mouseDown);
+  function fullscreen() {
+    if (!isFullscreen) {
+      templateRenderer.style.display = "none";
+      pageDivider.style.display = "none";
+      pagePreview.style.width = "100%";
+      isFullscreen = true;
+    } else if (isFullscreen) {
+      templateRenderer.style.display = "block";
+      pageDivider.style.display = "block";
+        pagePreview.style.width = rightWidth + "px";
+      isFullscreen = false;
+    }
+  }
 </script>
 </html>
