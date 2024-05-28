@@ -27,8 +27,31 @@ if (isset($_REQUEST['sideId'])) {
 }
 
 $articles = customSelect("SELECT * FROM articles WHERE smeID = $smeID");
-echo $articles;
-// TODO
+
+foreach ($articles as $article) {
+  $components = customSelect("SELECT * FROM components WHERE artID =" . $article["artId"] . " ORDER BY displayOrder ASC");
+  foreach ($components as $component) {
+    $type = $component["type"];
+    
+    switch ($type) {
+      case "title":
+        echo '<h5 class="card-title text-danger">' . $component["content"] . '</h5>';
+        break;
+      case "subTitle":
+        break;
+      case "text":
+        break;
+      case "img":
+        break;
+      case "yt":
+        break;
+      case "fb":
+        break;
+      case "img":
+        break;
+    }
+  }
+}
 
 require_once 'templates/static/footer.php';
 ?>
