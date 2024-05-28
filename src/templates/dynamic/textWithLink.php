@@ -1,5 +1,6 @@
 
-<?php function rendertext_with_link($title, $content, $time, $link, $link_text)
+<?php
+function rendertext_with_link($title, $content, $time, $link, $link_text)
 {
   echo '
 <div class="container">
@@ -8,20 +9,20 @@
             <div class="row g-0">
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title text-danger">' .
+                        <h5 class="card-title text-danger editable">' .
     $title .
     '</h5>
-                        <p class="card-text">' .
+                        <p class="card-text editable">' .
     $content .
-    '</p>
-                        <p class="card-text abstand"><small class="text-muted">' .
+      '</p>
+                        <p class="card-text spacer editable"><small class="text-muted">' .
     $time .
     '</small></p>
-                        <p><a class="link-opacity-100 mt-4" href="' .
+                        <p class="editable"><a class="link-opacity-100 mt-4" href="' .
     $link .
     '">' .
     $link_text .
-    '</a></p>
+      '</a></p>
                     </div>
                 </div>
             </div>
@@ -29,8 +30,8 @@
     </div>
 </div>
 <style>
-    .abstand {
-        margin-bottom: +40px;
+    .spacer {
+        margin-bottom: 40px;
     }
 </style>
 ';
