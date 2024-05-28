@@ -5,7 +5,10 @@
 [alte website](https://musikbezirk-silz.at)
 
 # Todos
-- [ ] Backend auf neues DB schema anpassen
+- [x] Backend auf neues DB schema anpassen
+  - [x] link & gallery einbauen
+  - [ ] imageText & Table templates einbauen
 - [ ] Scene Builder
-- [ ] Code formatting, useless code removen (julians code) & Bugfixe
-- [ ] kurze DOC schreiben
+- [ ] Code formatting, useless code removen (julians code) & Bugfixes
+- [ ] kurze DOC schreiben (CHATGPT)
+- [ ] Issues fixen

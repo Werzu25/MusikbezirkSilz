@@ -1,6 +1,5 @@
 <?php
-require_once "templates/dynamic/textWithLink.php"
-?>
+require_once 'templates/dynamic/textWithLink.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

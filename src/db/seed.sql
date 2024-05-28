@@ -44,11 +44,23 @@ VALUES
         3,
         "text",
         "Lorem ipsum dolor sit amet SEX mit Leons SCHWESTER, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        1
+        2
     ),
     (
         1,
         "carousel",
-        '["/path/to/image1.jpg", "/path/to/image2.jpg", "/path/to/image3.jpg"]',
-        8
+        '["../assets/images/Eva.jpg", "../assets/images/Alfred.jpeg", "../assets/images/Ausschuss2018.JPG"]',
+        3
+    ),
+    (
+        3,
+        "link",
+        '{"href": "https://reintech.io/blog/php-json-encoding-decoding-web-services", "text": "penis"}',
+        3
+    ),
+    (
+        3,
+        "table",
+        '{"titles": ["test", "test1", "leon"], "data": [["gay", "leon", ""], ["nox", "", ""], ["birgit", "", ""]]}',
+        4
     );
