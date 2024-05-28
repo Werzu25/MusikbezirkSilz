@@ -3,7 +3,7 @@
 <link href="../../../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 
 <div class="container-fluid p-0">
-    <div class="container-fluid gruen " style="height: 20px; "></div>
+    <div class="container-fluid gruen " style="height: 50px; "></div>
     <div class="row row-cols-sm-6">
         <div class="col">
             <img class="img-fluid logoImage" alt="Musikbezirk Silz Logo" src="../assets/images/Logo-MB-Silz-mini2.jpeg" />
@@ -23,7 +23,7 @@
         min-width: 600px;
     }
     .gruen{
+        background-image: linear-gradient(#3d3e3f, white);
 
-        background-color: #104b26;
     }
 </style>
