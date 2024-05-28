@@ -7,20 +7,30 @@ VALUES
     ("Events", "mdi-calendar-multiple"),
     ("Rückblick", ""),
     ("Jugend", ""),
-    ("Über uns", "");
+    ("Über uns", ""),
+    ("Haarpflege", "mdi-shampoo"),
+    ("Glatzenfall", "mdi-hair-dryer");;
 
 INSERT INTO
     subMenuEntry (name, mmeID)
 VALUES
     ("Bezirksmusikfest", 1),
-    ("Orchester Projekte", 2);
+    ("Orchester Projekte", 2),
+    ("Jugend", 4),
+    ("Vorstand", 5),
+    ("Geschichte", 5),
+    ("Haarwäsche", 6),
+    ("Verschmiertes Haar", 6),
+    ("Glatzenfall Tipps", 7);
 
 INSERT INTO
     articles (smeID)
 VALUES
-    ("1"),
-    ("2"),
-    ("2");
+    (1),
+    (2),
+    (2),
+    (3),
+    (4);
 
 INSERT INTO
     components (artID, type, content, displayOrder)
@@ -163,4 +173,17 @@ oooooollllcccc:::;;;;;,,'.'',,,;;;;;;,.      'ldxdddollcc:,'...........'',,,,,,'
         "table",
         '{"titles": ["test", "test1", "leon"], "data": [["abcd", "leon", "warum"], ["nox", "julian", "ju"], ["birgit", "komplett", "ja"]]}',
         4
+    ),(3, "title", "Verschmiertes Haar", 1),
+    (
+        3,
+        "text",
+        "Verschmiertes Haar kann ein Zeichen für übermäßige Verwendung von Stylingprodukten sein. Es ist wichtig, die richtige Menge an Produkt zu verwenden und es gleichmäßig zu verteilen, um ein gepflegtes Aussehen zu erzielen.",
+        2
+    ),
+    (4, "title", "Glatzenfall", 1),
+    (
+        4,
+        "text",
+        "Glatzenfall, auch bekannt als Alopezie, kann viele Ursachen haben, einschließlich genetischer Faktoren, Stress und Ernährung. Es gibt viele Behandlungen und Strategien zur Bewältigung von Haarausfall, einschließlich Medikamenten, Haartransplantationen und Lifestyle-Änderungen.",
+        2
     );
