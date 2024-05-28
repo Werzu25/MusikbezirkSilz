@@ -1,6 +1,5 @@
 
-<?php
-function rendertext_with_link($title, $content, $time, $link, $link_text)
+<?php function rendertext_with_link($title, $content, $time, $link, $link_text)
 {
   echo '
 <div class="container-fluid" style="width: 100%;">
@@ -14,7 +13,7 @@ function rendertext_with_link($title, $content, $time, $link, $link_text)
     '</h5>
                         <p class="card-text editable"   >' .
     $content .
-      '</p>
+    '</p>
                         <p class="card-text spacer editable"><small class="text-muted">' .
     $time .
     '</small></p>
@@ -22,7 +21,7 @@ function rendertext_with_link($title, $content, $time, $link, $link_text)
     $link .
     '">' .
     $link_text .
-      '</a></p>
+    '</a></p>
                     </div>
                 </div>
             </div>

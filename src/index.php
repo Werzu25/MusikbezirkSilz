@@ -27,29 +27,35 @@ if (isset($_REQUEST['sideId'])) {
 $articles = customSelect("SELECT * FROM articles WHERE smeID = $smeID");
 
 foreach ($articles as $article) {
-  $components = customSelect("SELECT * FROM components WHERE artID =" . $article["artId"] . " ORDER BY displayOrder ASC");
+  $components = customSelect(
+    'SELECT * FROM components WHERE artID =' . $article['artId'] . ' ORDER BY displayOrder ASC'
+  );
   echo '<div class="m-4">';
   foreach ($components as $component) {
-    $type = $component["type"];
+    $type = $component['type'];
 
     switch ($type) {
-      case "title":
-        echo '<h5 class="card-title text-danger">' . $component["content"] . '</h5>';
+      case 'title':
+        echo '<h5 class="card-title text-danger">' . $component['content'] . '</h5>';
         break;
-      case "text":
-        echo $component["content"];
+      case 'text':
+        echo $component['content'];
         break;
-      case "carousel":
-        $imgs = json_decode($component["content"]);
+      case 'carousel':
+        $imgs = json_decode($component['content']);
         renderImageCarousel($imgs);
         break;
-      case "link":
-        $link = json_decode($component["content"], true);
-        echo '<p><a class="link-opacity-100" href='. $link["href"] .'>'. $link["text"] .'<a/></p>';
+      case 'link':
+        $link = json_decode($component['content'], true);
+        echo '<p><a class="link-opacity-100" href=' .
+          $link['href'] .
+          '>' .
+          $link['text'] .
+          '<a/></p>';
         break;
-      case "table":
+      case 'table':
         break;
-      case "imgText":
+      case 'imgText':
         break;
     }
   }
