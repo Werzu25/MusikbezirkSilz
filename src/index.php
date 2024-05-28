@@ -47,6 +47,10 @@ foreach ($articles as $article) {
         $link = json_decode($component["content"], true);
         echo '<p><a class="link-opacity-100" href='. $link["href"] .'>'. $link["text"] .'<a/></p>';
         break;
+      case "table":
+        break;
+      case "imgText":
+        break;
     }
   }
   echo '</div>';
