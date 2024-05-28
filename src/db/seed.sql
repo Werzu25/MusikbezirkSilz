@@ -15,15 +15,11 @@ VALUES
     ("Bezirksmusikfest", 1),
     ("Orchester Projekte", 2);
 
-<<<<<<< HEAD
-INSERT INTO articles (smeID) VALUES ("1"), ("2");
-=======
 INSERT INTO
     artikel (smeID)
 VALUES
     ("1"),
     ("2");
->>>>>>> fce0b11730ff4e7efcae0ab6cda0ea55aaa7b95c
 
 INSERT INTO
     components (artID, type, content, displayOrder)
