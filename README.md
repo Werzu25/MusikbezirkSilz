@@ -11,3 +11,4 @@
 - [ ] Scene Builder
 - [ ] Code formatting, useless code removen (julians code) & Bugfixes
 - [ ] kurze DOC schreiben
+- [ ] Issues fixen
