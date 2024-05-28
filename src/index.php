@@ -21,11 +21,13 @@ require_once 'templates/dynamic/imageText.php';
 require_once 'templates/dynamic/imageCarousel.php';
 
 if (isset($_REQUEST['sideId'])) {
-  $sideId = $_REQUEST['sideId'];
+  $smeID = $_REQUEST['sideId'];
 } else {
-  $sideId = 1;
+  $smeID = 1;
 }
 
+$articles = customSelect("SELECT * FROM articles WHERE smeID = $smeID");
+echo $articles;
 // TODO
 
 require_once 'templates/static/footer.php';

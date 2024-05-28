@@ -16,7 +16,7 @@ CREATE TABLE subMenuEntry (
     FOREIGN KEY (mmeId) REFERENCES mainMenuEntry(mmeId)
 );
 
-CREATE TABLE artikel (
+CREATE TABLE articles (
     artId INT AUTO_INCREMENT NOT NULL,
     creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     smeId INT,
@@ -31,5 +31,5 @@ CREATE TABLE components (
     content TEXT,
     displayOrder INT,
     PRIMARY KEY (cmpId),
-    FOREIGN KEY (artId) REFERENCES artikel(artId)
+    FOREIGN KEY (artId) REFERENCES articles(artId)
 );
