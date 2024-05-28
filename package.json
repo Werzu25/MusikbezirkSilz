@@ -4,7 +4,7 @@
     "bootstrap": "^5.3.3"
   },
   "scripts": {
-    "format": "npx prettier ./src --write"
+    "format": "npx prettier ./src --write --embedded-language-formatting=auto"
   },
   "devDependencies": {
     "@prettier/plugin-php": "^0.22.2",
