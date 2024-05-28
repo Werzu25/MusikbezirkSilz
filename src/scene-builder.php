@@ -11,7 +11,9 @@ require_once "templates/dynamic/textWithLink.php"
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
 <body>
-<div class="container-fluid bg-body-secondary">
+
+
+    <div class="container-fluid bg-body-secondary">
   <div class="row">
     <div class="col-9">
       test1
@@ -43,6 +45,32 @@ require_once "templates/dynamic/textWithLink.php"
     </div>
   </div>
 </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">EPIC TEXT WITH TEXTö</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>EPCI LEON GAY SEX WOW I LOVE SEX 69 WOW AMAZING</div>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+                    <div>EPCI LEON GAY SEX WOW I LOVE SEX 69 WOW AMAZING PART2</div>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 <style>
     .h-100vh {

@@ -9,10 +9,10 @@ function rendertext_with_link($title, $content, $time, $link, $link_text)
             <div class="row ">
                 <div class="col-md-8">
                     <div class="card-body" >
-                        <h5 class="card-title text-danger editable "  >' .
+                        <h5 class="card-title text-danger  "  >' .
     $title .
     '</h5>
-                        <p class="card-text editable"   >' .
+                        <p class="card-text "   >' .
     $content .
       '</p>
                         <p class="card-text spacer editable"><small class="text-muted">' .
