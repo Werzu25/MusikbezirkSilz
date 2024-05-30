@@ -1,4 +1,5 @@
 <?php
+require_once 'templates/dynamic/textWithLink.php'; ?>
 require_once "templates/dynamic/textWithLink.php";
 require_once "templates/dynamic/table.php"
 ?>
@@ -12,22 +13,26 @@ require_once "templates/dynamic/table.php"
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
 <body>
-<div class="modal fade" id="linkModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Example Modal</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>Link</div>
+                <input type="text" class="w-100" id="link_text_field">
+                <div class="mt-5">Displayed Link</div>
+                <input type="text" class="w-100" id="displayedlink_text_field">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="container-fluid bg-body-secondary">
   <div class="row">
@@ -48,16 +53,11 @@ require_once "templates/dynamic/table.php"
   <div class="row h-100vh">
     <div class="spCol text-center" id="templateRenderer">
     test1
-      <div class="border rounded template ">
+      <div class="border rounded template">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
       <div class="border rounded template">
         Raphi hat a skill issue
-      </div>
-      <div class="template">
-        <?php
-        rendertext_with_link("ju gay not", "thest", "11.09.2001", "https://www.google.com", "1");
-        ?>
       </div>
     </div>
     <div class="verticalRuler h-100vh" id="pageDivider" ></div>
@@ -122,8 +122,6 @@ require_once "templates/dynamic/table.php"
         }
     });
   });
-
-
 
   function deleteElement(e) {
     e.preventDefault();

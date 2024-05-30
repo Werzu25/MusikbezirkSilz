@@ -1,7 +1,13 @@
+
 <?php
-function renderImageCarousel($images)
+
+
+
+
+
+function renderimageCarousel($images)
 {
-  echo '<div id="carouselExampleIndicators" class="carousel slide">
+  echo '<div id="carouselExampleIndicators" class="carousel slide w-25 h-auto"  >
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>';
   for ($i = 1; $i < sizeof($images); $i++) {
@@ -20,7 +26,7 @@ function renderImageCarousel($images)
       '">
             <img src="' .
       $image .
-      '" class="d-block w-100" alt="...">
+      '" class="d-block " style="width: 100%; height: 25% " alt="...">
         </div>';
     $first = false;
   }
@@ -35,4 +41,5 @@ function renderImageCarousel($images)
     </button>
 </div>';
 }
+
 ?>
