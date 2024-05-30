@@ -11,6 +11,26 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
 </head>
 <body>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Example Modal</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>Link</div>
+                <input type="text" class="w-100" id="link_text_field">
+                <div class="mt-5">Displayed Link</div>
+                <input type="text" class="w-100" id="displayedlink_text_field">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <div class="container-fluid bg-body-secondary">
   <div class="row">
