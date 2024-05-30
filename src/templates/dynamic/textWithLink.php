@@ -15,7 +15,7 @@ function rendertext_with_link($title, $content, $time, $link, $link_text)
                         <p class="card-text editable"   >' .
     $content .
       '</p>
-                        <p class="card-text spacer editable"><small class="text-muted">' .
+                        <p class="card-text spacer editable "><small class="text-muted">' .
     $time .
     '</small></p>
                         <p class="editable"><a class="link-opacity-100 " href="' .
