@@ -19,7 +19,7 @@
       '">
             <img src="' .
       $image .
-      '" class="d-block " style="width: 100%; height: 25% " alt="...">
+      '" class="d-block w-100 h-25" alt="...">
         </div>';
     $first = false;
   }
