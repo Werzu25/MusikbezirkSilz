@@ -56,7 +56,7 @@ foreach ($articles as $article) {
         break;
       case 'table':
         $table = json_decode($component['content'], true);
-        renderTable($table['titles'], $table['data']);
+        renderTable($table['data']);
         break;
       // case 'mediaText':
       //   $mediaText = json_decode($component["content"], true);
