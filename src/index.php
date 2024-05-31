@@ -35,41 +35,7 @@ foreach ($articles as $article) {
   $components = select(
     'SELECT * FROM components WHERE artID =' . $article['artId'] . ' ORDER BY displayOrder ASC'
   );
-  echo '<div class="m-4 border p-1">';
-  foreach ($components as $component) {
-    $type = $component['type'];
-
-    switch ($type) {
-      case 'title':
-        renderTitle($component['content']);
-        break;
-      case 'text':
-        renderText($component['content']);
-        break;
-      case 'carousel':
-        $imgs = json_decode($component['content']);
-        renderCarousel($imgs);
-        break;
-      case 'link':
-        $link = json_decode($component['content'], true);
-        renderLink($link['href'], $link['text']);
-        break;
-      case 'table':
-        $table = json_decode($component['content'], true);
-        renderTable($table['data']);
-        break;
-      // case 'mediaText':
-      //   $mediaText = json_decode($component["content"], true);
-      //   $orientation = $mediaText["orienation"];
-      //   if ($orientation == 'R') {
-      //     mediaRight($mediaText["content"], $mediaText["link"], $mediaText["type"]);
-      //   } elseif ($orientation == 'L') {
-      //     mediaLeft($mediaText["content"], $mediaText["link"], $mediaText["type"]);
-      //   }
-      //   break;
-    }
-  }
-  echo '</div>';
+  renderArticle($components);
 }
 
 require_once 'templates/footer.php';
