@@ -66,19 +66,13 @@ require_once 'components/link.php';
         <a href="">Link</a>
       </div>
       <div class="border rounded">
-        <?php
-          renderTitle("Title");
-        ?>
+        <?php renderTitle('Title'); ?>
       </div>
       <div class="border rounded">
-          <?php
-          renderText("Text");
-          ?>
+          <?php renderText('Text'); ?>
       </div>
       <div class="border rounded">
-          <?php
-          renderTable([["1", "2", "3"], ["4", "5", "6"]]);
-          ?>
+          <?php renderTable([['1', '2', '3'], ['4', '5', '6']]); ?>
       </div>
     </div>
     <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>

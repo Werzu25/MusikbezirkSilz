@@ -30,7 +30,8 @@ function insert($sql)
   $conn->close();
 }
 
-function renderArticle($components) {
+function renderArticle($components)
+{
   echo '<div class="m-4 border p-1">';
   foreach ($components as $component) {
     $type = $component['type'];
@@ -54,15 +55,10 @@ function renderArticle($components) {
         $table = json_decode($component['content'], true);
         renderTable($table['data']);
         break;
-      // case 'mediaText':
-      //   $mediaText = json_decode($component["content"], true);
-      //   $orientation = $mediaText["orienation"];
-      //   if ($orientation == 'R') {
-      //     mediaRight($mediaText["content"], $mediaText["link"], $mediaText["type"]);
-      //   } elseif ($orientation == 'L') {
-      //     mediaLeft($mediaText["content"], $mediaText["link"], $mediaText["type"]);
-      //   }
-      //   break;
+      case  'media':
+        $media = json_decode($component['content'], true);
+        renderMedia($media['type'], $media['content']);
+        break;
     }
   }
   echo '</div>';
