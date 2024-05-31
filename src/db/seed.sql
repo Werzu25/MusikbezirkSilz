@@ -7,7 +7,7 @@ VALUES
     ("Events", "mdi-calendar-multiple"),
     ("Rückblick", ""),
     ("Jugend", ""),
-    ("Über uns", ""),
+    ("Über uns", "");
 
 INSERT INTO
     subMenuEntry (name, mmeID)
