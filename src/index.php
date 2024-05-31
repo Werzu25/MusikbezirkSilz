@@ -22,6 +22,7 @@ require_once 'components/text.php';
 require_once 'components/table.php';
 require_once 'components/carousel.php';
 require_once 'components/link.php';
+require_once 'components/media.php';
 
 if (isset($_REQUEST['sideId'])) {
   $smeID = $_REQUEST['sideId'];
