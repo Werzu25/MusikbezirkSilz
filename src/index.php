@@ -15,8 +15,8 @@
 
 <?php
 require_once 'util.php';
-require_once 'templates/static/header.php';
-require_once 'templates/dynamic/navbar.php';
+require_once 'templates/header.php';
+require_once 'templates/navbar.php';
 require_once 'components/title.php';
 require_once 'components/text.php';
 require_once 'components/table.php';
@@ -73,7 +73,7 @@ foreach ($articles as $article) {
   echo '</div>';
 }
 
-require_once 'templates/static/footer.php';
+require_once 'templates/footer.php';
 ?>
 </body>
 
