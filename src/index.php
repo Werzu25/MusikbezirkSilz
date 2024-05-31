@@ -58,15 +58,15 @@ foreach ($articles as $article) {
         break;
       case 'table':
         $table = json_decode($component['content'], true);
-        renderTable($table["titles"], $table["data"]);
+        renderTable($table['titles'], $table['data']);
         break;
       case 'mediaText':
-        $mediaText = json_decode($component["content"], true);
-        $orientation = $mediaText["orienation"];
+        $mediaText = json_decode($component['content'], true);
+        $orientation = $mediaText['orienation'];
         if ($orientation == 'R') {
-          mediaRight($mediaText["content"], $mediaText["link"], $mediaText["type"]);
+          mediaRight($mediaText['content'], $mediaText['link'], $mediaText['type']);
         } elseif ($orientation == 'L') {
-          mediaLeft($mediaText["content"], $mediaText["link"], $mediaText["type"]);
+          mediaLeft($mediaText['content'], $mediaText['link'], $mediaText['type']);
         }
         break;
     }

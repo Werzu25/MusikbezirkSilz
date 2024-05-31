@@ -1,8 +1,5 @@
 <?php
 require_once 'templates/dynamic/textWithLink.php'; ?>
-require_once "templates/dynamic/textWithLink.php";
-require_once "templates/dynamic/table.php"
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,29 +9,37 @@ require_once "templates/dynamic/table.php"
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
-<body>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Example Modal</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div>Link</div>
-                <input type="text" class="w-100" id="link_text_field">
-                <div class="mt-5">Displayed Link</div>
-                <input type="text" class="w-100" id="displayedlink_text_field">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+<body data-bs-theme="dark">
+<div class="modal fade" id="linkInsert" tabindex="-1" aria-labelledby="linkInsertLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="linkInsertLabel">Insert Link</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="h1 mt-3 mb-3">
+          Link Text
         </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" aria-label="linkText" placeholder="Link Text" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="h1 mt-3 mb-3">
+          Insert Link
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" aria-label="linkInput" placeholder="Link" aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
+  </div>
 </div>
-<div class="container-fluid bg-body-secondary">
+
+<div class="container-fluid ">
   <div class="row">
     <div class="col-9">
       test1
@@ -51,8 +56,7 @@ require_once "templates/dynamic/table.php"
 </div>
 <div class="container-fluid mainContainer h-100vh">
   <div class="row h-100vh">
-    <div class="spCol text-center" id="templateRenderer">
-    test1
+    <div class="spCol rounded bg-body-secondary text-center" id="templateRenderer">
       <div class="border rounded template">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
@@ -60,9 +64,8 @@ require_once "templates/dynamic/table.php"
         Raphi hat a skill issue
       </div>
     </div>
-    <div class="verticalRuler h-100vh" id="pageDivider" ></div>
-    <div class="spCol text-center" id="pagePreview">
-      test
+    <div class="verticalRuler bg-white h-100vh" id="pageDivider" ></div>
+    <div class="spCol rounded bg-body-secondary text-center" id="pagePreview">
     </div>
   </div>
 </div>
@@ -75,14 +78,20 @@ require_once "templates/dynamic/table.php"
         min-height: 100vh;
     }
     .spCol {
-        width: calc(50% - 1px);
+        width: calc(50% - 7px);
         min-width: 200px;
+        margin: 3px;
+        border: 2px solid !important;
+        padding: 12px;
+    }
+    .spCol > div {
+        padding: 5px !important;
+        margin-bottom: 15px;
     }
     .verticalRuler {
         width: 2px;
         padding: 0;
         height: 100%;
-        background: #003262;
     }
     .verticalRuler:hover {
         cursor: ew-resize;
@@ -113,14 +122,6 @@ require_once "templates/dynamic/table.php"
       e.preventDefault();
     });
     element.id = Math.random().toString(36).substring(7);
-    resetDragBehavior(element);
-    element.addEventListener('keydown', (e) => {
-      e.preventDefault();
-        if (e.ctrlKey && e.key === "Ü") {
-          console.log("test");
-          //new bootstrap.Modal(document.getElementById("linkModal")).toggle();
-        }
-    });
   });
 
   function deleteElement(e) {
@@ -154,9 +155,11 @@ require_once "templates/dynamic/table.php"
     e.dataTransfer.setData("text", JSON.stringify(output));
   }
 
-  function resetDragBehavior(element)  {
+  function resetEventBehavior(element)  {
     element.removeEventListener('dragstart',(e) => templateRendererDragStart(e));
-    element.removeEventListener('drop', (e) => {e.preventDefault();});
+    element.removeEventListener('drop', (e) => {
+      e.preventDefault();
+    });
     element.addEventListener('dragstart',(e) => pagePreviewDragStart(e));
     element.addEventListener('dblclick', (e) => {
       e.target.contentEditable = true;
@@ -164,6 +167,12 @@ require_once "templates/dynamic/table.php"
     });
     element.addEventListener('blur', (e) => {
       e.target.contentEditable = false;
+    });
+    element.addEventListener('keydown', (e) => {
+      if (e.code === 'KeyAlt' || e.code === 'KeyL') {
+        console.log("test");
+        new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
+      }
     });
   }
 
@@ -182,7 +191,7 @@ require_once "templates/dynamic/table.php"
       element = document.getElementById(id);
     }
     e.target.appendChild(element);
-    resetDragBehavior(element);
+    resetEventBehavior(element);
   }
 
   function mouseDown(e) {
@@ -194,8 +203,8 @@ require_once "templates/dynamic/table.php"
 
   function mouseMove(e) {
     let x = e.clientX;
-    let leftWidth = x - 1;
-    rightWidth = bodyWidth - x - 1;
+    let leftWidth = x - 7;
+    rightWidth = bodyWidth - x - 7;
     let minWidth = getComputedStyle(templateRenderer).getPropertyValue("min-width").replace("px", "");
     if (leftWidth < minWidth || rightWidth < minWidth) {
       return;
