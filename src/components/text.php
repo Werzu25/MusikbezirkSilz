@@ -2,5 +2,5 @@
 
 function renderText($text)
 {
-    echo $text;
+  echo $text;
 }

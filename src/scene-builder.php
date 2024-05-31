@@ -1,5 +1,10 @@
 <?php
-require_once 'templates/dynamic/textWithLink.php'; ?>
+require_once 'components/title.php';
+require_once 'components/text.php';
+require_once 'components/table.php';
+require_once 'components/carousel.php';
+require_once 'components/link.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,14 +62,24 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
 <div class="container-fluid mainContainer h-100vh">
   <div class="row h-100vh">
     <div class="spCol rounded bg-body-secondary text-center" id="templateRenderer">
-      <div class="border rounded template">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-      <div class="border rounded template">
-        Raphi hat a skill issue
-      </div>
       <div class="border rounded link">
         <a href="">Link</a>
+      </div>
+      <div class="border rounded">
+        <?php
+          renderTitle("Title");
+        ?>
+      </div>
+      <div class="border rounded">
+          <?php
+          renderText("Text");
+          ?>
+      </div>
+      <div class="border rounded">
+          <?php
+          $array = array("1", "2", "3");
+          renderTable("TableTitel", $array);
+          ?>
       </div>
     </div>
     <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
@@ -88,7 +103,7 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
         border: 2px solid !important;
         padding: 12px;
     }
-    .spCol > div {
+    .spCol > * {
         padding: 5px !important;
         margin-bottom: 15px;
     }
@@ -179,6 +194,8 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
         }
       });
     }
+    element.classList.remove("border");
+    element.classList.remove("rounded");
   }
 
   function drop(e) {
@@ -238,7 +255,5 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
       isFullscreen = false;
     }
   }
-
-
 </script>
 </html>
