@@ -33,13 +33,13 @@ foreach ($articles as $article) {
   $components = customSelect(
     'SELECT * FROM components WHERE artID =' . $article['artId'] . ' ORDER BY displayOrder ASC'
   );
-  echo '<div class="m-4">';
+  echo '<div class="m-4 border p-1">';
   foreach ($components as $component) {
     $type = $component['type'];
 
     switch ($type) {
       case 'title':
-        echo '<h5 class="card-title text-danger">' . $component['content'] . '</h5>';
+        echo '<h5 class="card-title text-danger text-decoration-underline">' . $component['content'] . '</h5>';
         break;
       case 'text':
         echo $component['content'];
