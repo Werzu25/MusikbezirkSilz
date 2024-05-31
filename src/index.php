@@ -17,9 +17,12 @@
 require_once 'util.php';
 require_once 'templates/static/header.php';
 require_once 'templates/dynamic/navbar.php';
-require_once 'templates/dynamic/imageCarousel.php';
-require_once 'templates/dynamic/table.php';
-require_once 'templates/dynamic/mediaText.php';
+require_once 'components/title.php';
+require_once 'components/text.php';
+require_once 'components/table.php';
+require_once 'components/carousel.php';
+require_once 'components/link.php';
+
 
 if (isset($_REQUEST['sideId'])) {
   $smeID = $_REQUEST['sideId'];
@@ -39,36 +42,32 @@ foreach ($articles as $article) {
 
     switch ($type) {
       case 'title':
-        echo '<h5 class="card-title text-danger text-decoration-underline">' . $component['content'] . '</h5>';
+        renderTitle($component['content']);
         break;
       case 'text':
-        echo $component['content'];
+        renderText($component['content']);
         break;
       case 'carousel':
         $imgs = json_decode($component['content']);
-        renderImageCarousel($imgs);
+        renderCarousel($imgs);
         break;
       case 'link':
         $link = json_decode($component['content'], true);
-        echo '<p><a class="link-opacity-100" href=' .
-          $link['href'] .
-          '>' .
-          $link['text'] .
-          '<a/></p>';
+        renderLink($link['href'], $link['text']);
         break;
       case 'table':
         $table = json_decode($component['content'], true);
         renderTable($table['titles'], $table['data']);
         break;
-      case 'mediaText':
-        $mediaText = json_decode($component['content'], true);
-        $orientation = $mediaText['orienation'];
-        if ($orientation == 'R') {
-          mediaRight($mediaText['content'], $mediaText['link'], $mediaText['type']);
-        } elseif ($orientation == 'L') {
-          mediaLeft($mediaText['content'], $mediaText['link'], $mediaText['type']);
-        }
-        break;
+      // case 'mediaText':
+      //   $mediaText = json_decode($component["content"], true);
+      //   $orientation = $mediaText["orienation"];
+      //   if ($orientation == 'R') {
+      //     mediaRight($mediaText["content"], $mediaText["link"], $mediaText["type"]);
+      //   } elseif ($orientation == 'L') {
+      //     mediaLeft($mediaText["content"], $mediaText["link"], $mediaText["type"]);
+      //   }
+      //   break;
     }
   }
   echo '</div>';
