@@ -33,13 +33,13 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Insert Link</button>
+        <button type="button" class="btn btn-primary" onclick="">Insert Link</button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container-fluid ">
+<div class="container-fluid mt-1 mb-1">
   <div class="row">
     <div class="col-9">
       test1
@@ -50,7 +50,7 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
       </div>
     </div>
     <div class="col-1">
-      <button type="button" onclick="fullscreen()" class="btn">Fullscreen</button>
+      <button type="button" onclick="fullscreen()" class="btn btn-outline-light">Fullscreen</button>
     </div>
   </div>
 </div>
