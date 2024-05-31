@@ -9,7 +9,7 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
-<body data-bs-theme="dark">
+<body data-bs-theme="dark" class="bg-body-tertiary">
 <div class="modal fade" id="linkInsert" tabindex="-1" aria-labelledby="linkInsertLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -18,13 +18,13 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="h1 mt-3 mb-3">
+        <div class="h2 mt-3 mb-3">
           Link Text
         </div>
         <div class="input-group mb-3">
           <input type="text" class="form-control" aria-label="linkText" placeholder="Link Text" aria-describedby="inputGroup-sizing-default">
         </div>
-        <div class="h1 mt-3 mb-3">
+        <div class="h2 mt-3 mb-3">
           Insert Link
         </div>
         <div class="input-group mb-3">
@@ -33,7 +33,7 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Insert Link</button>
       </div>
     </div>
   </div>
@@ -63,8 +63,11 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
       <div class="border rounded template">
         Raphi hat a skill issue
       </div>
+      <div class="border rounded link">
+        <a href="">Link</a>
+      </div>
     </div>
-    <div class="verticalRuler bg-white h-100vh" id="pageDivider" ></div>
+    <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
     <div class="spCol rounded bg-body-secondary text-center" id="pagePreview">
     </div>
   </div>
@@ -76,6 +79,7 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
     }
     body {
         min-height: 100vh;
+        max-width: 100vw !important;
     }
     .spCol {
         width: calc(50% - 7px);
@@ -106,7 +110,7 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
   let pagePreview = document.getElementById('pagePreview');
   let bodyWidth = document.body.clientWidth;
   let isFullscreen = false;
-  let rightWidth = 0;
+  let pagePreviewWidth = bodyWidth / 2 - 7;
 
   pageDivider.addEventListener("mousedown", mouseDown);
   pageDivider.addEventListener('dragover',(e) => preventDefault(e));
@@ -168,12 +172,13 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
     element.addEventListener('blur', (e) => {
       e.target.contentEditable = false;
     });
-    element.addEventListener('keydown', (e) => {
-      if (e.code === 'KeyAlt' || e.code === 'KeyL') {
-        console.log("test");
-        new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
-      }
-    });
+    if (element.classList.contains("link")) {
+      element.addEventListener('keydown', (e) => {
+        if (e.code === 'KeyAlt' || e.code === 'KeyL') {
+          new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
+        }
+      });
+    }
   }
 
   function drop(e) {
@@ -204,13 +209,13 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
   function mouseMove(e) {
     let x = e.clientX;
     let leftWidth = x - 7;
-    rightWidth = bodyWidth - x - 7;
+    pagePreviewWidth = bodyWidth - x - 7;
     let minWidth = getComputedStyle(templateRenderer).getPropertyValue("min-width").replace("px", "");
-    if (leftWidth < minWidth || rightWidth < minWidth) {
+    if (leftWidth < minWidth || pagePreviewWidth < minWidth) {
       return;
     }
     templateRenderer.style.width = leftWidth + "px";
-    pagePreview.style.width = rightWidth + "px";
+    pagePreview.style.width = pagePreviewWidth + "px";
   }
 
   function mouseUp(e) {
@@ -224,14 +229,16 @@ require_once 'templates/dynamic/textWithLink.php'; ?>
     if (!isFullscreen) {
       templateRenderer.style.display = "none";
       pageDivider.style.display = "none";
-      pagePreview.style.width = "100%";
+      pagePreview.style.width = bodyWidth + "px"
       isFullscreen = true;
     } else if (isFullscreen) {
       templateRenderer.style.display = "block";
       pageDivider.style.display = "block";
-        pagePreview.style.width = rightWidth + "px";
+      pagePreview.style.width = pagePreviewWidth + "px";
       isFullscreen = false;
     }
   }
+
+
 </script>
 </html>

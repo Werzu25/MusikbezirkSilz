@@ -8,8 +8,8 @@
             <img class="img-fluid logoImage" alt="Musikbezirk Silz Logo" src="../assets/images/Logo-MB-Silz-mini2.jpeg" />
         </div>
         <div class="col w-50 mt-auto mb-auto">
-            <h1 class="head" >Musikbezirk Silz</h1>
-            <p class="fst-italic text-body-secondary">Es klingt Musik...</p>
+            <h1 class="head text" >Musikbezirk Silz</h1>
+            <p class="fst-italic text-body-secondary text">Es klingt Musik...</p>
         </div>
     </div>
 </div>
@@ -24,6 +24,6 @@
         background: linear-gradient(45deg, white 20%, #003262 80%);
     }
     .text {
-        color: #484848;
+        color: #484848 !important;
     }
 </style>
