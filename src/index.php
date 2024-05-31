@@ -30,10 +30,10 @@ if (isset($_REQUEST['sideId'])) {
   $smeID = 1;
 }
 
-$articles = customSelect("SELECT * FROM articles WHERE smeID = $smeID");
+$articles = select("SELECT * FROM articles WHERE smeID = $smeID");
 
 foreach ($articles as $article) {
-  $components = customSelect(
+  $components = select(
     'SELECT * FROM components WHERE artID =' . $article['artId'] . ' ORDER BY displayOrder ASC'
   );
   echo '<div class="m-4 border p-1">';

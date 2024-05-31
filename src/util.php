@@ -1,5 +1,5 @@
 <?php
-function fetchTable(string $table)
+function select(string $sql)
 {
   //$conn = new mysqli('localhost', getenv('USERNAME'), getenv('PASSWORD'), 'MusikbezirkSilz');
   $conn = new mysqli('localhost', 'root', '', 'mbs'); //TODO auf ENV vars umstellen
@@ -7,7 +7,6 @@ function fetchTable(string $table)
     die('Connection failed: ' . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM $table";
   $result = $conn->query($sql);
 
   $tableData = [];
@@ -19,21 +18,14 @@ function fetchTable(string $table)
   return $tableData;
 }
 
-function customSelect(string $sql)
+function insert($sql)
 {
-  //$conn = new mysqli('localhost', getenv('USERNAME'), getenv('PASSWORD'), 'MusikbezirkSilz');
   $conn = new mysqli('localhost', 'root', '', 'mbs'); //TODO auf ENV vars umstellen
   if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
   }
 
-  $result = $conn->query($sql);
-
-  $tableData = [];
-  while ($row = $result->fetch_assoc()) {
-    $tableData[] = $row;
-  }
+  $conn->query($sql);
 
   $conn->close();
-  return $tableData;
 }

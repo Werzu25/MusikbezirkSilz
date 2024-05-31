@@ -1,13 +1,12 @@
 <?php
-$MainEntries = fetchTable('mainMenuEntry');
+$MainEntries = select('SELECT * FROM mainMenuEntry'); 
 $content = '
 <nav class="navbar navbar-expand  bg-body-secondary">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">';
 foreach ($MainEntries as $MainEntry) {
-  $sql = 'SELECT * FROM subMenuEntry where mmeId = ' . $MainEntry['mmeId'];
-  $SubEntries = customSelect($sql);
+  $SubEntries = select('SELECT * FROM subMenuEntry where mmeId = ' . $MainEntry['mmeId']); 
   $content .=
     '
                 <li class="nav-item dropdown mainEntry">
