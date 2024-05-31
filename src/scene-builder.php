@@ -77,8 +77,7 @@ require_once 'components/link.php';
       </div>
       <div class="border rounded">
           <?php
-          $array = array("1", "2", "3");
-          renderTable("TableTitel", $array);
+          renderTable([["1", "2", "3"], ["4", "5", "6"]]);
           ?>
       </div>
     </div>
