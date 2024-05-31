@@ -11,7 +11,7 @@
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
 
-<body>
+<body data-bs-theme="dark">
 
 <?php
 require_once 'util.php';
