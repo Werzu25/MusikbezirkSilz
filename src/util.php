@@ -1,8 +1,7 @@
 <?php
 function select(string $sql)
 {
-  //$conn = new mysqli('localhost', getenv('USERNAME'), getenv('PASSWORD'), 'MusikbezirkSilz');
-  $conn = new mysqli('localhost', 'root', '', 'mbs'); //TODO auf ENV vars umstellen
+  $conn = new mysqli('localhost', 'root', '', 'mbs');
   if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
   }
@@ -18,9 +17,9 @@ function select(string $sql)
   return $tableData;
 }
 
-function insert($sql)
+function query($sql)
 {
-  $conn = new mysqli('localhost', 'root', '', 'mbs'); //TODO auf ENV vars umstellen
+  $conn = new mysqli('localhost', 'root', '', 'mbs');
   if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
   }
