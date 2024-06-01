@@ -15,6 +15,35 @@ require_once 'components/link.php';
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
 <body data-bs-theme="dark" class="bg-body-tertiary">
+<div class="modal fade" id="containerInsert" tabindex="-1" aria-labelledby="containerInsertLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="containerInsertLabel">Insert Container</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="h2 mt-3 mb-3">
+          Rows
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" id="rowsInput" aria-label="rowsInput" placeholder="Rows" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="h2 mt-3 mb-3">
+          Columns
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" id="colsInput" aria-label="colsInput" placeholder="Columns" aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertContainer()">Insert Container</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="linkInsert" tabindex="-1" aria-labelledby="linkInsertLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -27,22 +56,52 @@ require_once 'components/link.php';
           Link Text
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" aria-label="linkText" placeholder="Link Text" aria-describedby="inputGroup-sizing-default">
+          <input type="text" class="form-control" id="linkText" aria-label="linkText" placeholder="Link Text" aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="h2 mt-3 mb-3">
           Insert Link
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" aria-label="linkInput" placeholder="Link" aria-describedby="inputGroup-sizing-default">
+          <input type="text" class="form-control" id="linkInput" aria-label="linkInput" placeholder="Link" aria-describedby="inputGroup-sizing-default">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="">Insert Link</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertLink()">Insert Link</button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="dimensionChanger" tabindex="-1" aria-labelledby="dimensionChangerLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="dimensionChangerLabel">Insert Container</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="h2 mt-3 mb-3">
+          Width
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" id="widthInput" aria-label="WidthInput" placeholder="Width" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="h2 mt-3 mb-3">
+          Height
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" id="heightInput" aria-label="HeightInput" placeholder="Height" aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="changeDimensions()">Change Dimensions</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="container-fluid mt-1 mb-1">
   <div class="row">
@@ -65,14 +124,23 @@ require_once 'components/link.php';
       <div class="border rounded link">
         <a href="">Link</a>
       </div>
-      <div class="border rounded">
-        <?php renderTitle('Title'); ?>
+      <div class="border rounded previewContainer">
+        Container
       </div>
       <div class="border rounded">
-          <?php renderText('Text'); ?>
+        <?php
+          renderTitle("Title");
+        ?>
       </div>
       <div class="border rounded">
-          <?php renderTable([['1', '2', '3'], ['4', '5', '6']]); ?>
+          <?php
+          renderText("Text");
+          ?>
+      </div>
+      <div class="border rounded">
+          <?php
+          renderTable([["1", "2", "3"], ["4", "5", "6"]]);
+          ?>
       </div>
     </div>
     <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
@@ -119,6 +187,9 @@ require_once 'components/link.php';
   let bodyWidth = document.body.clientWidth;
   let isFullscreen = false;
   let pagePreviewWidth = bodyWidth / 2 - 7;
+  let currentLinkElement;
+  let currentContainerElement;
+  let currentElement;
 
   pageDivider.addEventListener("mousedown", mouseDown);
   pageDivider.addEventListener('dragover',(e) => preventDefault(e));
@@ -176,19 +247,44 @@ require_once 'components/link.php';
     element.addEventListener('dblclick', (e) => {
       e.target.contentEditable = true;
       e.target.focus();
+      currentElement = e.target;
     });
     element.addEventListener('blur', (e) => {
       e.target.contentEditable = false;
+      if (e.target.innerHTML === "" || e.target.innerHTML === "<br>") {
+        e.target.remove();
+      }
     });
+    element.addEventListener('keydown', (e) => {
+      if (e.code === 'KeyAlt' || e.code === 'KeyW') {
+        currentElement = e.target;
+        document.getElementById('widthInput').value = currentElement.style.width.replace("px", "");
+        document.getElementById('heightInput').value = currentElement.style.height.replace("px", "");
+        new bootstrap.Modal(document.getElementById("dimensionChanger")).toggle();
+      }
+    });
+
     if (element.classList.contains("link")) {
+      currentLinkElement = element;
+      element.innerHTML = "";
+      new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
       element.addEventListener('keydown', (e) => {
         if (e.code === 'KeyAlt' || e.code === 'KeyL') {
-          new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
+          currentLinkElement = element;
+          if (element.parentElement.querySelector("a") === null) {
+            new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
+          }
         }
       });
     }
-    element.classList.remove("border");
-    element.classList.remove("rounded");
+    if (!element.classList.contains("previewContainer")) {
+      element.classList.remove("border");
+      element.classList.remove("rounded");
+    } else {
+      element.innerHTML = "";
+      currentContainerElement = element;
+      new bootstrap.Modal(document.getElementById("containerInsert")).toggle();
+    }
   }
 
   function drop(e) {
@@ -205,7 +301,15 @@ require_once 'components/link.php';
     } else if (data["source"] === "pagePreview") {
       element = document.getElementById(id);
     }
-    e.target.appendChild(element);
+    if (e.target === document.getElementById("pagePreview")) {
+      addClassToChildren(element, "insertedElement")
+    }
+    if (e.target.classList.contains("insertedElement") || e.target.classList.contains("insertedContainerElement")) {
+      e.target.innerHTML = "";
+    }
+    if (e.target.classList.contains("insertedContainerElement") || e.target === document.getElementById("pagePreview")) {
+      e.target.appendChild(element);
+    }
     resetEventBehavior(element);
   }
 
@@ -247,6 +351,57 @@ require_once 'components/link.php';
       pagePreview.style.width = pagePreviewWidth + "px";
       isFullscreen = false;
     }
+  }
+
+  function insertLink() {
+    let linkText = document.getElementById('linkText').value;
+    let linkInput = document.getElementById('linkInput').value;
+    let link = document.createElement('a');
+    document.getElementById('linkText').value = '';
+    document.getElementById('linkInput').value = '';
+    link.href = linkInput;
+    link.innerHTML = linkText;
+    currentLinkElement.appendChild(link);
+    currentLinkElement = null;
+  }
+
+  function insertContainer() {
+    let numCols = document.getElementById('colsInput').value;
+    let numRows = document.getElementById('rowsInput').value;
+    let container = document.createElement('div');
+    container.classList.add('container-fluid');
+    document.getElementById('colsInput').value = '';
+    document.getElementById('rowsInput').value = '';
+    for (let i = 0; i < numRows; i++) {
+      let row = document.createElement('div');
+      row.classList.add('row');
+      for (let j = 0; j < numCols; j++) {
+        let col = document.createElement('div');
+        col.classList.add('col');
+        col.innerHTML = (j+1) +" " + i
+        row.appendChild(col);
+      }
+      container.appendChild(row);
+    }
+    currentContainerElement.appendChild(container);
+    addClassToChildren(currentContainerElement, "insertedContainerElement");
+    currentContainerElement = null;
+  }
+
+  function addClassToChildren(parent, className) {
+    parent.childNodes.forEach((child) => {
+      if (child.nodeType === 1) {
+        child.classList.add(className);
+        addClassToChildren(child, className);
+      }
+    });
+  }
+
+  function changeDimensions() {
+    let width = document.getElementById('widthInput').value;
+    let height = document.getElementById('heightInput').value;
+    currentElement.style.width = width + "%";
+    currentElement.style.height = height + "%";
   }
 </script>
 </html>
