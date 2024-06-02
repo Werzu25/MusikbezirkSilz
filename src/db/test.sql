@@ -47,4 +47,4 @@ CREATE TABLE media (
     location TEXT,
     PRIMARY KEY (medId),
     FOREIGN KEY (artId) REFERENCES articles(artId)
-);y
+);
