@@ -36,11 +36,9 @@ function renderArticle($components)
     $type = $component['type'];
 
     switch ($type) {
-      case 'title':
-        renderTitle($component['content']);
-        break;
       case 'text':
-        renderText($component['content']);
+        $text = json_decode($component['content'], true);
+        renderText($text);
         break;
       case 'carousel':
         $imgs = json_decode($component['content']);
