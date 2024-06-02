@@ -6,7 +6,7 @@ VALUES
     ("Events", "mdi-calendar-multiple"),
     ("Rückblick", "mdi-reload"),
     ("Jugend", "mdi-human-male-boy"),
-    ("Über uns", "mdi-chat-question-outline"),
+    ("Über uns", "mdi-chat-question-outline");
 
 INSERT INTO
     articles (meID, name)
