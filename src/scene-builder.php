@@ -1,9 +1,16 @@
 <?php
+session_start();
 require_once 'components/title.php';
 require_once 'components/text.php';
 require_once 'components/table.php';
 require_once 'components/carousel.php';
 require_once 'components/link.php';
+
+if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
+  header('Location: login.php');
+  exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,11 +80,11 @@ require_once 'components/link.php';
   </div>
 </div>
 
-<div class="modal fade" id="dimensionChanger" tabindex="-1" aria-labelledby="dimensionChangerLabel" aria-hidden="true">
+<div class="modal fade" id="dimensionChange" tabindex="-1" aria-labelledby="dimensionChangeLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="dimensionChangerLabel">Insert Container</h1>
+        <h1 class="modal-title fs-5" id="dimensionChangeLabel">Insert Container</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -103,6 +110,57 @@ require_once 'components/link.php';
 </div>
 
 
+<div class="modal fade" id="textInsert" tabindex="-1" aria-labelledby="textInsertLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="textInsertLabel">Inset Text</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="h2 mt-3 mb-3">
+          Font Color
+        </div>
+        <div class="input-group mb-3">
+          <input type="color" class="form-control" id="fontColorInput" aria-label="fontColorInput" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="h2 mt-3 mb-3">
+          Font Size
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" id="fontSizeInput" aria-label="fontSizeInput" placeholder="Font Size" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="h2 mt-3 mb-3">
+          Underline
+        </div>
+        <div class="input-group mb-3">
+          <input class="form-check-input me-1 rounded" type="checkbox" value="" id="underlineInput">
+          <label class="form-check-label" for="underlineInput">
+            Underline
+          </label>
+        </div>
+        <div class="h2 mt-3 mb-3">
+          Text Alignment
+        </div>
+        <div class="input-group mb-3">
+          <div class="form-floating">
+            <select class="form-select" id="floatingSelect" aria-label="Text alignment Selector">
+              <option value="left">Left</option>
+              <option value="Right">Right</option>
+              <option value="Center">Center</option>
+            </select>
+            <label for="floatingSelect">Text Alignment</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="changeFont()">Change Font</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container-fluid mt-1 mb-1">
   <div class="row">
     <div class="col-9">
@@ -117,34 +175,37 @@ require_once 'components/link.php';
       <button type="button" onclick="fullscreen()" class="btn btn-outline-light">Fullscreen</button>
     </div>
   </div>
+  <div class="row">
+    <div class="col-2">
+      <button type="button" onclick="setContentEditable()" id="containerEditableButton" class="btn btn-outline-light">Enter Edit Mod</button>
+    </div>
+  </div>
 </div>
 <div class="container-fluid mainContainer h-100vh">
   <div class="row h-100vh">
     <div class="spCol rounded bg-body-secondary text-center" id="templateRenderer">
-      <div class="border rounded link">
+      <div class="border rounded previewTitle">
+          <span class="h5">
+            Title
+          </span>
+      </div>
+      <div class="border rounded previewText">
+          <span class="h6">
+            Text
+          </span>
+      </div>
+      <div class="border rounded previewLink">
         <a href="">Link</a>
       </div>
       <div class="border rounded previewContainer">
         Container
       </div>
-      <div class="border rounded">
-        <?php
-          renderTitle("Title");
-        ?>
-      </div>
-      <div class="border rounded">
-          <?php
-          renderText("Text");
-          ?>
-      </div>
-      <div class="border rounded">
-          <?php
-          renderTable([["1", "2", "3"], ["4", "5", "6"]]);
-          ?>
+      <div class="border rounded previewImage">
+        <span>Image</span>
       </div>
     </div>
     <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
-    <div class="spCol rounded bg-body-secondary text-center" id="pagePreview">
+    <div class="spCol rounded bg-body-secondary" id="pagePreview">
     </div>
   </div>
 </div>
@@ -176,9 +237,6 @@ require_once 'components/link.php';
     .verticalRuler:hover {
         cursor: ew-resize;
     }
-    .template {
-        padding-bottom: 10px;
-    }
 </style>
 <script>
   let pageDivider = document.getElementById('pageDivider');
@@ -186,6 +244,7 @@ require_once 'components/link.php';
   let pagePreview = document.getElementById('pagePreview');
   let bodyWidth = document.body.clientWidth;
   let isFullscreen = false;
+  let editing = false;
   let pagePreviewWidth = bodyWidth / 2 - 7;
   let currentLinkElement;
   let currentContainerElement;
@@ -244,32 +303,41 @@ require_once 'components/link.php';
       e.preventDefault();
     });
     element.addEventListener('dragstart',(e) => pagePreviewDragStart(e));
-    element.addEventListener('dblclick', (e) => {
-      e.target.contentEditable = true;
-      e.target.focus();
-      currentElement = e.target;
-    });
-    element.addEventListener('blur', (e) => {
-      e.target.contentEditable = false;
-      if (e.target.innerHTML === "" || e.target.innerHTML === "<br>") {
-        e.target.remove();
-      }
-    });
     element.addEventListener('keydown', (e) => {
-      if (e.code === 'KeyAlt' || e.code === 'KeyW') {
+      if (e.code === 'KeyAlt' && e.code === 'KeyW') {
         currentElement = e.target;
-        document.getElementById('widthInput').value = currentElement.style.width.replace("px", "");
-        document.getElementById('heightInput').value = currentElement.style.height.replace("px", "");
-        new bootstrap.Modal(document.getElementById("dimensionChanger")).toggle();
+        new bootstrap.Modal(document.getElementById("dimensionChange")).toggle();
+        setChangeDimensionsModalDefaults();
       }
     });
-
+    if (element.classList.contains("previewTitle") || element.classList.contains("previewText")) {
+      element.addEventListener('dblclick', (e) => {
+        e.target.contentEditable = true;
+        e.target.focus();
+        currentElement = e.target;
+      });
+      element.addEventListener('blur', (e) => {
+        e.target.contentEditable = false;
+        if (e.target.innerHTML === "" || e.target.innerHTML === "<br>") {
+          e.target.remove();
+        }
+      });
+      currentElement = element.children[0];
+      new bootstrap.Modal(document.getElementById("textInsert")).toggle();
+      element.addEventListener('keydown', (e) => {
+        if (e.code === 'KeyAlt' && e.code === 'KeyF') {
+          currentElement = e.target;
+          new bootstrap.Modal(document.getElementById("textInsert")).toggle();
+          setFontModalDefaults();
+        }
+      });
+    }
     if (element.classList.contains("link")) {
       currentLinkElement = element;
       element.innerHTML = "";
       new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
       element.addEventListener('keydown', (e) => {
-        if (e.code === 'KeyAlt' || e.code === 'KeyL') {
+        if (e.code === 'KeyAlt' && e.code === 'KeyL') {
           currentLinkElement = element;
           if (element.parentElement.querySelector("a") === null) {
             new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
@@ -386,6 +454,7 @@ require_once 'components/link.php';
     currentContainerElement.appendChild(container);
     addClassToChildren(currentContainerElement, "insertedContainerElement");
     currentContainerElement = null;
+    setContentEditable();
   }
 
   function addClassToChildren(parent, className) {
@@ -400,8 +469,67 @@ require_once 'components/link.php';
   function changeDimensions() {
     let width = document.getElementById('widthInput').value;
     let height = document.getElementById('heightInput').value;
-    currentElement.style.width = width + "%";
-    currentElement.style.height = height + "%";
+    currentElement.style.width = width;
+    currentElement.style.height = height;
+  }
+
+  function setChangeDimensionsModalDefaults() {
+    document.getElementById('widthInput').value = currentElement.style.width.replace("px", "");
+    document.getElementById('heightInput').value = currentElement.style.height.replace("px", "");
+  }
+
+  function changeFont() {
+    let fontColor = document.getElementById('fontColorInput').value;
+    let fontSize = document.getElementById('fontSizeInput').value;
+    let underline = document.getElementById('underlineInput').checked;
+    let alignment = document.getElementById('floatingSelect').value;
+    currentElement.style.color = fontColor;
+    currentElement.style.fontSize = fontSize + "px";
+    if (underline) {
+      currentElement.style.textDecoration = "underline";
+    } else {
+      currentElement.style.textDecoration = "none";
+    }
+    currentElement.classList.remove("text-start");
+    currentElement.classList.remove("text-center");
+    currentElement.classList.remove("text-end");
+    switch (alignment) {
+      case 'Left':
+        currentElement.parentElement.classList.add("text-start");
+        break;
+      case 'Right':
+        currentElement.parentElement.classList.add("text-end");
+        break;
+      case 'Center':
+        currentElement.parentElement.classList.add("text-center");
+        break;
+    }
+  }
+
+  function setFontModalDefaults() {
+    document.getElementById('fontColorInput').value = currentElement.style.color;
+    document.getElementById('fontSizeInput').value = currentElement.style.fontSize.replace("px", "");
+    document.getElementById('underlineInput').checked = currentElement.style.textDecoration === "underline";
+  }
+
+  function setContentEditable() {
+    editing = !editing;
+    if (editing) {
+      document.getElementById('containerEditableButton').innerHTML = "Exit Container Edit Mode"
+      document.querySelectorAll('.previewContainer').forEach((element) => {
+        if (element.parentElement === document.getElementById('pagePreview')) {
+          element.contentEditable = true;
+          element.focus();
+        }
+      });
+    } else {
+      document.getElementById('containerEditableButton').innerHTML = "Enter Container Edit Mode"
+      document.querySelectorAll('.previewContainer').forEach((element) => {
+        if (element.parentElement === document.getElementById('pagePreview')) {
+          element.contentEditable = false;
+        }
+      });
+    }
   }
 </script>
 </html>
