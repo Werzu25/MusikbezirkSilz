@@ -24,15 +24,6 @@ CREATE TABLE articles (
     FOREIGN KEY (smeId) REFERENCES subMenuEntry(smeId)
 );
 
-CREATE TABLE components (
-    cmpId INT AUTO_INCREMENT NOT NULL,
-    artId INT,
-    type ENUM('text', 'title', 'table', 'link', 'carousel', 'mediaText'),
-    content TEXT,
-    displayOrder INT,
-    PRIMARY KEY (cmpId),
-    FOREIGN KEY (artId) REFERENCES articles(artId)
-);
 
 
 CREATE TABLE entries (
@@ -51,32 +42,9 @@ CREATE TABLE media (
     medId INT AUTO_INCREMENT NOT NULL,
     artId INT,
     cssClasses TEXT,
-    style TEXT,spatial
+    style TEXT,
     type ENUM('image', 'fbVideo', 'ytVideo'),
-    path VARCHAR(255),
+    location TEXT,
     PRIMARY KEY (medId),
     FOREIGN KEY (artId) REFERENCES articles(artId)
-);
-
-Create Table image (
-    imgId INT AUTO_INCREMENT NOT NULL,
-    medId INT,
-    path VARCHAR(255),
-    PRIMARY KEY (imgId),
-    FOREIGN KEY (medId) REFERENCES media(medId)
-);
-
-Create Table fbVideo (
-    fbVidId INT AUTO_INCREMENT NOT NULL,
-    medId INT,
-    link VARCHAR(255),
-    PRIMARY KEY (fbVidId),
-    FOREIGN KEY (medId) REFERENCES media(medId)
-);
-CREATE TABLE ytVideo (
-    ytVidId INT AUTO_INCREMENT NOT NULL,
-    medId INT,
-    link VARCHAR(255),
-    PRIMARY KEY (ytVidId),
-    FOREIGN KEY (medId) REFERENCES media(medId)
-);
+);y

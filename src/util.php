@@ -54,7 +54,7 @@ function renderArticle($components)
         $table = json_decode($component['content'], true);
         renderTable($table['data']);
         break;
-      case  'media':
+      case 'media':
         $media = json_decode($component['content'], true);
         renderMedia($media['type'], $media['content']);
         break;
