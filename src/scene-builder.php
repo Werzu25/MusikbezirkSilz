@@ -187,13 +187,13 @@ require_once 'components/link.php';
             Text
           </span>
       </div>
-      <div class="border rounded link">
+      <div class="border rounded previewLink">
         <a href="">Link</a>
       </div>
       <div class="border rounded previewContainer">
         Container
       </div>
-      <div class="border rounded">
+      <div class="border rounded previewImage">
         <span>Image</span>
       </div>
     </div>
