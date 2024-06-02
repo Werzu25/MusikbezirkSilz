@@ -17,7 +17,6 @@
 require_once 'util.php';
 require_once 'templates/header.php';
 require_once 'templates/navbar.php';
-require_once 'components/title.php';
 require_once 'components/text.php';
 require_once 'components/table.php';
 require_once 'components/carousel.php';
