@@ -1,9 +1,16 @@
 <?php
+session_start();
 require_once 'components/title.php';
 require_once 'components/text.php';
 require_once 'components/table.php';
 require_once 'components/carousel.php';
 require_once 'components/link.php';
+
+if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
+  header('Location: login.php');
+  exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
