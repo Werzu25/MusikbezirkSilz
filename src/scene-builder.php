@@ -238,8 +238,9 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       <?php
         require_once './util.php';
         
+        $artId = 1;
         // drop doesnt work and currently defaults to article 1
-        $components = select("SELECT * FROM components WHERE artId = 1 ORDER BY displayOrder ASC");
+        $components = select("SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC");
         renderArticle($components);
       ?>
     </div>
