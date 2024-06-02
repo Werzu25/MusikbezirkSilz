@@ -29,7 +29,7 @@ VALUES
     (4),
     (5),
     (6),
-    (7);
+    (6);
 
 INSERT INTO
     components (artID, type, content, displayOrder)
@@ -46,7 +46,7 @@ VALUES
     (4, "table", '{"titles": ["Sölden", "27.07", "Tag des Klotz"], "data": [["6069", "9-8-2025", "Tag der Jungen & Jüngeren"], ["Sölden", "28.07.2024", "Bezirksmusikfest"], ["Haiming", "02.06", "Generanalversamlung"]]}', 1),
     (4, "text", "angaben ohne gewähr", 2),
 
-    (5,'Title', 'Urheberrechtshinweis', 1),
+    (5,'title', 'Urheberrechtshinweis', 1),
     (5, "link", '{"href": "https://bibel.github.io/EUe/ot/Gen_9.html", "text": "Datenschutzerklärung"}', 2),
     (5, "text", 'Gen 9,16; Gilt besonders im Juni', 3),
 
@@ -60,5 +60,5 @@ VALUES
     (8, 'text', 'Ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde', 2),
 
     
-    (9, 'carousel', 'carousel', '["../assets/images/Eva.jpg", "../assets/images/Alfred.jpeg", "../assets/images/Ausschuss2018.JPG"], "../assets/images/Alfred.jpeg", "../assets/images/Alfred.jpeg"', 1),
+    (9, 'carousel', '["../assets/images/Eva.jpg", "../assets/images/Alfred.jpeg", "../assets/images/Ausschuss2018.JPG"], "../assets/images/Alfred.jpeg", "../assets/images/Alfred.jpeg"', 1),
     (9, 'text', 'Unsere Ehrenmitglieder (Alfred ist cool)', 2);
