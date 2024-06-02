@@ -2,32 +2,26 @@ DROP DATABASE IF EXISTS mbs;
 CREATE DATABASE IF NOT EXISTS mbs;
 USE mbs;
 
-CREATE TABLE mainMenuEntry (
-    mmeId INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE menuEntry (
+    meId INT AUTO_INCREMENT NOT NULL,
     name VARCHAR(255),
     icon VARCHAR(255),
-    PRIMARY KEY (mmeId)
-);
-CREATE TABLE subMenuEntry (
-    smeId INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(255),
-    mmeId INT,
-    PRIMARY KEY (smeId),
-    FOREIGN KEY (mmeId) REFERENCES mainMenuEntry(mmeId)
+    PRIMARY KEY (meId)
 );
 
 CREATE TABLE articles (
     artId INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255),
+    meId INT,
     creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    smeId INT,
     PRIMARY KEY (artId),
-    FOREIGN KEY (smeId) REFERENCES subMenuEntry(smeId)
+    FOREIGN KEY (meId) REFERENCES menuEntry(meId)
 );
 
 CREATE TABLE components (
     cmpId INT AUTO_INCREMENT NOT NULL,
     artId INT,
-    type ENUM('text', 'table', 'link' 'carousel', 'media'),
+    type ENUM('text', 'table', 'link', 'carousel', 'media'),
     content TEXT,
     displayOrder INT,
     PRIMARY KEY (cmpId),
