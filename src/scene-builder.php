@@ -187,11 +187,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 <div class="container-fluid mainContainer h-100vh">
   <div class="row h-100vh">
     <div class="spCol rounded bg-body-secondary text-center" id="templateRenderer">
-      <div class="border rounded previewTitle">
-          <span class="h5">
-            Title
-          </span>
-      </div>
       <div class="border rounded previewText">
           <span class="h6">
             Text
@@ -315,7 +310,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         setChangeDimensionsModalDefaults();
       }
     });
-    if (element.classList.contains("previewTitle") || element.classList.contains("previewText")) {
+    if (element.classList.contains("previewText")) {
       element.addEventListener('dblclick', (e) => {
         e.target.contentEditable = true;
         e.target.focus();
@@ -337,7 +332,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         }
       });
     }
-    if (element.classList.contains("link")) {
+    if (element.classList.contains("previewLink")) {
       currentLinkElement = element;
       element.innerHTML = "";
       new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
@@ -571,25 +566,20 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         output.content.push(entry);
       }
     });
-    document.querySelectorAll('.previewTitle').forEach((element) => {
-      if (element.parentElement === document.getElementById('templateRenderer')) {
-        let child = element.children[0];
-        let entry = new Entry('title', child.innerHTML, child.classList, child.style);
-        output.content.push(entry);
-      }
-    });
-    document.querySelectorAll('.previewTitle').forEach((element) => {
-      if (element.parentElement === document.getElementById('templateRenderer')) {
-        let child = element.children[0];
-        let entry = new Entry('title', child.innerHTML, child.classList, child.style);
-        output.content.push(entry);
-      }
-    });
     document.querySelectorAll('.previewLink').forEach((element) => {
       if (element.parentElement === document.getElementById('templateRenderer')) {
         let child = element.children[0];
-        let entry = new Entry('link', child.innerHTML, child.classList, child.style);
+        let linkElement = {
+          href: child.href,
+          text: child.innerHTML
+        };
+        let entry = new Entry('link', linkElement, child.classList, child.style);
         output.content.push(entry);
+      }
+    });
+    document.querySelectorAll('.previewContainer').forEach((element) => {
+      if (element.parentElement === document.getElementById('templateRenderer')) {
+
       }
     });
   }
