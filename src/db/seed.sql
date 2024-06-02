@@ -1,25 +1,16 @@
 USE mbs;
 INSERT INTO
-    mainMenuEntry (name, icon)
+    menuEntry (name, icon)
 VALUES
     ("Start", "mdi-home-variant"),
     ("Events", "mdi-calendar-multiple"),
     ("Rückblick", "mdi-reload"),
     ("Jugend", "mdi-human-male-boy"),
-    ("Über uns", "mdi-chat-question-outline");
+    ("Über uns", "mdi-chat-question-outline"),
+    ('Test dass funktioniert', '');
 
 INSERT INTO
-    subMenuEntry (name, mmeID)
-VALUES
-    ("DEFAULT_Start", 1),
-    ("Bezirksmusikfest", 2),
-    ("Orchester Projekte", 3),
-    ("Musikfeste", 3),
-    ("Ausbildung", 4),
-    ("Vorstand", 5);
-
-INSERT INTO
-    articles (smeID)
+    articles (meID)
 VALUES
     (1),
     (2),
