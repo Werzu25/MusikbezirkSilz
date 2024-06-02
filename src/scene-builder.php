@@ -168,6 +168,11 @@ require_once 'components/link.php';
       <button type="button" onclick="fullscreen()" class="btn btn-outline-light">Fullscreen</button>
     </div>
   </div>
+  <div class="row">
+    <div class="col-2">
+      <button type="button" onclick="setContentEditable()" id="containerEditableButton" class="btn btn-outline-light">Enter Edit Mod</button>
+    </div>
+  </div>
 </div>
 <div class="container-fluid mainContainer h-100vh">
   <div class="row h-100vh">
@@ -232,6 +237,7 @@ require_once 'components/link.php';
   let pagePreview = document.getElementById('pagePreview');
   let bodyWidth = document.body.clientWidth;
   let isFullscreen = false;
+  let editing = false;
   let pagePreviewWidth = bodyWidth / 2 - 7;
   let currentLinkElement;
   let currentContainerElement;
@@ -290,26 +296,25 @@ require_once 'components/link.php';
       e.preventDefault();
     });
     element.addEventListener('dragstart',(e) => pagePreviewDragStart(e));
-    element.addEventListener('dblclick', (e) => {
-      e.target.contentEditable = true;
-      e.target.focus();
-      currentElement = e.target;
-    });
-    element.addEventListener('blur', (e) => {
-      e.target.contentEditable = false;
-      if (e.target.innerHTML === "" || e.target.innerHTML === "<br>") {
-        e.target.remove();
-      }
-    });
     element.addEventListener('keydown', (e) => {
       if (e.code === 'KeyAlt' && e.code === 'KeyW') {
         currentElement = e.target;
         new bootstrap.Modal(document.getElementById("dimensionChange")).toggle();
-        document.getElementById('widthInput').value = currentElement.style.width.replace("px", "");
-        document.getElementById('heightInput').value = currentElement.style.height.replace("px", "");
+        setChangeDimensionsModalDefaults();
       }
     });
     if (element.classList.contains("previewTitle") || element.classList.contains("previewText")) {
+      element.addEventListener('dblclick', (e) => {
+        e.target.contentEditable = true;
+        e.target.focus();
+        currentElement = e.target;
+      });
+      element.addEventListener('blur', (e) => {
+        e.target.contentEditable = false;
+        if (e.target.innerHTML === "" || e.target.innerHTML === "<br>") {
+          e.target.remove();
+        }
+      });
       currentElement = element.children[0];
       new bootstrap.Modal(document.getElementById("textInsert")).toggle();
       element.addEventListener('keydown', (e) => {
@@ -442,6 +447,7 @@ require_once 'components/link.php';
     currentContainerElement.appendChild(container);
     addClassToChildren(currentContainerElement, "insertedContainerElement");
     currentContainerElement = null;
+    setContentEditable();
   }
 
   function addClassToChildren(parent, className) {
@@ -456,8 +462,13 @@ require_once 'components/link.php';
   function changeDimensions() {
     let width = document.getElementById('widthInput').value;
     let height = document.getElementById('heightInput').value;
-    currentElement.style.width = width + "%";
-    currentElement.style.height = height + "%";
+    currentElement.style.width = width;
+    currentElement.style.height = height;
+  }
+
+  function setChangeDimensionsModalDefaults() {
+    document.getElementById('widthInput').value = currentElement.style.width.replace("px", "");
+    document.getElementById('heightInput').value = currentElement.style.height.replace("px", "");
   }
 
   function changeFont() {
@@ -492,6 +503,26 @@ require_once 'components/link.php';
     document.getElementById('fontColorInput').value = currentElement.style.color;
     document.getElementById('fontSizeInput').value = currentElement.style.fontSize.replace("px", "");
     document.getElementById('underlineInput').checked = currentElement.style.textDecoration === "underline";
+  }
+
+  function setContentEditable() {
+    editing = !editing;
+    if (editing) {
+      document.getElementById('containerEditableButton').innerHTML = "Exit Container Edit Mode"
+      document.querySelectorAll('.previewContainer').forEach((element) => {
+        if (element.parentElement === document.getElementById('pagePreview')) {
+          element.contentEditable = true;
+          element.focus();
+        }
+      });
+    } else {
+      document.getElementById('containerEditableButton').innerHTML = "Enter Container Edit Mode"
+      document.querySelectorAll('.previewContainer').forEach((element) => {
+        if (element.parentElement === document.getElementById('pagePreview')) {
+          element.contentEditable = false;
+        }
+      });
+    }
   }
 </script>
 </html>
