@@ -31,7 +31,7 @@ function query($sql)
 
 function renderArticle($components)
 {
-  echo '<div class="m-4 border p-1">';
+  echo '<div class="border rounded m-2 p-1">';
   foreach ($components as $component) {
     $type = $component['type'];
 

@@ -23,20 +23,14 @@ require_once 'components/carousel.php';
 require_once 'components/link.php';
 require_once 'components/media.php';
 
-if (isset($_REQUEST['sideId'])) {
-  $smeID = $_REQUEST['sideId'];
+if (isset($_REQUEST['artId'])) {
+  $artId = $_REQUEST['artId'];
 } else {
-  $smeID = 1;
+  $artId = 1;
 }
 
-$articles = select("SELECT * FROM articles WHERE smeID = $smeID");
-
-foreach ($articles as $article) {
-  $components = select(
-    'SELECT * FROM components WHERE artID =' . $article['artId'] . ' ORDER BY displayOrder ASC'
-  );
-  renderArticle($components);
-}
+$components = select("SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC");
+renderArticle($components);
 
 require_once 'templates/footer.php';
 ?>

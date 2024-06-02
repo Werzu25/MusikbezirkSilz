@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+require_once 'components/text.php';
+require_once 'components/table.php';
+require_once 'components/carousel.php';
+require_once 'components/link.php';
+
 if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   header('Location: login.php');
   exit;
@@ -166,27 +171,21 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       </div>
       <div class="modal-body">
         <div class="h2 mt-3 mb-3">
-          Image Path
+          Rows
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="imagePathInput" aria-label="pathInput" placeholder="Image Path" aria-describedby="inputGroup-sizing-default">
+          <input type="number" class="form-control" id="rowsInput" aria-label="rowsInput" placeholder="Rows" aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="h2 mt-3 mb-3">
-          Width
+          Columns
         </div>
         <div class="input-group mb-3">
-          <input type="number" class="form-control" id="widthImageInput" aria-label="widthImageInput" placeholder="Width" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="h2 mt-3 mb-3">
-          Height
-        </div>
-        <div class="input-group mb-3">
-          <input type="number" class="form-control" id="heightImageInput" aria-label="heightImageInput" placeholder="Height" aria-describedby="inputGroup-sizing-default">
+          <input type="number" class="form-control" id="colsInput" aria-label="colsInput" placeholder="Columns" aria-describedby="inputGroup-sizing-default">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insetImage()">Insert Image</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertContainer()">Insert Container</button>
       </div>
     </div>
   </div>
@@ -237,6 +236,14 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     </div>
     <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
     <div class="spCol rounded bg-body-secondary" id="pagePreview">
+      <?php
+        require_once './util.php';
+
+        $artId = 1;
+        // drop doesnt work and currently defaults to article 1
+        $components = select("SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC");
+        renderArticle($components);
+      ?>
     </div>
   </div>
 </div>
@@ -295,7 +302,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       e.preventDefault();
     });
     element.id = Math.random().toString(36).substring(7);
-    resetEventBehavior(element);
   });
 
   function deleteElement(e) {
@@ -447,17 +453,24 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   }
 
   function fullscreen() {
-    if (!isFullscreen) {
-      templateRenderer.style.display = "none";
-      pageDivider.style.display = "none";
-      pagePreview.style.width = bodyWidth + "px"
-      isFullscreen = true;
-    } else if (isFullscreen) {
-      templateRenderer.style.display = "block";
-      pageDivider.style.display = "block";
-      pagePreview.style.width = pagePreviewWidth + "px";
-      isFullscreen = false;
-    }
+      if (!isFullscreen) {
+          templateRenderer.style.display = "none";
+          pageDivider.style.display = "none";
+          pagePreview.style.width = "100vw";
+          pagePreview.style.height = "100vh";
+          pagePreview.style.boxSizing = "border-box";
+          pagePreview.style.margin = "0";
+          pagePreview.style.padding = "0";
+          isFullscreen = true;
+      } else if (isFullscreen) {
+          templateRenderer.style.display = "block";
+          pageDivider.style.display = "block";
+          pagePreview.style.width = pagePreviewWidth + "px";
+          pagePreview.style.height = "auto";
+          pagePreview.style.boxSizing = "content-box";
+
+          isFullscreen = false;
+      }
   }
 
   function insertLink() {
@@ -645,7 +658,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       }
     });
    */
-    console.log(output);
   }
 </script>
 </html>
