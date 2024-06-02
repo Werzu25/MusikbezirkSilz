@@ -1,10 +1,5 @@
 <?php
 session_start();
-require_once 'components/title.php';
-require_once 'components/text.php';
-require_once 'components/table.php';
-require_once 'components/carousel.php';
-require_once 'components/link.php';
 
 if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   header('Location: login.php');
@@ -22,6 +17,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
 <body data-bs-theme="dark" class="bg-body-tertiary">
+
 <div class="modal fade" id="containerInsert" tabindex="-1" aria-labelledby="containerInsertLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -170,21 +166,27 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       </div>
       <div class="modal-body">
         <div class="h2 mt-3 mb-3">
-          Rows
+          Image Path
         </div>
         <div class="input-group mb-3">
-          <input type="number" class="form-control" id="rowsInput" aria-label="rowsInput" placeholder="Rows" aria-describedby="inputGroup-sizing-default">
+          <input type="text" class="form-control" id="imagePathInput" aria-label="pathInput" placeholder="Image Path" aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="h2 mt-3 mb-3">
-          Columns
+          Width
         </div>
         <div class="input-group mb-3">
-          <input type="number" class="form-control" id="colsInput" aria-label="colsInput" placeholder="Columns" aria-describedby="inputGroup-sizing-default">
+          <input type="number" class="form-control" id="widthImageInput" aria-label="widthImageInput" placeholder="Width" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="h2 mt-3 mb-3">
+          Height
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" id="heightImageInput" aria-label="heightImageInput" placeholder="Height" aria-describedby="inputGroup-sizing-default">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertContainer()">Insert Container</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insetImage()">Insert Image</button>
       </div>
     </div>
   </div>
@@ -206,7 +208,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   </div>
   <div class="row mt-1">
     <div class="col">
-      <button type="button" onclick="setContentEditable()" id="containerEditableButton" class="btn btn-outline-light">Enter Edit Mod</button>
+      <button type="button" onclick="setContentEditable()" id="containerEditableButton" class="btn btn-outline-light">Enter Container Edit Mode</button>
     </div>
     <div class="col text-end">
       <button type="button" onclick="saveContent()" class="btn btn-outline-light">Save Content</button>
@@ -293,6 +295,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       e.preventDefault();
     });
     element.id = Math.random().toString(36).substring(7);
+    resetEventBehavior(element);
   });
 
   function deleteElement(e) {
@@ -360,6 +363,13 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
           setFontModalDefaults();
         }
       });
+    }
+    if (element.classList.contains("previewImage")) {
+      document.getElementById('imagePathInput').value = '';
+      document.getElementById('widthInput').value = '';
+      document.getElementById('heightInput').value = '';
+      currentElement = element;
+      new bootstrap.Modal(document.getElementById("imageInsert")).toggle();
     }
     if (element.classList.contains("previewLink")) {
       currentLinkElement = element;
@@ -541,6 +551,19 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     document.getElementById('underlineInput').checked = currentElement.style.textDecoration === "underline";
   }
 
+  function insetImage() {
+    let imagePath = document.getElementById('imagePathInput').value;
+    let width = document.getElementById('widthImageInput').value;
+    let height = document.getElementById('heightImageInput').value;
+    let image = document.createElement('img');
+    image.src = "../assets/images/" + imagePath;
+    debugger
+    image.style.width = width;
+    image.style.height = height;
+    currentElement.innerHTML = "";
+    currentElement.appendChild(image);
+  }
+
   function setContentEditable() {
     editing = !editing;
     if (editing) {
@@ -590,7 +613,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 
     let output = new JsonOutput();
     document.querySelectorAll('.previewText').forEach((element) => {
-      if (element.parentElement === document.getElementById('templateRenderer')) {
+      if (element.parentElement === document.getElementById('pagePreview')) {
         let child = element.children[0];
         let content = {
           text: child.innerHTML,
@@ -602,7 +625,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     });
 
     document.querySelectorAll('.previewLink').forEach((element) => {
-      if (element.parentElement === document.getElementById('templateRenderer')) {
+      if (element.parentElement === document.getElementById('pagePreview')) {
         let child = element.children[0];
         let linkElement = {
           text: child.innerHTML,
@@ -622,6 +645,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       }
     });
    */
+    console.log(output);
   }
 </script>
 </html>
