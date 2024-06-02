@@ -9,7 +9,7 @@ $content = '
                     <a class="nav-link" href="login.php">Login</a>
                 </li>';
 foreach ($MainEntries as $MainEntry) {
-    $SubEntries = select('SELECT * FROM articles WHERE mmeId = ' . $MainEntry['meId']);
+    $SubEntries = select('SELECT * FROM articles WHERE meId = ' . $MainEntry['meId']);
     $content .=
     '
                 <li class="nav-item dropdown mainEntry">
@@ -20,7 +20,7 @@ foreach ($MainEntries as $MainEntry) {
                     ';
     foreach ($SubEntries as $SubEntry) {
         $content .=
-      '<li><a class="dropdown-item" href="index.php?sideId=' . $SubEntry['smeId'] . '">' . $SubEntry['name'] . '</a></li>';
+      '<li><a class="dropdown-item" href="index.php?sideId=' . $SubEntry['artId'] . '">' . $SubEntry['name'] . '</a></li>';
     }
     $content .= '
                    </ul>
