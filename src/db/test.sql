@@ -24,8 +24,6 @@ CREATE TABLE articles (
     FOREIGN KEY (smeId) REFERENCES subMenuEntry(smeId)
 );
 
-
-
 CREATE TABLE entries (
     entId INT AUTO_INCREMENT NOT NULL,
     artId INT,
@@ -44,7 +42,7 @@ CREATE TABLE media (
     cssClasses TEXT,
     style TEXT,
     type ENUM('image', 'fbVideo', 'ytVideo'),
-    location TEXT,
+    source TEXT,
     PRIMARY KEY (medId),
     FOREIGN KEY (artId) REFERENCES articles(artId)
-);y
+);

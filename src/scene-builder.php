@@ -175,9 +175,12 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       <button type="button" onclick="fullscreen()" class="btn btn-outline-light">Fullscreen</button>
     </div>
   </div>
-  <div class="row">
-    <div class="col-2">
+  <div class="row mt-1">
+    <div class="col">
       <button type="button" onclick="setContentEditable()" id="containerEditableButton" class="btn btn-outline-light">Enter Edit Mod</button>
+    </div>
+    <div class="col text-end">
+      <button type="button" onclick="saveContent()" class="btn btn-outline-light">Save Content</button>
     </div>
   </div>
 </div>
@@ -195,7 +198,9 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
           </span>
       </div>
       <div class="border rounded previewLink">
-        <a href="">Link</a>
+        <a href="">
+          Link
+        </a>
       </div>
       <div class="border rounded previewContainer">
         Container
@@ -530,6 +535,63 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         }
       });
     }
+  }
+
+  function saveContent() {
+    class JsonOutput {
+      constructor() {
+        this.smeId = '';
+        this.content = [];
+      }
+    }
+
+    class Entry {
+      constructor(type, content, cssClasses, style) {
+        this.type = type;
+        this.content = content;
+        this.cssClasses = cssClasses;
+        this.style = style;
+      }
+    }
+
+    class Media {
+      constructor(type, content, cssClasses, style, location) {
+        this.type = type;
+        this.content = content;
+        this.cssClasses = cssClasses;
+        this.style = style;
+        this.location = location;
+      }
+    }
+    let output = new JsonOutput();
+    document.querySelectorAll('.previewText').forEach((element) => {
+      if (element.parentElement === document.getElementById('templateRenderer')) {
+        let child = element.children[0];
+        let entry = new Entry('text', child.innerHTML, child.classList, child.style);
+        output.content.push(entry);
+      }
+    });
+    document.querySelectorAll('.previewTitle').forEach((element) => {
+      if (element.parentElement === document.getElementById('templateRenderer')) {
+        let child = element.children[0];
+        let entry = new Entry('title', child.innerHTML, child.classList, child.style);
+        output.content.push(entry);
+      }
+    });
+    document.querySelectorAll('.previewTitle').forEach((element) => {
+      if (element.parentElement === document.getElementById('templateRenderer')) {
+        let child = element.children[0];
+        let entry = new Entry('title', child.innerHTML, child.classList, child.style);
+        output.content.push(entry);
+      }
+    });
+    document.querySelectorAll('.previewLink').forEach((element) => {
+      if (element.parentElement === document.getElementById('templateRenderer')) {
+        let child = element.children[0];
+        let entry = new Entry('link', child.innerHTML, child.classList, child.style);
+        output.content.push(entry);
+      }
+    });
   }
 </script>
 </html>
