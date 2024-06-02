@@ -7,7 +7,6 @@ VALUES
     ("Rückblick", "mdi-reload"),
     ("Jugend", "mdi-human-male-boy"),
     ("Über uns", "mdi-chat-question-outline"),
-    ('Test dass funktioniert', '');
 
 INSERT INTO
     articles (meID, name)
