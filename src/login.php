@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -24,19 +25,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title >Login</title>
 </head>
-<body>
-    <h2>Login</h2>
-    <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
-    <form method="post" action="">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        <br>
-        <button type="submit">Login</button>
-    </form>
+<body data-bs-theme="dark">
+<div class="container-fluid d-flex justify-content-center align-items-center">
+    <div>
+        <h2 class="text-center">Login</h2>
+        <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
+        <form method="post" action="" class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" class="form-control" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" class="form-control" required>
+            <br>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
