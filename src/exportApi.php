@@ -3,7 +3,6 @@ require_once 'util.php';
 
 header('Content-Type: application/json');
 
-// JSON-Daten empfangen
 $smeId = isset($_GET['smeId']) ? (int)$_GET['smeId'] : null;
 
 if ($smeId === null) {
@@ -11,14 +10,12 @@ if ($smeId === null) {
     exit();
 }
 
-// Artikel mit der angegebenen smeId abrufen
 $articles = query("SELECT * FROM articles WHERE smeId = $smeId");
 
 $content = [];
 foreach ($articles as $article) {
     $artId = $article['artId'];
 
-    // Entries für den Artikel abrufen
     $entries = query("SELECT * FROM entries WHERE artId = $artId");
 
     $entryData = [];
@@ -31,7 +28,6 @@ foreach ($articles as $article) {
         ];
     }
 
-    // Media für den Artikel abrufen
     $media = query("SELECT * FROM media WHERE artId = $artId");
 
     $mediaData = [];
