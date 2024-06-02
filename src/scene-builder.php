@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'components/title.php';
+
 require_once 'components/text.php';
 require_once 'components/table.php';
 require_once 'components/carousel.php';
@@ -437,17 +437,24 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   }
 
   function fullscreen() {
-    if (!isFullscreen) {
-      templateRenderer.style.display = "none";
-      pageDivider.style.display = "none";
-      pagePreview.style.width = bodyWidth + "px"
-      isFullscreen = true;
-    } else if (isFullscreen) {
-      templateRenderer.style.display = "block";
-      pageDivider.style.display = "block";
-      pagePreview.style.width = pagePreviewWidth + "px";
-      isFullscreen = false;
-    }
+      if (!isFullscreen) {
+          templateRenderer.style.display = "none";
+          pageDivider.style.display = "none";
+          pagePreview.style.width = "100vw";
+          pagePreview.style.height = "100vh";
+          pagePreview.style.boxSizing = "border-box";
+          pagePreview.style.margin = "0";
+          pagePreview.style.padding = "0";
+          isFullscreen = true;
+      } else if (isFullscreen) {
+          templateRenderer.style.display = "block";
+          pageDivider.style.display = "block";
+          pagePreview.style.width = pagePreviewWidth + "px";
+          pagePreview.style.height = "auto";
+          pagePreview.style.boxSizing = "content-box";
+
+          isFullscreen = false;
+      }
   }
 
   function insertLink() {
