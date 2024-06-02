@@ -235,6 +235,12 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     </div>
     <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
     <div class="spCol rounded bg-body-secondary" id="pagePreview">
+      <?php
+        require_once './util.php';
+        
+        $components = select("SELECT * FROM components WHERE artId = 1 ORDER BY displayOrder ASC");
+        renderArticle($components);
+      ?>
     </div>
   </div>
 </div>
