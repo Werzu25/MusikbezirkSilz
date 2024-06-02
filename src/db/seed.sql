@@ -56,8 +56,8 @@ VALUES
     (7, "title", "Vorstand", 1),
     (7, "text", "Hallo", 2),
     
-    (8, 'title', 'Ich finde, dass ich finde, dass ich finde', 1),
-    (8, 'text', 'Ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde, dass ich finde', 2),
+    (8, 'title', 'Jugendmarschierprobe 2023', 1),
+    (8, 'text', 'Auch heuer waren wieder sehr viele marschierbegeisterte NachwuchsmusikantInnen dabei. Organisiert und durchgeführt von unseren Jugendreferenten Angi und Hannes sowie unserem Bezirksstabführer Thomas hatten alle Teilnehmenden wieder eine lehrreiche Probe und ein abwechslungsreiches Rahmenprogramm.', 2),
 
     
     (9, 'carousel', '["../assets/images/Eva.jpg", "../assets/images/Alfred.jpeg", "../assets/images/Ausschuss2018.JPG"], "../assets/images/Alfred.jpeg", "../assets/images/Alfred.jpeg"', 1),
