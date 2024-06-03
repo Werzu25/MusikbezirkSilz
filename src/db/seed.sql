@@ -21,6 +21,7 @@ insert into
 values
     (1),
     (2),
+
     (1);
 
 insert into
@@ -33,4 +34,5 @@ values
     (1, "text", '{"style": "", "text": "Die Generalversammlung fand dieses Jahr in Umhausen statt"}', 2),
     (1, "link", '{"style": "", "href":"https://musikbezirk-silz.at/page-15/page-14/", "text": "Hier gehts zum Nachbericht"}', 3),
     (3, "text", '{"style": "color: #ff0000", "text": "Vorschau 2024"}', 1),
-    (3, "table", '[["Sölden","27.07.2024","Tag der Jugend"],["Sölden","28.07.2024","Bezirkmusikfest"],["Haiming","06.10.2024","Generalversammlung des Musikbezirkes"]]', 2);
+    (3, "table", '[["Sölden","27.07.2024","Tag der Jugend"],["Sölden","28.07.2024","Bezirkmusikfest"],["Haiming","06.10.2024","Generalversammlung des Musikbezirkes"]]', 2),
+    (4,"carousel",'["../assets/images/bezirksmusikfest2024.jpg","../assets/images/Eva.jpg","../assets/images/Ausschuss2018.JPG"]',1);
