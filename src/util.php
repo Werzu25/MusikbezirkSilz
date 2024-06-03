@@ -1,36 +1,49 @@
 <?php
+// Funktion zum Ausführen einer SELECT-Abfrage und Rückgabe der Ergebnisse als assoziatives Array
 function select(string $sql)
 {
+  // Verbindung zur Datenbank herstellen
   $conn = new mysqli('localhost', 'root', '', 'mbs');
+  // Bei Verbindungsfehler abbrechen und Fehlermeldung ausgeben
   if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
   }
 
+  // SQL-Abfrage ausführen
   $result = $conn->query($sql);
 
+  // Daten in ein Array speichern
   $tableData = [];
   while ($row = $result->fetch_assoc()) {
     $tableData[] = $row;
   }
 
+  // Verbindung schließen und Ergebnis zurückgeben
   $conn->close();
   return $tableData;
 }
 
+// Funktion zum Ausführen einer allgemeinen SQL-Abfrage (z.B. INSERT, UPDATE, DELETE)
 function query($sql)
 {
+  // Verbindung zur Datenbank herstellen
   $conn = new mysqli('localhost', 'root', '', 'mbs');
+  // Bei Verbindungsfehler abbrechen und Fehlermeldung ausgeben
   if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
   }
 
+  // SQL-Abfrage ausführen
   $conn->query($sql);
 
+  // Verbindung schließen
   $conn->close();
 }
 
+// Funktion zum Rendern eines Artikels basierend auf den Komponenten
 function renderArticle($components)
 {
+  // Durchlaufen der Komponenten und Rendern entsprechend ihres Typs
   foreach ($components as $component) {
     $type = $component['type'];
 
