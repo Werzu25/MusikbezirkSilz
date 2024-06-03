@@ -1,5 +1,5 @@
 <?php
-require_once 'util.php';
+/*require_once 'util.php';
 
 header('Content-Type: application/json');
 
@@ -51,5 +51,7 @@ $response = [
     "content" => $content
 ];
 
-echo json_encode($response);
+echo json_encode($response);*/
+
+//LEON I BRAUCH DIE EXAMPLE JSON
 ?>
