@@ -1,5 +1,5 @@
 <?php
-$MainEntries = select('SELECT * FROM menuEntry');
+$MainEntries = select('SELECT * FROM mainMenuEntry');
 $content = '
 <nav class="navbar navbar-expand  bg-body-secondary">
     <div class="container-fluid">
@@ -9,7 +9,7 @@ $content = '
                     <a class="nav-link" href="login.php">Login</a>
                 </li>';
 foreach ($MainEntries as $MainEntry) {
-    $SubEntries = select('SELECT * FROM articles WHERE meId = ' . $MainEntry['meId']);
+    $SubEntries = select('SELECT * FROM subMenuEntry WHERE mmeId = ' . $MainEntry['mmeId']);
     $content .=
     '
                 <li class="nav-item dropdown mainEntry">
@@ -20,7 +20,7 @@ foreach ($MainEntries as $MainEntry) {
                     ';
     foreach ($SubEntries as $SubEntry) {
         $content .=
-      '<li><a class="dropdown-item" href="index.php?sideId=' . $SubEntry['artId'] . '">' . $SubEntry['name'] . '</a></li>';
+      '<li><a class="dropdown-item" href="index.php?sideId=' . $SubEntry['smeId'] . '">' . $SubEntry['name'] . '</a></li>';
     }
     $content .= '
                    </ul>

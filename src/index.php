@@ -29,8 +29,17 @@ if (isset($_REQUEST['artId'])) {
   $artId = 1; // Standard-Artikel-ID, falls keine in der Anfrage angegeben wurde
 }
 
-$components = select("SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC"); // Abrufen der Komponenten aus der Datenbank
-renderArticle($components); // Rendern der Artikel mit den abgerufenen Komponenten
+// $components = select("SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC");
+// renderArticle($components);
+
+$articles = select("SELECT * FROM articles WHERE smeID = $smeID");
+
+foreach ($articles as $article) {
+  $components = select(
+    'SELECT * FROM components WHERE artID =' . $article['artId'] . ' ORDER BY displayOrder ASC'
+  );
+  renderArticle($components);
+}
 
 require_once 'templates/footer.php'; // Einbindung des Footer-Templates
 ?>
