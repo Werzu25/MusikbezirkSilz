@@ -10,14 +10,14 @@ values
     ("über uns", "mdi-chat-question-outline");
 
 insert into
-    submenuentry (name, mmeid)
+    submenuentry (name, mmeId)
 values
     ("default_start", 1),
     ("bezirksmusikfest", 2),
     ("vorstand", 5);
 
 insert into
-    articles (smeid)
+    articles (smeId)
 values
     (1),
     (2);
