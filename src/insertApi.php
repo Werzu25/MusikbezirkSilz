@@ -34,6 +34,7 @@ foreach ($content as $item) {
         $style = $media['style'];
         $location = $media['location'];
 
+        
         query("INSERT INTO media (artId, type, cssClasses, style, location) VALUES ($artId, '$type', '$cssClasses', '$style', '$location')");
     }
 }
