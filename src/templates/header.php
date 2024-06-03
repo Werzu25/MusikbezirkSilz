@@ -5,7 +5,7 @@
 <div class="imageRow">
     <div class="row row-cols-sm-6">
         <div class="col">
-            <img class="img-fluid logoImage" alt="Musikbezirk Silz Logo" src="../assets/images/Logo-MB-Silz-mini2.jpeg" />
+            <img class="img-fluid logoImage" alt="Musikbezirk Silz Logo" src="../assets/images/logo.jpg" />
         </div>
         <div class="col w-50 mt-auto mb-auto">
             <h1 class="head text" >Musikbezirk Silz</h1>

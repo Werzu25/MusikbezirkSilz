@@ -10,7 +10,6 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
-
 <?php
 require_once 'util.php'; 
 require_once 'templates/header.php'; 
