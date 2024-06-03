@@ -40,4 +40,4 @@ insert into
     components (artId, type, content, displayorder)
 values
     (1, "text", '{"style": "color: #ff0000", "text": "Vorschau 2024"}', 1),
-    (1, "table", '[["Sölden","27.07.2024","Tag der Jugend"],["Sölden","28.07.2024","Bezirkmusikfest"],["Haiming","06.10.2024","Generalversammlung des Musikbezirkes"]]', 2);
+    (1, "table", '{"data": [["Sölden","27.07.2024","Tag der Jugend"],["Sölden","28.07.2024","Bezirkmusikfest"],["Haiming","06.10.2024","Generalversammlung des Musikbezirkes"]]}', 2);
