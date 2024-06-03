@@ -1,7 +1,9 @@
+
 <?php
+
 function renderCarousel($images)
 {
-  echo '<div id="carouselExampleIndicators" class="carousel slide w-25 h-auto"  >
+  echo '<div id="carouselExampleIndicators" class="carousel slide w-25 h-auto" data-bs-ride="carousel"  >
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>';
   for ($i = 1; $i < sizeof($images); $i++) {
@@ -33,5 +35,19 @@ function renderCarousel($images)
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
-</div>';
+</div>
+<style>
+.carousel {
+    width: 100%; /* Adjust width as necessary */
+    height: 500px; /* Set a fixed height */
 }
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cover to fill the area, contain to fit inside */
+}
+</style>';
+}
+
+?>
