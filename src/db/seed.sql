@@ -1,30 +1,30 @@
-USE mbs;
+use mbs;
 
-INSERT INTO
-    mainMenuEntry (name, icon)
-VALUES
-    ("Start", "mdi-home-variant"),
-    ("Events", "mdi-calendar-multiple"),
-    ("Rückblick", "mdi-reload"),
-    ("Jugend", "mdi-human-male-boy"),
-    ("Über uns", "mdi-chat-question-outline");
+insert into
+    mainmenuentry (name, icon)
+values
+    ("start", "mdi-home-variant"),
+    ("events", "mdi-calendar-multiple"),
+    ("rückblick", "mdi-reload"),
+    ("jugend", "mdi-human-male-boy"),
+    ("über uns", "mdi-chat-question-outline");
 
-INSERT INTO
-    subMenuEntry (name, mmeId)
-VALUES
-    ("DEFAULT_Start", 1),
-    ("Bezirksmusikfest", 2),
-    ("Orchester Projekte", 3),
-    ("Musikfeste", 3),
-    ("Ausbildung", 4),
-    ("Vorstand", 5);
+insert into
+    submenuentry (name, mmeid)
+values
+    ("default_start", 1),
+    ("bezirksmusikfest", 2),
+    ("vorstand", 5);
 
-INSERT INTO
-    articles (smeId)
-VALUES
-    (1);
+insert into
+    articles (smeid)
+values
+    (1),
+    (2);
 
-INSERT INTO
-    components (artId, type, content, displayOrder)
-VALUES
-    (1, "text", '{"style": "", "text": "test"}', 2);
+insert into
+    components (artId, type, content, displayorder)
+values
+    (2, "text", '{"style": "color: #ff0000", "text": "bezirksmusikfest 2024"}', 1),
+    (2, "text", '{"style": "", "text": "das bezirksmusikfest findet heuer vom 26. bis zum 28. juli in sölden statt."}', 2),
+    (2, "media", '{"type": "image", "content": "../assets/images/bezirksmusikfest2024.jpg"}', 3);
