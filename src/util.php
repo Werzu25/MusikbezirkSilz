@@ -44,6 +44,7 @@ function query($sql)
 function renderArticle($components)
 {
   // Durchlaufen der Komponenten und Rendern entsprechend ihres Typs
+  echo '<div class="m-3 border p-1">';
   foreach ($components as $component) {
     $type = $component['type'];
 
@@ -70,4 +71,5 @@ function renderArticle($components)
         break;
     }
   }
+  echo '</div>';
 }
