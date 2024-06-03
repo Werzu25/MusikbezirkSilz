@@ -19,7 +19,7 @@ CREATE TABLE articles (
 );
 
 CREATE TABLE components (
-    cmpId varchar(255) AUTO_INCREMENT NOT NULL,
+    cmpId varchar(255) NOT NULL,
     artId INT,
     type ENUM('text', 'link', 'carousel', 'media'),
     content TEXT,
@@ -29,8 +29,6 @@ CREATE TABLE components (
 );
 
 CREATE TABLE container(
-    cmpId varchar(255),
-    content TEXT,
-    PRIMARY KEY (cmpId),
-    FOREIGN KEY (cmpId) REFERENCES components(cmpId)
+    contID varchar(255),
+    content TEXT
 );

@@ -622,48 +622,37 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   function saveContent() {
     class JsonOutput {
       constructor() {
-        this.smeId = '';
+        this.articleID = '';
         this.content = [];
       }
     }
 
     class Entry {
-      constructor(type, content, cssClasses, style) {
+      constructor(type,id, content) {
+        this.id = id;
         this.type = type;
         this.content = content;
-        this.cssClasses = cssClasses;
-        this.style = style;
       }
     }
 
     class Container {
-      constructor(id, content, cssClasses, style) {
+      constructor(type ,id, content) {
+        this.type = type
         this.id = id;
         this.content = content;
-        this.cssClasses = cssClasses;
-        this.style = style;
-      }
-    }
-
-    class Media {
-      constructor(type, content, cssClasses, style, location) {
-        this.type = type;
-        this.content = content;
-        this.cssClasses = cssClasses;
-        this.style = style;
-        this.location = location;
       }
     }
 
     let output = new JsonOutput();
+
     document.querySelectorAll('.previewText').forEach((element) => {
       if (element.parentElement === document.getElementById('pagePreview')) {
         let child = element.children[0];
         let content = {
           text: child.innerHTML,
-          style: child.style
+          style: child.style.cssText
         };
-        let entry = new Entry('text',content);
+        let entry = new Entry('text', content);
         output.content.push(entry);
       }
     });
@@ -675,44 +664,55 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
           text: child.innerHTML,
           href: child.href,
         };
-        let entry = new Entry('link', linkElement, child.classList, child.style);
+        let entry = new Entry('link', linkElement);
         output.content.push(entry);
       }
     });
+
     document.querySelectorAll('.previewContainer').forEach((element) => {
       if (element.parentElement === document.getElementById('pagePreview')) {
-        debugger
-        let containerContent
+        let containerContent = [];
         let child = element.children[0];
         child.childNodes.forEach((row) => {
           row.childNodes.forEach((col) => {
-            if (col.classList.contains("previewText")) {
-              let content = {
-                text: col.children[0].innerHTML,
-                style: col.children[0].style
-              };
-              containerContent.push(new Entry('text', content));
-            } else if (col.classList.contains("previewLink")) {
-              let linkElement = {
-                text: col.children[0].innerHTML,
-                href: col.children[0].href,
-              };
-              containerContent.push(new Entry('link', linkElement, col.children[0].classList, col.children[0].style));
-            } else if (col.classList.contains("previewImage")) {
-              let content = {
-                src: col.children[0].src,
-                width: col.children[0].style.width,
-                height: col.children[0].style.height
-              };
-              containerContent.push(new Entry('media', content, col.children[0].classList, col.children[0].style));
+            if (col.children.length !== 0) {
+              let subEntry = col.children[0].children[0];
+              if (subEntry.parentElement.classList.contains("previewText")) {
+                let content = {
+                  text: subEntry.innerHTML,
+                  style: subEntry.style.cssText
+                };
+                containerContent.push(new Entry('text', subEntry.parentElement.id,content));
+              } else if (subEntry.parentElement.classList.contains("previewLink")) {
+                let linkElement = {
+                  text: subEntry.innerHTML,
+                  href: subEntry.href,
+                };
+                containerContent.push(new Entry('link', subEntry.parentElement.id , linkElement));
+              } else if (subEntry.parentElement.classList.contains("previewImage")) {
+                let content = {
+                  type: "image",
+                  src: subEntry.src,
+                  width: subEntry.style.width,
+                  height: subEntry.style.height
+                };
+                containerContent.push(new Entry('media' , subEntry.parentElement.id , content,));
+              }
+            } else {
+              containerContent.push(new Entry('empty', 'empty'));
             }
           });
         });
-        let container = new Container('container', element.id, containerContent);
+        let container = new Container("container", element.id, containerContent);
         output.content.push(container);
-
       }
     });
+    console.log(output)
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "save-content.php", true);
+    xhr.send(JSON.stringify(output));
+
   }
+
 </script>
 </html>
