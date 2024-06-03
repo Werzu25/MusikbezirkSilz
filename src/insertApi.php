@@ -23,7 +23,7 @@ foreach ($content as $item) {
         $cssClasses = $entries['cssClasses'];
         $style = $entries['style'];
         $displayOrder = $entries['displayOrder'];
-
+        //Leon i hass die 
         query("INSERT INTO entries (artId, type, content, cssClasses, style, displayOrder) VALUES ($artId, '$type', '$content', '$cssClasses', '$style', $displayOrder)");
     }
 
