@@ -21,8 +21,8 @@ require_once 'components/carousel.php';
 require_once 'components/link.php'; 
 require_once 'components/media.php'; 
 
-if (isset($_REQUEST['smeId'])) {
-  $smeId = $_REQUEST['smeId']; // Abrufen der Artikel-ID aus der Anfrage
+if (isset($_REQUEST['sideId'])) {
+  $smeId = $_REQUEST['sideId']; // Abrufen der Artikel-ID aus der Anfrage
 } else {
   $smeId = 1; // Standard-Artikel-ID, falls keine in der Anfrage angegeben wurde
 }
@@ -31,10 +31,9 @@ if (isset($_REQUEST['smeId'])) {
 // renderArticle($components);
 
 $articles = select("SELECT * FROM articles WHERE smeId = $smeId");
-
 foreach ($articles as $article) {
   $components = select(
-    'SELECT * FROM components WHERE artID =' . $article['artId'] . ' ORDER BY displayOrder ASC'
+    'SELECT * FROM components WHERE artId =' . $article['artId'] . ' ORDER BY displayOrder ASC'
   );
   renderArticle($components);
 }
