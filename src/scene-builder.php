@@ -21,7 +21,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
-<body data-bs-theme="dark" class="bg-body-tertiary">
 
 <div class="modal fade" id="containerInsert" tabindex="-1" aria-labelledby="containerInsertLabel" aria-hidden="true">
   <div class="modal-dialog">
