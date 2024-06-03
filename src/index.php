@@ -14,26 +14,27 @@
 <body data-bs-theme="dark">
 
 <?php
-require_once 'util.php';
-require_once 'templates/header.php';
-require_once 'templates/navbar.php';
-require_once 'components/text.php';
-require_once 'components/table.php';
-require_once 'components/carousel.php';
-require_once 'components/link.php';
-require_once 'components/media.php';
+require_once 'util.php'; // Einbindung von Hilfsfunktionen
+require_once 'templates/header.php'; // Einbindung des Header-Templates
+require_once 'templates/navbar.php'; // Einbindung der Navigationsleiste
+require_once 'components/text.php'; // Einbindung der Textkomponente
+require_once 'components/table.php'; // Einbindung der Tabellenkomponente
+require_once 'components/carousel.php'; // Einbindung der Karussellkomponente
+require_once 'components/link.php'; // Einbindung der Linkkomponente
+require_once 'components/media.php'; // Einbindung der Medienkomponente
 
 if (isset($_REQUEST['artId'])) {
-  $artId = $_REQUEST['artId'];
+  $artId = $_REQUEST['artId']; // Abrufen der Artikel-ID aus der Anfrage
 } else {
-  $artId = 1;
+  $artId = 1; // Standard-Artikel-ID, falls keine in der Anfrage angegeben wurde
 }
 
-$components = select("SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC");
-renderArticle($components);
+$components = select("SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC"); // Abrufen der Komponenten aus der Datenbank
+renderArticle($components); // Rendern der Artikel mit den abgerufenen Komponenten
 
-require_once 'templates/footer.php';
+require_once 'templates/footer.php'; // Einbindung des Footer-Templates
 ?>
+
 </body>
 
 </html>
