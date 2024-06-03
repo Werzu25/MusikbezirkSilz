@@ -31,7 +31,6 @@ function query($sql)
 
 function renderArticle($components)
 {
-  echo '<div class="border rounded m-2 p-1">';
   foreach ($components as $component) {
     $type = $component['type'];
 
@@ -58,5 +57,4 @@ function renderArticle($components)
         break;
     }
   }
-  echo '</div>';
 }

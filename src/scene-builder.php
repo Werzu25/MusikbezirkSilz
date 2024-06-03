@@ -156,7 +156,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="changeFont()">Change Font</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="changeFont()">Inset Text</button>
       </div>
     </div>
   </div>
@@ -171,21 +171,27 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       </div>
       <div class="modal-body">
         <div class="h2 mt-3 mb-3">
-          Rows
+          Image Path
         </div>
         <div class="input-group mb-3">
-          <input type="number" class="form-control" id="rowsInput" aria-label="rowsInput" placeholder="Rows" aria-describedby="inputGroup-sizing-default">
+          <input type="text" class="form-control" id="imagePathInput" aria-label="pathInput" placeholder="Image Path" aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="h2 mt-3 mb-3">
-          Columns
+          Width
         </div>
         <div class="input-group mb-3">
-          <input type="number" class="form-control" id="colsInput" aria-label="colsInput" placeholder="Columns" aria-describedby="inputGroup-sizing-default">
+          <input type="text" class="form-control" id="widthImageInput" aria-label="widthImageInput" placeholder="Width" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="h2 mt-3 mb-3">
+          Height
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="heightImageInput" aria-label="heightImageInput" placeholder="Height" aria-describedby="inputGroup-sizing-default">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertContainer()">Insert Container</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insetImage()">Insert Image</button>
       </div>
     </div>
   </div>
@@ -287,6 +293,10 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   let currentLinkElement;
   let currentContainerElement;
   let currentElement;
+  let previousSpacing = {
+    margin: 0,
+    padding: 0,
+  };
 
   pageDivider.addEventListener("mousedown", mouseDown);
   pageDivider.addEventListener('dragover',(e) => preventDefault(e));
@@ -302,6 +312,12 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       e.preventDefault();
     });
     element.id = Math.random().toString(36).substring(7);
+  });
+
+  pagePreview.childNodes.forEach((element) => {
+    if (element.nodeType === Node.ELEMENT_NODE) {
+      resetEventBehavior(element);
+    }
   });
 
   function deleteElement(e) {
@@ -361,7 +377,9 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         }
       });
       currentElement = element.children[0];
-      new bootstrap.Modal(document.getElementById("textInsert")).toggle();
+      if (!element.classList.contains("loadedElement")) {
+        new bootstrap.Modal(document.getElementById("textInsert")).toggle();
+      }
       element.addEventListener('keydown', (e) => {
         if (e.code === 'KeyAlt' && e.code === 'KeyF') {
           currentElement = e.target;
@@ -454,20 +472,24 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 
   function fullscreen() {
       if (!isFullscreen) {
-          templateRenderer.style.display = "none";
-          pageDivider.style.display = "none";
-          pagePreview.style.width = "100vw";
-          pagePreview.style.height = "100vh";
-          pagePreview.style.boxSizing = "border-box";
-          pagePreview.style.margin = "0";
-          pagePreview.style.padding = "0";
-          isFullscreen = true;
+        previousSpacing.margin = pagePreview.style.margin + "px";
+        previousSpacing.padding = pagePreview.style.padding + "px";
+        templateRenderer.style.display = "none";
+        pageDivider.style.display = "none";
+        pagePreview.style.width = "100vw";
+        pagePreview.style.height = "100vh";
+        pagePreview.style.boxSizing = "border-box";
+        pagePreview.style.margin = "0";
+        pagePreview.style.padding = "0";
+        isFullscreen = true;
       } else if (isFullscreen) {
           templateRenderer.style.display = "block";
           pageDivider.style.display = "block";
           pagePreview.style.width = pagePreviewWidth + "px";
           pagePreview.style.height = "auto";
           pagePreview.style.boxSizing = "content-box";
+          pagePreview.style.margin = previousSpacing.margin;
+          pagePreview.style.padding = previousSpacing.padding;
 
           isFullscreen = false;
       }
@@ -614,6 +636,15 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       }
     }
 
+    class Container {
+      constructor(id, content, cssClasses, style) {
+        this.id = id;
+        this.content = content;
+        this.cssClasses = cssClasses;
+        this.style = style;
+      }
+    }
+
     class Media {
       constructor(type, content, cssClasses, style, location) {
         this.type = type;
@@ -648,16 +679,40 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         output.content.push(entry);
       }
     });
-
-    /*
     document.querySelectorAll('.previewContainer').forEach((element) => {
-      if (element.parentElement === document.getElementById('templateRenderer')) {
-        element.forEach((child) => {
-
+      if (element.parentElement === document.getElementById('pagePreview')) {
+        debugger
+        let containerContent
+        let child = element.children[0];
+        child.childNodes.forEach((row) => {
+          row.childNodes.forEach((col) => {
+            if (col.classList.contains("previewText")) {
+              let content = {
+                text: col.children[0].innerHTML,
+                style: col.children[0].style
+              };
+              containerContent.push(new Entry('text', content));
+            } else if (col.classList.contains("previewLink")) {
+              let linkElement = {
+                text: col.children[0].innerHTML,
+                href: col.children[0].href,
+              };
+              containerContent.push(new Entry('link', linkElement, col.children[0].classList, col.children[0].style));
+            } else if (col.classList.contains("previewImage")) {
+              let content = {
+                src: col.children[0].src,
+                width: col.children[0].style.width,
+                height: col.children[0].style.height
+              };
+              containerContent.push(new Entry('media', content, col.children[0].classList, col.children[0].style));
+            }
+          });
         });
+        let container = new Container('container', element.id, containerContent);
+        output.content.push(container);
+
       }
     });
-   */
   }
 </script>
 </html>

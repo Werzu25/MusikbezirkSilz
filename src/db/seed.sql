@@ -16,4 +16,4 @@ VALUES
 INSERT INTO
     components (artID, type, content, displayOrder)
 VALUES
-    (1, "text", '{"style": "", "text": "Loremp  ipsum fick dich"}', 2);
+    (1, "text", '{"style": "font-color: gray;", "text": "Loremp  ipsum fick dich"}', 2);

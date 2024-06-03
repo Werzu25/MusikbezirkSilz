@@ -19,11 +19,18 @@ CREATE TABLE articles (
 );
 
 CREATE TABLE components (
-    cmpId INT AUTO_INCREMENT NOT NULL,
+    cmpId varchar(255) AUTO_INCREMENT NOT NULL,
     artId INT,
-    type ENUM('text', 'table', 'link', 'carousel', 'media'),
+    type ENUM('text', 'link', 'carousel', 'media'),
     content TEXT,
     displayOrder INT,
     PRIMARY KEY (cmpId),
     FOREIGN KEY (artId) REFERENCES articles(artId)
+);
+
+CREATE TABLE container(
+    cmpId varchar(255),
+    content TEXT,
+    PRIMARY KEY (cmpId),
+    FOREIGN KEY (cmpId) REFERENCES components(cmpId)
 );

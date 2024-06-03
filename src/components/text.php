@@ -2,5 +2,5 @@
 
 function renderText($text)
 {
-  echo '<div class="previewText"><span style="' . $text["style"] .'">' . $text["text"] . '</span></div>';
+  echo '<div class="previewText loadedElement"><span style="' . $text["style"] .'">' . $text["text"] . '</span></div>';
 }
