@@ -1,6 +1,6 @@
 <?php
 require_once 'util.php';
-
+/*
 header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents('php://input'), true);
@@ -39,4 +39,6 @@ foreach ($content as $item) {
 }
 
 echo json_encode(["status" => "success", "message" => "Daten erfolgreich eingefügt"]);
+*/
+// Still waiting for JSON example data LEON I BRUACH SIE
 ?>
