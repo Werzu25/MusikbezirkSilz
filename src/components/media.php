@@ -4,7 +4,7 @@ function renderMedia($type, $content)
 {
   switch ($type) {
     case 'image':
-      echo '<img src="' . $content . '" class="d-block w-100" alt="...">';
+      echo '<img src="' . $content . '" class="d-block w-50" alt="...">';
       break;
     case 'youtube':
       '<iframe width="560" height="315" src=' .
