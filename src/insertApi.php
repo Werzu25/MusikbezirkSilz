@@ -25,15 +25,15 @@ foreach ($content as $item) {
         $displayOrder = $entries['displayOrder'];
 
         query("INSERT INTO entries (artId, type, content, cssClasses, style, displayOrder) VALUES ($artId, '$type', '$content', '$cssClasses', '$style', $displayOrder)");
-    
+    }
+
     if (isset($item['media'])) {
         $media = $item['media'];
         $type = $media['type'];
         $cssClasses = $media['cssClasses'];
         $style = $media['style'];
         $location = $media['location'];
-
-
+        
         query("INSERT INTO media (artId, type, cssClasses, style, location) VALUES ($artId, '$type', '$cssClasses', '$style', '$location')");
     }
 }
