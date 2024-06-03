@@ -3,8 +3,8 @@
 session_start();
 
 // Hashed values of 'root' for username and password
-$correct_username = password_hash('root', PASSWORD_DEFAULT);
-$correct_password = password_hash('root', PASSWORD_DEFAULT);
+$correct_username = password_hash('root' /*Replace with correct username */, PASSWORD_DEFAULT); // or replace with correct hash for the the username sha264
+$correct_password = password_hash('root'/*Replace with correct password */, PASSWORD_DEFAULT);
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
