@@ -62,8 +62,8 @@ function renderArticle($components)
         renderLink($link['href'], $link['text']);
         break;
       case 'table':
-        $table = json_decode($component['content'], true);
-        renderTable($table['data']);
+        $table = json_decode($component['content']);
+        renderTable($table);
         break;
       case 'media':
         $media = json_decode($component['content'], true);
