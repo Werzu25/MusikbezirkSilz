@@ -53,6 +53,5 @@ $response = [
 
 echo json_encode($response);*/
 
-//LEON I BRAUCH DIE EXAMPLE JSON
-//Ohne die kann i nix machen
+//Ohne die example Json kann i nix machen
 ?>
