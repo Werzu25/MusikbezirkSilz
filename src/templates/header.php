@@ -3,7 +3,7 @@
 <link href="../../../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 
 <div class="imageRow">
-    <div class="row row-cols-sm-6">
+    <div class="row row-cols-sm-6 widfix">
         <div class="col">
             <img class="img-fluid logoImage" alt="Musikbezirk Silz Logo" src="../assets/images/logo.jpg" />
         </div>
@@ -14,6 +14,9 @@
     </div>
 </div>
 <style>
+    .widfix {
+        max-width: 100%;
+    }
     .logoImage {
         width: 8em;
     }
