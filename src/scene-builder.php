@@ -268,7 +268,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 </body>
 <style>
     .h-100vh {
-        min-height: 110vh;
+        min-height: 100vb;
     }
     body {
         min-height: 100vh;
@@ -342,6 +342,9 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       return;
     }
     document.getElementById(data["id"]).remove();
+    // TODO Leon i glaub da passt des
+    let height =pagePreview.clientHeight
+    pageDivider.style.height = height + "px";
   }
 
   function preventDefault(e) {
@@ -467,6 +470,9 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       e.target.appendChild(element);
     }
     resetEventBehavior(element);
+    // TODO Leon des wird am falschen ort aufgerufen
+    let height =pagePreview.clientHeight
+    pageDivider.style.height = height + "px";
   }
 
   function mouseDown(e) {
