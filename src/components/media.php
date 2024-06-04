@@ -1,5 +1,4 @@
 <?php
-
 function renderMedia($type, $content)
 {
   switch ($type) {

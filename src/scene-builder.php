@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$artId = 1;
+
 require_once 'components/text.php';
 require_once 'components/table.php';
 require_once 'components/carousel.php';
@@ -199,12 +201,15 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 <div class="container-fluid mt-1 mb-1">
   <div class="row">
     <div class="col-9">
-      test1
+
     </div>
     <div class="col-2">
-      <div class="w-50 dropdown">
-        test2
-      </div>
+      <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+        <option selected>Choose Page</option>
+        <option value="1">Page One</option>
+        <option value="2">Page Two</option>
+        <option value="3">Page Three</option>
+      </select>
     </div>
     <div class="col-1">
       <button type="button" onclick="fullscreen()" class="btn btn-outline-light">Fullscreen</button>
@@ -243,8 +248,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     <div class="spCol rounded bg-body-secondary" id="pagePreview">
       <?php
       require_once './util.php';
-
-      $artId = 1;
       echo '<div class="previewContainer loadedContainer">';
       // drop doesnt work and currently defaults to article 1
       $components = select(
@@ -608,7 +611,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     let height = document.getElementById('heightImageInput').value;
     let image = document.createElement('img');
     image.src = "../assets/images/" + imagePath;
-    debugger
     image.style.width = width;
     image.style.height = height;
     currentElement.innerHTML = "";
@@ -634,7 +636,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       });
     }
   }
-
   function saveContent() {
     class JsonOutput {
       constructor() {
@@ -644,7 +645,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     }
 
     class Entry {
-      constructor(type,id, content) {
+      constructor(type, id, content) {
         this.id = id;
         this.type = type;
         this.content = content;
@@ -652,8 +653,8 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     }
 
     class Container {
-      constructor(type ,id, content) {
-        this.type = type
+      constructor(type, id, content) {
+        this.type = type;
         this.id = id;
         this.content = content;
       }
@@ -688,48 +689,47 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     document.querySelectorAll('.previewContainer').forEach((element) => {
       if (element.parentElement === document.getElementById('pagePreview')) {
         if (!element.classList.contains("loadedElement")) {
-
-        let containerContent = [];
-        let child = element.children[0];
-        child.childNodes.forEach((row) => {
-          row.childNodes.forEach((col) => {
-            if (col.children.length !== 0) {
-              let subEntry = col.children[0].children[0];
-              if (subEntry.parentElement.classList.contains("previewText")) {
-                let content = {
-                  text: subEntry.innerHTML,
-                  style: subEntry.style.cssText
-                };
-                containerContent.push(new Entry('text', subEntry.parentElement.id,content));
-              } else if (subEntry.parentElement.classList.contains("previewLink")) {
-                let linkElement = {
-                  text: subEntry.innerHTML,
-                  href: subEntry.href,
-                };
-                containerContent.push(new Entry('link', subEntry.parentElement.id , linkElement));
-              } else if (subEntry.parentElement.classList.contains("previewImage")) {
-                let content = {
-                  type: "image",
-                  src: subEntry.src,
-                  width: subEntry.style.width,
-                  height: subEntry.style.height
-                };
-                containerContent.push(new Entry('media' , subEntry.parentElement.id , content,));
+          let containerContent = [];
+          let child = element.children[0];
+          child.childNodes.forEach((row) => {
+            row.childNodes.forEach((col) => {
+              if (col.children.length !== 0) {
+                let subEntry = col.children[0].children[0];
+                if (subEntry.parentElement.classList.contains("previewText")) {
+                  let content = {
+                    text: subEntry.innerHTML,
+                    style: subEntry.style.cssText
+                  };
+                  containerContent.push(new Entry('text', subEntry.parentElement.id, content));
+                } else if (subEntry.parentElement.classList.contains("previewLink")) {
+                  let linkElement = {
+                    text: subEntry.innerHTML,
+                    href: subEntry.href,
+                  };
+                  containerContent.push(new Entry('link', subEntry.parentElement.id, linkElement));
+                } else if (subEntry.parentElement.classList.contains("previewImage")) {
+                  let content = {
+                    type: "image",
+                    src: subEntry.src,
+                    width: subEntry.style.width,
+                    height: subEntry.style.height
+                  };
+                  containerContent.push(new Entry('media', subEntry.parentElement.id, content));
+                }
+              } else {
+                containerContent.push(new Entry('empty', 'empty'));
               }
-            } else {
-              containerContent.push(new Entry('empty', 'empty'));
-            }
+            });
           });
-        });
-        let container = new Container("container", element.id, containerContent);
-        output.content.push(container);
+          let container = new Container("container", element.id, containerContent);
+          output.content.push(container);
+        }
       }
     });
     console.log(output)
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "save-content.php", true);
     xhr.send(JSON.stringify(output));
-    }
   }
 
 </script>
