@@ -248,12 +248,14 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     <div class="spCol rounded bg-body-secondary" id="pagePreview">
       <?php
       require_once './util.php';
-      echo '<div class="previewContainer loadedContainer">';
       // drop doesnt work and currently defaults to article 1
       $components = select(
         "SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC"
       );
-      renderArticle($components);
+      echo '<div class="previewContainer loadedContainer">';
+      foreach ($components as $component) {
+        render($component);
+      }
       echo '</div>';
       ?>
     </div>
