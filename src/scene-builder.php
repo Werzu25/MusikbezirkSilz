@@ -277,7 +277,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     .spCol {
         width: calc(50% - 7px);
         min-width: 200px;
-        
         border: 2px solid !important;
         padding: 12px;
     }
