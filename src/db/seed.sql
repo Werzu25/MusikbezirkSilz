@@ -17,12 +17,12 @@ values
     ("vorstand", 5);
 
 insert into
-    articles (smeId)
+    articles (smeId, name)
 values
-    (1),
-    (2),
-    (1),
-    (1);
+    (1, 'Unsere Kapellen'),
+    (2, 'Rückblick'),
+    (1, 'Jugendmöglichkeiten'),
+    (1, 'Generalversammlung 2069');
 
 insert into
     components (artId, type, content, displayorder)
