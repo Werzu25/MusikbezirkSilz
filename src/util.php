@@ -40,11 +40,8 @@ function query($sql)
   $conn->close();
 }
 
-// Funktion zum Rendern eines Artikels basierend auf den Komponenten
-function renderArticle($components)
+function render($component)
 {
-  // Durchlaufen der Komponenten und Rendern entsprechend ihres Typs
-  foreach ($components as $component) {
     $type = $component['type'];
 
     switch ($type) {
@@ -69,5 +66,4 @@ function renderArticle($components)
         renderMedia($media['type'], $media['content']);
         break;
     }
-  }
 }

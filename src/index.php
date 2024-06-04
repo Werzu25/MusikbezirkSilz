@@ -34,7 +34,11 @@ foreach ($articles as $article) {
   $components = select(
     'SELECT * FROM components WHERE artId =' . $article['artId'] . ' ORDER BY displayOrder ASC'
   );
-  renderArticle($components);
+  echo '<div class="border rounded m-2 p-1">';
+  foreach ($components as $component) {
+    render($component);
+  }
+  echo '</div>';
 }
 
 require_once 'templates/footer.php';
