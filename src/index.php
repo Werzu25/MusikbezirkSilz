@@ -11,14 +11,14 @@
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
 <?php
-require_once 'util.php'; 
-require_once 'templates/header.php'; 
+require_once 'util.php';
+require_once 'templates/header.php';
 require_once 'templates/navbar.php';
-require_once 'components/text.php'; 
-require_once 'components/table.php'; 
-require_once 'components/carousel.php'; 
-require_once 'components/link.php'; 
-require_once 'components/media.php'; 
+require_once 'components/text.php';
+require_once 'components/table.php';
+require_once 'components/carousel.php';
+require_once 'components/link.php';
+require_once 'components/media.php';
 
 if (isset($_REQUEST['sideId'])) {
   $smeId = $_REQUEST['sideId']; // Abrufen der Artikel-ID aus der Anfrage
@@ -37,7 +37,7 @@ foreach ($articles as $article) {
   renderArticle($components);
 }
 
-require_once 'templates/footer.php'; 
+require_once 'templates/footer.php';
 ?>
 
 </body>

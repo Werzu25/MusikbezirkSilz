@@ -7,21 +7,24 @@ session_start();
 
 // Hashed values of 'root' for username and password
 $correct_username = password_hash('root' /*Replace with correct username */, PASSWORD_DEFAULT); // or replace with correct hash for the the username sha264
-$correct_password = password_hash('root'/*Replace with correct password */, PASSWORD_DEFAULT); // or replace with correct hash for the the pw sha264
+$correct_password = password_hash('root' /*Replace with correct password */, PASSWORD_DEFAULT); // or replace with correct hash for the the pw sha264
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+  $username = $_POST['username'];
+  $password = $_POST['password'];
 
-    // Validate the username and password
-    if (password_verify($username, $correct_username) && password_verify($password, $correct_password)) {
-        $_SESSION['logedIn'] = true;
-        header('Location: scene-builder.php');
-        exit;
-    } else {
-        $error = 'Invalid username or password';
-    }
+  // Validate the username and password
+  if (
+    password_verify($username, $correct_username) &&
+    password_verify($password, $correct_password)
+  ) {
+    $_SESSION['logedIn'] = true;
+    header('Location: scene-builder.php');
+    exit();
+  } else {
+    $error = 'Invalid username or password';
+  }
 }
 ?>
 
@@ -34,7 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container-fluid d-flex justify-content-center align-items-center">
     <div>
         <h2 class="text-center">Login</h2>
-        <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
+        <?php if (isset($error)) {
+          echo "<p style='color:red;'>$error</p>";
+        } ?>
         <form method="post" action="" class="form-group">
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" class="form-control" required>

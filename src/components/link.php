@@ -1,5 +1,5 @@
 <?php
 function renderLink($href, $text)
 {
-  echo '<a href=' . $href . '>' . $text . '<a/>';
+  echo '<div class="previewLink"><a href=' . $href . '>' . $text . '<a/></div>';
 }

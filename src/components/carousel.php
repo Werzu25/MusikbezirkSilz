@@ -1,7 +1,5 @@
 
-<?php
-
-function renderCarousel($images)
+<?php function renderCarousel($images)
 {
   echo '<div id="carouselExampleIndicators" class="carousel slide w-25 h-auto" data-bs-ride="carousel"  >
     <div class="carousel-indicators">

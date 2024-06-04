@@ -8,9 +8,8 @@ require_once 'components/link.php';
 
 if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   header('Location: login.php');
-  exit;
+  exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -243,14 +242,16 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
     <div class="spCol rounded bg-body-secondary" id="pagePreview">
       <?php
-        require_once './util.php';
+      require_once './util.php';
 
-        $artId = 1;
-        echo '<div class="previewContainer loadedContainer">';
-        // drop doesnt work and currently defaults to article 1
-        $components = select("SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC");
-        renderArticle($components);
-        echo '</div>';
+      $artId = 1;
+      echo '<div class="previewContainer loadedContainer">';
+      // drop doesnt work and currently defaults to article 1
+      $components = select(
+        "SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC"
+      );
+      renderArticle($components);
+      echo '</div>';
       ?>
     </div>
   </div>
@@ -686,6 +687,8 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 
     document.querySelectorAll('.previewContainer').forEach((element) => {
       if (element.parentElement === document.getElementById('pagePreview')) {
+        if (!element.classList.contains("loadedElement")) {
+
         let containerContent = [];
         let child = element.children[0];
         child.childNodes.forEach((row) => {
@@ -726,7 +729,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "save-content.php", true);
     xhr.send(JSON.stringify(output));
-
+    }
   }
 
 </script>
