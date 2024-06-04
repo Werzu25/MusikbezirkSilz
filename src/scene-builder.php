@@ -268,7 +268,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 </body>
 <style>
     .h-100vh {
-        min-height: 100vh;
+        min-height: 110vh;
     }
     body {
         min-height: 100vh;
