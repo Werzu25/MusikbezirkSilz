@@ -44,6 +44,7 @@ function render($component)
 {
     $type = $component['type'];
 
+    echo '<div id="' . $component["cmpId"] . '">';
     switch ($type) {
       case 'text':
         $text = json_decode($component['content'], true);
@@ -66,4 +67,5 @@ function render($component)
         renderMedia($media['type'], $media['content']);
         break;
     }
+    echo '</div>';
 }
