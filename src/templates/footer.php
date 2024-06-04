@@ -1,7 +1,7 @@
 
 
 
-<div class="container-fluid bg-black d-flex justify-content-center">
+<div class="container-fluid bg-black d-flex justify-content-center position-absolute bottom-0">
     <a href="https://www.facebook.com/mbsilz/" class="p-3 previewLink text-white">
         <span class="mdi mdi-facebook"></span>
         Facebook
