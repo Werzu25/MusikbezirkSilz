@@ -21,6 +21,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
 </head>
+<body data-bs-theme="dark">
 
 <div class="modal fade" id="containerInsert" tabindex="-1" aria-labelledby="containerInsertLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -245,9 +246,11 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         require_once './util.php';
 
         $artId = 1;
+        echo '<div class="previewContainer loadedContainer">';
         // drop doesnt work and currently defaults to article 1
         $components = select("SELECT * FROM components WHERE artId = $artId ORDER BY displayOrder ASC");
         renderArticle($components);
+        echo '</div>';
       ?>
     </div>
   </div>
@@ -316,6 +319,9 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   pagePreview.childNodes.forEach((element) => {
     if (element.nodeType === Node.ELEMENT_NODE) {
       resetEventBehavior(element);
+      if (element.id === "") {
+        element.id = Math.random().toString(36).substring(7);
+      }
     }
   });
 
@@ -379,6 +385,9 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       if (!element.classList.contains("loadedElement")) {
         new bootstrap.Modal(document.getElementById("textInsert")).toggle();
       }
+      else {
+        element.draggable = true;
+      }
       element.addEventListener('keydown', (e) => {
         if (e.code === 'KeyAlt' && e.code === 'KeyF') {
           currentElement = e.target;
@@ -411,9 +420,16 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       element.classList.remove("border");
       element.classList.remove("rounded");
     } else {
-      element.innerHTML = "";
+      element.classList.add("border");
+      element.classList.add("rounded");
       currentContainerElement = element;
-      new bootstrap.Modal(document.getElementById("containerInsert")).toggle();
+      if (!element.classList.contains("loadedContainer"))
+      {
+        element.innerHTML = "";
+        new bootstrap.Modal(document.getElementById("containerInsert")).toggle();
+      } else  {
+        element.draggable = true;
+      }
     }
   }
 

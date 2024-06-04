@@ -22,7 +22,7 @@ function renderCarousel($images)
       '">
             <img src="' .
       $image .
-      '" class="d-block w-100 h-25" alt="...">
+      '" class="d-block w-100 image" alt="...">
         </div>';
     $first = false;
   }
@@ -46,6 +46,9 @@ function renderCarousel($images)
     width: 100%;
     height: 100%;
     object-fit: cover; /* cover to fill the area, contain to fit inside */
+}
+.image {
+  height: 250px !important;
 }
 </style>';
 }
