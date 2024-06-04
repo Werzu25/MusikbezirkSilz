@@ -277,7 +277,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     .spCol {
         width: calc(50% - 7px);
         min-width: 200px;
-        margin: 3px;
+        
         border: 2px solid !important;
         padding: 12px;
     }
@@ -289,6 +289,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         width: 2px;
         padding: 0;
         height: 100%;
+        margin: 3px;
     }
     .verticalRuler:hover {
         cursor: ew-resize;
