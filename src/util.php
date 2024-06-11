@@ -1,4 +1,9 @@
 <?php
+require_once 'components/text.php';
+require_once 'components/table.php';
+require_once 'components/carousel.php';
+require_once 'components/link.php';
+require_once 'components/media.php';
 // Funktion zum Ausführen einer SELECT-Abfrage und Rückgabe der Ergebnisse als assoziatives Array
 function select(string $sql)
 {
@@ -42,28 +47,28 @@ function query($sql)
 
 function render($component)
 {
-    $type = $component['type'];
+  $type = $component['type'];
 
-    switch ($type) {
-      case 'text':
-        $text = json_decode($component['content'], true);
-        renderText($text);
-        break;
-      case 'carousel':
-        $imgs = json_decode($component['content']);
-        renderCarousel($imgs);
-        break;
-      case 'link':
-        $link = json_decode($component['content'], true);
-        renderLink($link['href'], $link['text']);
-        break;
-      case 'table':
-        $table = json_decode($component['content']);
-        renderTable($table);
-        break;
-      case 'media':
-        $media = json_decode($component['content'], true);
-        renderMedia($media['type'], $media['content']);
-        break;
-    }
+  switch ($type) {
+    case 'text':
+      $text = json_decode($component['content'], true);
+      renderText($text);
+      break;
+    case 'carousel':
+      $imgs = json_decode($component['content']);
+      renderCarousel($imgs);
+      break;
+    case 'link':
+      $link = json_decode($component['content'], true);
+      renderLink($link['href'], $link['text']);
+      break;
+    case 'table':
+      $table = json_decode($component['content']);
+      renderTable($table);
+      break;
+    case 'media':
+      $media = json_decode($component['content'], true);
+      renderMedia($media['type'], $media['content']);
+      break;
+  }
 }

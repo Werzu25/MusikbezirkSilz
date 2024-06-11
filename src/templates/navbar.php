@@ -4,10 +4,7 @@ $content = '
 <nav class="navbar navbar-expand  bg-body-secondary">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>';
+            <ul class="navbar-nav">';
 foreach ($MainEntries as $MainEntry) {
   $SubEntries = select('SELECT * FROM subMenuEntry WHERE mmeId = ' . $MainEntry['mmeId']);
   $content .=
