@@ -196,7 +196,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     </div>
     <div class="col-2">
       <select class="form-select" id="pageSelect" aria-label="Floating label select example">
-        <option selected>Choose Page</option>
+        <option selected id="defaultSelected">Choose Page</option>
         <?php
         $sub = select('Select * from subMenuEntry');
         foreach ($sub as $entry) {
@@ -721,6 +721,10 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   }
 
   function loadSite(event) {
+    if (document.getElementById('defaultSelected').selected) {
+      document.getElementById("pagePreview").innerHTML = "";
+      return;
+    }
     let smeId = { smeId: event.target.value };
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "pagePreviewContent.php", true);

@@ -1,5 +1,10 @@
 <?php
 require_once './util.php';
+require_once 'components/text.php';
+require_once 'components/table.php';
+require_once 'components/carousel.php';
+require_once 'components/link.php';
+require_once 'components/media.php';
 
 $smeId = 0;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
