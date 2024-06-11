@@ -1,1 +1,25 @@
-// API to put data in database wenn ich keine example Json kriege kann ich nix machen Jungs, i mach zuhause nix. Wenn es es ned gschissen kriegs selber schuld. Bitte ich will doch nur meine example json. Ich will nur dieses eine File. Ich bettle drum seid 5 Tagen. Bitte Leon. Ich will arbeiten kann aber nicht wegen dir. Wie schlecht. Ich willl doch nur dieses eine File. Bitte. Mehr will ich doch garnicht. Gönn doch bitte nur diese Zeilen Code. damit ich die Insertapi fertigstellen kann. Leon. Raffi. Peda. Julian. Ich will doch nur diese Simplen Daten. So schwierig kann es doch nicht sein. Bitte Leon. Ich will arbeiten aber ich kann nicht weil du mir die Daten gibst. bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Bitte. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich will arbeiten. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Ich kann aber nicht. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Weil mir die Daten fehlen. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Leon. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json. Bitte gib mir die Json.
+<?php
+include 'util.php';
+
+$json = file_get_contents('php://input');
+if (!empty($json)) {
+    $data = json_decode($json, true);
+    
+    insertData($data);
+} else {
+    echo "Keine Daten erhalten.";
+}
+
+function insertData($data) {
+    $smmeId = $data['articleID'];
+    $articles = json_decode($data['container'], true);
+    $components = json_decode($articles['content'], true);
+
+    foreach ($articles as $article) {
+        query("INSERT INTO articles (smmeId, articleId) VALUES ($smmeId," . $article["articleId"] . ")");
+    }
+    foreach ($components as $component) {
+        query("INSERT INTO components (articleId, type, content) VALUES (" . $component["artId"] . $component["type"] . ", " . $component["content"] . ")");
+    }   
+}
+?>
