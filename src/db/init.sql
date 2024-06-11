@@ -18,7 +18,6 @@ CREATE TABLE subMenuEntry ( -- article
 
 CREATE TABLE articles ( -- container
     artId INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(255),
     creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     smeId INT,
     PRIMARY KEY (artId),

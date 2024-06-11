@@ -1,13 +1,10 @@
 <?php
 session_start();
-
-$artId = 1;
-
 require_once 'components/text.php';
 require_once 'components/table.php';
 require_once 'components/carousel.php';
 require_once 'components/link.php';
-
+require_once 'util.php';
 if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   header('Location: login.php');
   exit();
@@ -37,12 +34,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         </div>
         <div class="input-group mb-3">
           <input type="number" class="form-control" id="rowsInput" aria-label="rowsInput" placeholder="Rows" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="h2 mt-3 mb-3">
-          Columns
-        </div>
-        <div class="input-group mb-3">
-          <input type="number" class="form-control" id="colsInput" aria-label="colsInput" placeholder="Columns" aria-describedby="inputGroup-sizing-default">
         </div>
       </div>
       <div class="modal-footer">
@@ -204,11 +195,14 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 
     </div>
     <div class="col-2">
-      <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+      <select class="form-select" id="pageSelect" aria-label="Floating label select example">
         <option selected>Choose Page</option>
-        <option value="1">Page One</option>
-        <option value="2">Page Two</option>
-        <option value="3">Page Three</option>
+        <?php
+        $sub = select('Select * from subMenuEntry');
+        foreach ($sub as $entry) {
+          echo '<option value="' . $entry['smeId'] . '">' . $entry['name'] . '</option>';
+        }
+        ?>
       </select>
     </div>
     <div class="col-1">
@@ -246,29 +240,13 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     </div>
     <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
     <div class="spCol rounded bg-body-secondary" id="pagePreview">
-      <?php
-      require_once './util.php';
-      $smeId = 1;
-      // drop doesnt work and currently defaults to article 1
-      $articles = select("SELECT * FROM articles WHERE smeId = $smeId");
-      foreach ($articles as $article) {
-        $components = select(
-          'SELECT * FROM components WHERE artId =' . $article['artId'] . ' ORDER BY displayOrder ASC'
-        );
-        echo '<div class="previewContainer loadedContainer">';
-        foreach ($components as $component) {
-          render($component);
-        }
-        echo '</div>';
-      }
-      ?>
     </div>
   </div>
 </div>
 </body>
 <style>
     .h-100vh {
-        min-height: 100vb;
+        min-height: 100vh;
     }
     body {
         min-height: 100vh;
@@ -277,6 +255,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     .spCol {
         width: calc(50% - 7px);
         min-width: 200px;
+        margin: 3px;
         border: 2px solid !important;
         padding: 12px;
     }
@@ -287,8 +266,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     .verticalRuler {
         width: 2px;
         padding: 0;
-        height: 100%;
-        margin: 3px;
+        height: 100%!important;
     }
     .verticalRuler:hover {
         cursor: ew-resize;
@@ -309,7 +287,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     margin: 0,
     padding: 0,
   };
-
+  document.getElementById('pageSelect').addEventListener('change' ,(e) => loadSite(e))
   pageDivider.addEventListener("mousedown", mouseDown);
   pageDivider.addEventListener('dragover',(e) => preventDefault(e));
   pagePreview.addEventListener('dragover', (e) => preventDefault(e));
@@ -326,14 +304,19 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     element.id = Math.random().toString(36).substring(7);
   });
 
-  pagePreview.childNodes.forEach((element) => {
-    if (element.nodeType === Node.ELEMENT_NODE) {
-      resetEventBehavior(element);
-      if (element.id === "") {
-        element.id = Math.random().toString(36).substring(7);
+  function setChildNodes(element) {
+      if (element.nodeType === Node.ELEMENT_NODE) {
+        resetEventBehavior(element);
+        if (element.id === "") {
+          element.id = Math.random().toString(36).substring(7);
+        }
+        if (element.childNodes.length !== 0) {
+          element.childNodes.forEach((child) => {
+            setChildNodes(child);
+          });
+        }
       }
-    }
-  });
+  }
 
   function deleteElement(e) {
     e.preventDefault();
@@ -342,9 +325,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       return;
     }
     document.getElementById(data["id"]).remove();
-    // TODO Leon i glaub da passt des
-    let height =pagePreview.clientHeight
-    pageDivider.style.height = height + "px";
   }
 
   function preventDefault(e) {
@@ -416,7 +396,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       currentElement = element;
       new bootstrap.Modal(document.getElementById("imageInsert")).toggle();
     }
-    if (element.classList.contains("previewLink")) {
+    if (element.classList.contains("previewLink") && !element.classList.contains("loadedLink")) {
       currentLinkElement = element;
       element.innerHTML = "";
       new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
@@ -470,9 +450,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       e.target.appendChild(element);
     }
     resetEventBehavior(element);
-    // TODO Leon des wird am falschen ort aufgerufen
-    let height =pagePreview.clientHeight
-    pageDivider.style.height = height + "px";
   }
 
   function mouseDown(e) {
@@ -539,11 +516,10 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   }
 
   function insertContainer() {
-    let numCols = document.getElementById('colsInput').value;
+    let numCols = 1;
     let numRows = document.getElementById('rowsInput').value;
     let container = document.createElement('div');
     container.classList.add('container-fluid');
-    document.getElementById('colsInput').value = '';
     document.getElementById('rowsInput').value = '';
     for (let i = 0; i < numRows; i++) {
       let row = document.createElement('div');
@@ -551,7 +527,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       for (let j = 0; j < numCols; j++) {
         let col = document.createElement('div');
         col.classList.add('col');
-        col.innerHTML = (j+1) +" " + i
+        col.innerHTML = (i+1)+"";
         row.appendChild(col);
       }
       container.appendChild(row);
@@ -700,7 +676,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 
     document.querySelectorAll('.previewContainer').forEach((element) => {
       if (element.parentElement === document.getElementById('pagePreview')) {
-        if (!element.classList.contains("loadedElement")) {
+        if (!element.classList.contains("loadedContainer")|| !element.classList.contains("loadedContainer")) {
           let containerContent = [];
           let child = element.children[0];
           child.childNodes.forEach((row) => {
@@ -738,11 +714,26 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         }
       }
     });
-    console.log(output)
+    console.log(JSON.stringify(output))
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "save-content.php", true);
     xhr.send(JSON.stringify(output));
   }
 
+  function loadSite(event) {
+    let smeId = { smeId: event.target.value };
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "pagePreviewContent.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        document.getElementById("pagePreview").innerHTML = xhr.responseText;
+        pagePreview.childNodes.forEach((element) => {
+          setChildNodes(element);
+        });
+      }
+    };
+    xhr.send("smeId="+JSON.stringify(smeId));
+  }
 </script>
 </html>
