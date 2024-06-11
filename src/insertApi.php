@@ -11,22 +11,15 @@ if (!empty($json)) {
 }
 
 function insertData($data) {
-    global $conn;
-    
-    $articleID = $data['articleID'];
-    $content = $data['content'];
+    $smmeId = $data['articleID'];
+    $articles = json_decode($data['container'], true);
+    $components = json_decode($articles['content'], true);
 
-    $sql = "INSERT INTO articles (name, smeId) VALUES ('$articleID', NULL)";
-    $conn->query($sql);
-    $articleId = $conn->insert_id;
-
-    foreach ($content as $component) {
-        $type = $component['type'];
-        $content = json_encode($component['content']);
-        $sql = "INSERT INTO components (artId, type, content, displayOrder) VALUES ('$articleId', '$type', '$content', NULL)";
-        $conn->query($sql);
+    foreach ($articles as $article) {
+        query("INSERT INTO articles (smmeId, articleId) VALUES ($smmeId," . $article["articleId"] . ")");
     }
-
-    echo "Daten drinn";
+    foreach ($components as $component) {
+        query("INSERT INTO components (articleId, type, content) VALUES (" . $component["artId"] . $component["type"] . ", " . $component["content"] . ")");
+    }   
 }
 ?>
