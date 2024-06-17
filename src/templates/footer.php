@@ -1,6 +1,6 @@
 <?php
 echo '
-<div class="container-fluid bg-black d-flex justify-content-center position-absolute bottom-0">
+<footer class="container-fluid bg-black d-flex justify-content-center">
     <a href="https://www.facebook.com/mbsilz/" class="p-3 previewLink text-white">
         <span class="mdi mdi-facebook"></span>
         Facebook
@@ -13,7 +13,7 @@ echo '
         <span class="mdi mdi-login"></span>
         Login
     </a>
-</div>
+</footer>
 <style>
     .previewLink:hover {
         color: #a3a0a0 !important;

@@ -3,18 +3,18 @@ use mbs;
 insert into
     mainmenuentry (name, icon)
 values
-    ("start", "mdi-home-variant"),
-    ("events", "mdi-calendar-multiple"),
-    ("rückblick", "mdi-reload"),
-    ("jugend", "mdi-human-male-boy"),
-    ("über uns", "mdi-chat-question-outline");
+    ("Start", "mdi-home-variant"),
+    ("Events", "mdi-calendar-multiple"),
+    ("Rückblick", "mdi-reload"),
+    ("Jugend", "mdi-human-male-boy"),
+    ("Über uns", "mdi-chat-question-outline");
 
 insert into
     submenuentry (name, mmeId)
 values
-    ("default_start", 1),
-    ("bezirksmusikfest", 2),
-    ("vorstand", 5);
+    ("Home", 1),
+    ("Bezirksmusikfest", 2),
+    ("Vorstand", 5);
 
 insert into
     articles (smeId)

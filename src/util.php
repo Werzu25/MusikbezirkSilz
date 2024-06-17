@@ -42,30 +42,30 @@ function query($sql)
 
 function render($component)
 {
-    $type = $component['type'];
+  $type = $component['type'];
 
-    echo '<div id="' . $component["cmpId"] . '">';
-    switch ($type) {
-      case 'text':
-        $text = json_decode($component['content'], true);
-        renderText($text);
-        break;
-      case 'carousel':
-        $imgs = json_decode($component['content']);
-        renderCarousel($imgs);
-        break;
-      case 'link':
-        $link = json_decode($component['content'], true);
-        renderLink($link['href'], $link['text']);
-        break;
-      case 'table':
-        $table = json_decode($component['content']);
-        renderTable($table);
-        break;
-      case 'media':
-        $media = json_decode($component['content'], true);
-        renderMedia($media['type'], $media['content']);
-        break;
-    }
-    echo '</div>';
+  echo '<div id="' . $component['cmpId'] . '">';
+  switch ($type) {
+    case 'text':
+      $text = json_decode($component['content'], true);
+      renderText($text);
+      break;
+    case 'carousel':
+      $imgs = json_decode($component['content']);
+      renderCarousel($imgs);
+      break;
+    case 'link':
+      $link = json_decode($component['content'], true);
+      renderLink($link['href'], $link['text']);
+      break;
+    case 'table':
+      $table = json_decode($component['content']);
+      renderTable($table);
+      break;
+    case 'media':
+      $media = json_decode($component['content'], true);
+      renderMedia($media['type'], $media['content']);
+      break;
+  }
+  echo '</div>';
 }

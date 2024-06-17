@@ -31,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title >Login</title>
+  <title>Login</title>
+  <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
 </head>
 <body data-bs-theme="dark">
 <div class="container-fluid d-flex justify-content-center align-items-center">
