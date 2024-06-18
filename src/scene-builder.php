@@ -763,7 +763,13 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     });
     console.log(JSON.stringify(output))
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "save-content.php", true);
+    xhr.open("POST", "insertApi.php", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText);
+      }
+    };
     xhr.send(JSON.stringify(output));
   }
 
@@ -785,6 +791,10 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       }
     };
     xhr.send("smeId="+JSON.stringify(smeId));
+  }
+
+  function insertCarouselField() {
+
   }
 </script>
 </html>

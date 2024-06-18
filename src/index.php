@@ -11,7 +11,7 @@
     <link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
 </head>
-<body>
+<body data-bs-theme="dark">
 
 <?php
 require_once 'util.php';

@@ -1,8 +1,10 @@
 
 <?php function renderCarousel($images)
 {
-  echo '<div id="carouselExampleIndicators" class="carousel slide w-25 h-auto" data-bs-ride="carousel"  >
-    <div class="carousel-indicators">
+  echo '
+<div class="container-fluid">
+<div id="carouselExampleIndicators" class="carousel slide h-auto" data-bs-ride="carousel"  >
+    <div class="carousel-indicators ">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>';
   for ($i = 1; $i < sizeof($images); $i++) {
     echo ' <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' .
@@ -20,7 +22,7 @@
       '">
             <img src="' .
       $image .
-      '" class="d-block w-100 image" alt="...">
+      '" class="d-block mx-auto w-100 image" alt="...">
         </div>';
     $first = false;
   }
@@ -33,6 +35,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+</div>
 </div>
 <style>
 .carousel {
@@ -47,8 +50,10 @@
 }
 .image {
   height: 250px !important;
+  width: auto !important;
 }
-</style>';
+</style>
+';
 }
 
 ?>
