@@ -189,6 +189,41 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     </div>
   </div>
 </div>
+<div class="modal fade" id="imageInsert" tabindex="-1" aria-labelledby="imageInsertLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="imageInsertLabel">Insert Image</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="h2 mt-3 mb-3">
+          Image Path
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="imagePathInput" aria-label="pathInput" placeholder="Image Path" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="h2 mt-3 mb-3">
+          Width
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="widthImageInput" aria-label="widthImageInput" placeholder="Width" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="h2 mt-3 mb-3">
+          Height
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="heightImageInput" aria-label="heightImageInput" placeholder="Height" aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insetImage()">Insert Image</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="container-fluid mt-1 mb-1">
   <div class="row">
@@ -237,6 +272,16 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       </div>
       <div class="border rounded previewImage">
         <span>Image</span>
+      </div>
+      <div class="previewCarousel">
+          <?php
+          $images = array(
+              "../assets/placeholder-image.webp",
+              "../assets/placeholder-image.webp",
+              "../assets/placeholder-image.webp",
+          );
+          renderCarousel($images);
+          ?>
       </div>
     </div>
     <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
@@ -447,10 +492,11 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     if (e.target.classList.contains("insertedElement") || e.target.classList.contains("insertedContainerElement")) {
       e.target.innerHTML = "";
     }
-    if (e.target.classList.contains("insertedContainerElement") || e.target === document.getElementById("pagePreview")) {
+    debugger
+    if (e.target.classList.contains("insertedContainerElement") || element.classList.contains("previewContainer")) {
       e.target.appendChild(element);
+      resetEventBehavior(element);
     }
-    resetEventBehavior(element);
   }
 
   function mouseDown(e) {
