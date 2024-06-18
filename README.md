@@ -2,6 +2,6 @@
   <h1>Website Musikbezirk-Silz</h1>
 </div>
 <div>
-Chris gehts ab jetzt was an
+Ladnig fixt es
 </div>
 ![alte website](https://musikbezirk-silz.at)
