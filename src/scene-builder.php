@@ -225,6 +225,31 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 </div>
 
 
+
+<div class="modal fade" id="carouselInsert" tabindex="-1" aria-labelledby="carouselInsertLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="carouselInsertLabel">Insert Images</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="h2 mt-3 mb-3">
+                    Image Path
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="imagePathInput" aria-label="pathInput" placeholder="Image Path" aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertImage()">Add Image</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertCarousel()">Add Image</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid mt-1 mb-1">
   <div class="row">
     <div class="col-9">
@@ -545,7 +570,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
           pagePreview.style.boxSizing = "content-box";
           pagePreview.style.margin = previousSpacing.margin;
           pagePreview.style.padding = previousSpacing.padding;
-
           isFullscreen = false;
       }
   }
