@@ -189,6 +189,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="imageInsert" tabindex="-1" aria-labelledby="imageInsertLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -241,10 +242,10 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
                     <input type="text" class="form-control" id="imagePathInput" aria-label="pathInput" placeholder="Image Path" aria-describedby="inputGroup-sizing-default">
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertImage()">Add Image</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertCarousel()">Add Image</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertImage()">Add Image</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertCarousel()">Add Image</button>
             </div>
         </div>
     </div>
@@ -407,6 +408,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       id: e.target.id,
       source: e.target.parentNode.id
     };
+    debugger
     e.dataTransfer.effectAllowed = "copy";
     e.dataTransfer.setData("text", JSON.stringify(output));
   }
@@ -427,6 +429,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     });
     element.addEventListener('dragstart',(e) => pagePreviewDragStart(e));
     element.addEventListener('keydown', (e) => {
+      e.preventDefault();
       if (e.code === 'KeyAlt' && e.code === 'KeyW') {
         currentElement = e.target;
         new bootstrap.Modal(document.getElementById("dimensionChange")).toggle();
@@ -453,6 +456,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         element.draggable = true;
       }
       element.addEventListener('keydown', (e) => {
+        e.preventDefault();
         if (e.code === 'KeyAlt' && e.code === 'KeyF') {
           currentElement = e.target;
           new bootstrap.Modal(document.getElementById("textInsert")).toggle();
@@ -472,11 +476,21 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       element.innerHTML = "";
       new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
       element.addEventListener('keydown', (e) => {
+        e.preventDefault();
         if (e.code === 'KeyAlt' && e.code === 'KeyL') {
           currentLinkElement = element;
           if (element.parentElement.querySelector("a") === null) {
             new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
           }
+        }
+      });
+    }
+    if (element.classList.contains("previewCarousel")) {
+      element.addEventListener('keydown', (e) => {
+        e.preventDefault();
+        if (e.code === 'KeyAlt' && e.code === 'KeyI') {
+          currentElement = element;
+          new bootstrap.Modal(document.getElementById("carouselInsert")).toggle();
         }
       });
     }
@@ -517,8 +531,8 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     if (e.target.classList.contains("insertedElement") || e.target.classList.contains("insertedContainerElement")) {
       e.target.innerHTML = "";
     }
-    debugger
     if (e.target.classList.contains("insertedContainerElement") || element.classList.contains("previewContainer")) {
+      debugger
       e.target.appendChild(element);
       resetEventBehavior(element);
     }
