@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Musikbezirk Silz</title>
+  <link rel="icon" type="image/x-icon" href="/MusikbezirkSilz/assets/images/logo.png">
   <link href="/MusikbezirkSilz/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="/MusikbezirkSilz/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <link href="/MusikbezirkSilz/node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
@@ -22,16 +23,14 @@ require_once 'components/carousel.php';
 require_once 'components/link.php';
 require_once 'components/media.php';
 
+$smeId = 1; // Default to Home if not found
+
 if (isset($_GET['subMenuName'])) {
-    $subMenuName = htmlspecialchars($_GET['subMenuName'], ENT_QUOTES, 'UTF-8');
+    $subMenuName = urldecode(htmlspecialchars($_GET['subMenuName'], ENT_QUOTES, 'UTF-8'));
     $subMenuEntry = select('SELECT smeId FROM subMenuEntry WHERE name = "' . $subMenuName . '"');
     if (!empty($subMenuEntry)) {
         $smeId = $subMenuEntry[0]['smeId'];
-    } else {
-        $smeId = 1; // Default to Home if not found
     }
-} else {
-    $smeId = 1; // Default to Home if not found
 }
 
 $articles = select("SELECT * FROM articles WHERE smeId = $smeId");

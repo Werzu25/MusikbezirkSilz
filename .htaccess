@@ -7,4 +7,7 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
 # Redirect /subMenuName to /src/index.php?subMenuName
-RewriteRule ^([a-zA-Z0-9_-]+)$ src/index.php?subMenuName=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_\-%]+)$ src/index.php?subMenuName=$1 [L,QSA]
+
+# Redirect all other requests to home page
+RewriteRule ^(.*)$ src/index.php [L,QSA]

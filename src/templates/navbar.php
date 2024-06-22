@@ -14,7 +14,8 @@ foreach ($MainEntries as $MainEntry) {
                     </a>
                     <ul class="dropdown-menu">';
   foreach ($SubEntries as $SubEntry) {
-    $content .= '<li><a class="dropdown-item" href="/MusikbezirkSilz/' . htmlspecialchars($SubEntry['name'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($SubEntry['name'], ENT_QUOTES, 'UTF-8') . '</a></li>';
+    $encodedName = urlencode($SubEntry['name']);
+    $content .= '<li><a class="dropdown-item" href="/MusikbezirkSilz/' . htmlspecialchars($encodedName, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($SubEntry['name'], ENT_QUOTES, 'UTF-8') . '</a></li>';
   }
   $content .= '
                    </ul>
@@ -61,7 +62,6 @@ $content .= '
         to {
             color: white;
         }
-    
     }
     .navbar {
         border-bottom: 1px solid #ffffff;

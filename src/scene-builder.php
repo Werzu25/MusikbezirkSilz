@@ -408,7 +408,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       id: e.target.id,
       source: e.target.parentNode.id
     };
-    debugger
     e.dataTransfer.effectAllowed = "copy";
     e.dataTransfer.setData("text", JSON.stringify(output));
   }
@@ -532,7 +531,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       e.target.innerHTML = "";
     }
     if (e.target.classList.contains("insertedContainerElement") || element.classList.contains("previewContainer")) {
-      debugger
       e.target.appendChild(element);
       resetEventBehavior(element);
     }
