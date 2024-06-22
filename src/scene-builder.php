@@ -259,12 +259,12 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     <div class="col-2">
       <select class="form-select" id="pageSelect" aria-label="Floating label select example">
         <option selected id="defaultSelected">Choose Page</option>
-        <?php
-        $sub = select('Select * from subMenuEntry');
-        foreach ($sub as $entry) {
-          echo '<option value="' . $entry['smeId'] . '">' . $entry['name'] . '</option>';
-        }
-        ?>
+          <?php
+          $sub = select('SELECT * FROM subMenuEntry');
+          foreach ($sub as $entry) {
+              echo '<option value="' . htmlspecialchars($entry['smeId'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($entry['name'], ENT_QUOTES, 'UTF-8') . '</option>';
+          }
+          ?>
       </select>
     </div>
     <div class="col-1">

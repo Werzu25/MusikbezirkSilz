@@ -1,36 +1,24 @@
 <?php
 $MainEntries = select('SELECT * FROM mainMenuEntry');
 $content = '
-<nav class="navbar navbar-expand  bg-body-tertiary">
+<nav class="navbar navbar-expand bg-body-tertiary">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">';
 foreach ($MainEntries as $MainEntry) {
-  $SubEntries = select('SELECT * FROM subMenuEntry WHERE mmeId = ' . $MainEntry['mmeId']);
-  $content .=
-    '
+  $SubEntries = select('SELECT * FROM subMenuEntry WHERE mmeId = ' . (int)$MainEntry['mmeId'] . ' AND RendererInNavbar = true');
+  $content .= '
                 <li class="nav-item dropdown mainEntry">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="mdi ' .
-    $MainEntry['icon'] .
-    '"> ' .
-    $MainEntry['name'] .
-    '</span>
+                        <span class="mdi ' . htmlspecialchars($MainEntry['icon'], ENT_QUOTES, 'UTF-8') . '"> ' . htmlspecialchars($MainEntry['name'], ENT_QUOTES, 'UTF-8') . '</span>
                     </a>
-                    <ul class="dropdown-menu">
-                    ';
+                    <ul class="dropdown-menu">';
   foreach ($SubEntries as $SubEntry) {
-    $content .=
-      '<li><a class="dropdown-item" href="index.php?sideId=' .
-      $SubEntry['smeId'] .
-      '">' .
-      $SubEntry['name'] .
-      '</a></li>';
+    $content .= '<li><a class="dropdown-item" href="/MusikbezirkSilz/' . htmlspecialchars($SubEntry['name'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($SubEntry['name'], ENT_QUOTES, 'UTF-8') . '</a></li>';
   }
   $content .= '
                    </ul>
-                </li>
-                ';
+                </li>';
 }
 
 $content .= '
@@ -76,7 +64,7 @@ $content .= '
     
     }
     .navbar {
-      border-bottom: 1px solid #ffffff;
+        border-bottom: 1px solid #ffffff;
     }
 </style>
 ';

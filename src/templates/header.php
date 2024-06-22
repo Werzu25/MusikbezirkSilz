@@ -1,11 +1,7 @@
-<link href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-<script src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<link href="../../../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-
 <div class="imageRow">
     <div class="row row-cols-sm-6 widfix">
         <div class="col">
-            <img class="img-fluid logoImage" alt="Musikbezirk Silz Logo" src="../assets/images/logo.jpg" />
+            <img class="img-fluid logoImage" alt="Musikbezirk Silz Logo" src="/MusikbezirkSilz/assets/images/logo.jpg" />
         </div>
         <div class="col w-50 mt-auto mb-auto">
             <h1 class="head text" >Musikbezirk Silz</h1>

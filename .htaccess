@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /MusikbezirkSilz/
+
+# Skip rewriting for existing files or directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirect /subMenuName to /src/index.php?subMenuName
+RewriteRule ^([a-zA-Z0-9_-]+)$ src/index.php?subMenuName=$1 [L,QSA]

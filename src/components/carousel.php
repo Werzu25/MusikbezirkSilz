@@ -1,23 +1,23 @@
 <?php
 function renderCarousel($images)
 {
-  echo '
+    echo '
 <div class="container-fluid mt-2">
 <div class="carousel slide" id="imageCarousel">
   <div class="carousel-inner">
     ';
-  $first = true;
-  foreach ($images as $image) {
-    echo '<div class="carousel-item' .
-        ($first ? ' active' : '') .
-        '">
+    $first = true;
+    foreach ($images as $image) {
+        echo '<div class="carousel-item' .
+            ($first ? ' active' : '') .
+            '">
               <img src="' .
-        $image .
-        '" class="d-block mx-auto w-100 image" alt="...">
+            htmlspecialchars($image, ENT_QUOTES, 'UTF-8') .
+            '" class="d-block mx-auto w-100 image" alt="...">
           </div>';
-    $first = false;
-  }
-  echo '
+        $first = false;
+    }
+    echo '
   </div>
   <div class="carousel-indicators">
   <div class="carousel-indicators-button">
@@ -26,18 +26,18 @@ function renderCarousel($images)
     </button>
   </div>
   <div class="select-button-container">';
-  foreach ($images as $index => $image) {
-    echo '<button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="' .
-        $index .
-        '" class="' .
-        ($index == 0 ? 'active' : '') .
-        '" aria-current="' .
-        ($index == 0 ? 'true' : 'false') .
-        '" aria-label="Slide ' .
-        ($index + 1) .
-        '"></button>';
-  }
-  echo '
+    foreach ($images as $index => $image) {
+        echo '<button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="' .
+            htmlspecialchars($index, ENT_QUOTES, 'UTF-8') .
+            '" class="' .
+            ($index == 0 ? 'active' : '') .
+            '" aria-current="' .
+            ($index == 0 ? 'true' : 'false') .
+            '" aria-label="Slide ' .
+            htmlspecialchars($index + 1, ENT_QUOTES, 'UTF-8') .
+            '"></button>';
+    }
+    echo '
 </div>
   <div class="carousel-indicators-button">
     <button type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
@@ -53,7 +53,7 @@ function renderCarousel($images)
     width: 100% !important;
     height: 2rem !important;
     margin: 0.5rem 0 0.5rem 0 !important;
-    background: #484848 !important;
+    background: #212529 !important;
     border-radius: 10px !important;
     display: flex !important;
     justify-content: space-between !important;

@@ -14,6 +14,7 @@ CREATE TABLE mainMenuEntry (
 CREATE TABLE subMenuEntry (
                               smeId INT AUTO_INCREMENT NOT NULL,
                               name VARCHAR(255),
+                              RendererInNavbar BOOLEAN,
                               mmeId INT,
                               PRIMARY KEY (smeId),
                               FOREIGN KEY (mmeId) REFERENCES mainMenuEntry(mmeId)
@@ -52,18 +53,18 @@ INSERT INTO mainMenuEntry (name, icon) VALUES
                                            ("Mitgliedschaft", "mdi-account-group");
 
 -- Insert data into subMenuEntry
-INSERT INTO subMenuEntry (name, mmeId) VALUES
-                                           ("Home", 1),
-                                           ("Bezirksmusikfest", 2),
-                                           ("Vorstand", 5),
-                                           ("Ansprechpartner", 6),
-                                           ("Veranstaltungen", 2),
-                                           ("Archiv", 3),
-                                           ("Jugendarbeit", 4),
-                                           ("Geschichte", 5),
-                                           ("Fotogalerie", 7),
-                                           ("Fragen und Antworten", 8),
-                                           ("Mitgliedschaft", 9);
+INSERT INTO subMenuEntry (name, RendererInNavbar, mmeId) VALUES
+                                                               ("Home", true, 1),
+                                                               ("Bezirksmusikfest", true, 2),
+                                                               ("Vorstand", false, 5),
+                                                               ("Ansprechpartner", true, 6),
+                                                               ("Veranstaltungen", true, 2),
+                                                               ("Archiv", true, 3),
+                                                               ("Jugendarbeit", true, 4),
+                                                               ("Geschichte", true, 5),
+                                                               ("Fotogalerie", true, 7),
+                                                               ("Fragen und Antworten", true, 8),
+                                                               ("Mitgliedschaft", true, 9);
 
 -- Insert data into articles
 INSERT INTO articles (smeId) VALUES
@@ -76,22 +77,22 @@ INSERT INTO articles (smeId) VALUES
 -- Insert data into components
 INSERT INTO components (artId, type, content, displayOrder) VALUES
                                                                 (2, "text", '{"style":"font-size:20px;color: #ff0000;margin-left:20px", "text": "Bezirksmusikfest 2024"}', 1),
-                                                                (2, "text", '{"style": "margin-left:20px", "text": "das bezirksmusikfest findet heuer vom 26. bis zum 28. juli in sölden statt."}', 2),
-                                                                (2, "media", '{"type": "image", "content": "../assets/images/bezirksmusikfest2024.jpg"}', 3),
+                                                                (2, "text", '{"style": "margin-left:20px", "text": "Das Bezirksmusikfest findet heuer vom 26. bis zum 28. Juli in Sölden statt."}', 2),
+                                                                (2, "media", '{"type": "image", "content": "/MusikbezirkSilz/assets/images/bezirksmusikfest2024.jpg"}', 3),
                                                                 (1, "text", '{"style": "margin-left:20px;color: #ff0000", "text": "Generalversammlung 2023"}', 1),
                                                                 (1, "text", '{"style": "margin-left:20px", "text": "Die Generalversammlung fand dieses Jahr in Umhausen statt"}', 2),
                                                                 (1, "link", '{"style": "margin-left:20px !important", "href":"https://musikbezirk-silz.at/page-15/page-14/", "text": "Hier gehts zum Nachbericht"}', 3),
                                                                 (3, "text", '{"style": "margin-left:20px;color: #ff0000", "text": "Vorschau 2024"}', 1),
-                                                                (3, "table", '[["Sölden","27.07.2024","Tag der Jugend"],["Sölden","28.07.2024","Bezirkmusikfest"],["Haiming","06.10.2024","Generalversammlung des Musikbezirkes"]]', 2),
-                                                                (4, "carousel", '["../assets/images/bezirksmusikfest2024.jpg","../assets/images/Eva.jpg","../assets/images/Ausschuss2018.JPG"]', 1),
+                                                                (3, "table", '[["Sölden","27.07.2024","Tag der Jugend"],["Sölden","28.07.2024","Bezirksmusikfest"],["Haiming","06.10.2024","Generalversammlung des Musikbezirkes"]]', 2),
+                                                                (4, "carousel", '["/MusikbezirkSilz/assets/images/bezirksmusikfest2024.jpg","/MusikbezirkSilz/assets/images/Eva.jpg","/MusikbezirkSilz/assets/images/Ausschuss2018.JPG"]', 1),
                                                                 (5, "text", '{"style": "margin-left:20px;color: #0000ff", "text": "Event Übersicht"}', 1),
                                                                 (5, "link", '{"style": "margin-left:20px", "href":"https://musikbezirk-silz.at/events", "text": "Mehr Informationen zu unseren Veranstaltungen"}', 2),
                                                                 (6, "text", '{"style": "margin-left:20px", "text": "Der Vorstand setzt sich aus folgenden Mitgliedern zusammen..."}', 1),
                                                                 (6, "table", '[["Name","Position","Kontakt"],["Max Mustermann","Vorsitzender","max@musikbezirk-silz.at"],["Anna Beispiel","Schriftführerin","anna@musikbezirk-silz.at"]]', 2),
-                                                                (7, "carousel", '["../assets/images/galerie1.jpg","../assets/images/galerie2.jpg","../assets/images/galerie3.jpg"]', 1),
+                                                                (7, "carousel", '["/MusikbezirkSilz/assets/images/galerie1.jpg","/MusikbezirkSilz/assets/images/galerie2.jpg","/MusikbezirkSilz/assets/images/galerie3.jpg"]', 1),
                                                                 (8, "text", '{"style": "margin-left:20px", "text": "Häufig gestellte Fragen..."}', 1),
                                                                 (8, "link", '{"style": "margin-left:20px", "href":"https://musikbezirk-silz.at/faq", "text": "Hier finden Sie Antworten auf häufig gestellte Fragen"}', 2),
-                                                                (9, "media", '{"type": "video", "content": "../assets/videos/geschichte.mp4"}', 1),
+                                                                (9, "media", '{"type": "video", "content": "/MusikbezirkSilz/assets/videos/geschichte.mp4"}', 1),
                                                                 (10, "text", '{"style": "margin-left:20px;color: #ff0000", "text": "Generalversammlung 2022"}', 1),
                                                                 (10, "text", '{"style": "margin-left:20px", "text": "Die Generalversammlung fand letztes Jahr in Umhausen statt"}', 2),
                                                                 (10, "link", '{"style": "margin-left:20px", "href":"https://musikbezirk-silz.at/page-15/page-13/", "text": "Hier gehts zum Nachbericht"}', 3),

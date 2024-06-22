@@ -9,7 +9,7 @@ echo '
         <span class="mdi mdi-email-outline"></span>
         E-Mail
     </a>
-    <a href="login.php" class="p-3 previewLink text-white">
+    <a href="/MusikbezirkSilz/src/login.php" class="p-3 previewLink text-white">
         <span class="mdi mdi-login"></span>
         Login
     </a>
@@ -17,6 +17,9 @@ echo '
 <style>
     .previewLink:hover {
         color: #a3a0a0 !important;
+    }
+    .previewLink {
+        text-decoration: none;
     }
 </style>
 ';
