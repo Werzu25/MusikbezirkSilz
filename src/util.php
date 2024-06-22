@@ -56,7 +56,7 @@ function render($component)
       break;
     case 'link':
       $link = json_decode($component['content'], true);
-      renderLink($link['href'], $link['text']);
+      renderLink($link['href'], $link['text'], $link['style']);
       break;
     case 'table':
       $table = json_decode($component['content']);

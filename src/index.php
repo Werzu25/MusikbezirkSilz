@@ -37,7 +37,7 @@ foreach ($articles as $article) {
   $components = select(
     'SELECT * FROM components WHERE artId =' . $article['artId'] . ' ORDER BY displayOrder ASC'
   );
-  echo '<div class="border rounded m-2 p-1">';
+  echo '<div class="border rounded m-2 p-1 bg-body-tertiary mb-3 mt-3">';
   foreach ($components as $component) {
     render($component);
   }

@@ -1,59 +1,105 @@
-
-<?php function renderCarousel($images)
+<?php
+function renderCarousel($images)
 {
   echo '
-<div class="container-fluid">
-<div id="carouselExampleIndicators" class="carousel slide h-auto" data-bs-ride="carousel"  >
-    <div class="carousel-indicators ">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>';
-  for ($i = 1; $i < sizeof($images); $i++) {
-    echo ' <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' .
-      $i .
-      '" aria-label="Slide ' .
-      ($i + 1) .
-      '"></button>';
-  }
-  echo '</div>
-    <div class="carousel-inner">';
+<div class="container-fluid mt-2">
+<div class="carousel slide" id="imageCarousel">
+  <div class="carousel-inner">
+    ';
   $first = true;
   foreach ($images as $image) {
-    echo ' <div class="carousel-item' .
-      ($first ? ' active' : '') .
-      '">
-            <img src="' .
-      $image .
-      '" class="d-block mx-auto w-100 image" alt="...">
-        </div>';
+    echo '<div class="carousel-item' .
+        ($first ? ' active' : '') .
+        '">
+              <img src="' .
+        $image .
+        '" class="d-block mx-auto w-100 image" alt="...">
+          </div>';
     $first = false;
   }
-  echo '</div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+  echo '
+  </div>
+  <div class="carousel-indicators">
+  <div class="carousel-indicators-button">
+    <button type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+      <span class="mdi mdi-chevron-left selector"></span>
     </button>
-    <button class="carousel-control-next text-black" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+  </div>
+  <div class="select-button-container">';
+  foreach ($images as $index => $image) {
+    echo '<button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="' .
+        $index .
+        '" class="' .
+        ($index == 0 ? 'active' : '') .
+        '" aria-current="' .
+        ($index == 0 ? 'true' : 'false') .
+        '" aria-label="Slide ' .
+        ($index + 1) .
+        '"></button>';
+  }
+  echo '
 </div>
+  <div class="carousel-indicators-button">
+    <button type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+      <span class="mdi mdi-chevron-right selector"></span>
+    </button>
+  </div>
+    </div>
+  </div>
 </div>
 <style>
-.carousel {
-    width: 100%; /* Adjust width as necessary */
-    height: 500px; /* Set a fixed height */
+  .carousel-indicators {
+    position: relative !important;
+    width: 100% !important;
+    height: 2rem !important;
+    margin: 0.5rem 0 0.5rem 0 !important;
+    background: #484848 !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center; /* Ensure children are vertically centered */
 }
 
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* cover to fill the area, contain to fit inside */
+.carousel-indicators > div > button {
+    background-color: #fff !important;
+    border-radius: 50% !important;
+    width: 10px !important;
+    height: 10px !important;
+    vertical-align: middle !important;
 }
+
+.carousel-indicators > div  {
+    display: flex !important;
+    align-items: center !important;
+    vertical-align: middle !important
+}
+
 .image {
-  height: 250px !important;
-  width: auto !important;
-}
-</style>
-';
+    height: 25rem !important;
+    width: auto !important;
+    border-radius: 5px !important;
 }
 
+.carousel-indicators-button > [data-bs-target] {
+    all: unset !important;
+    height: 100% !important;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+    display: flex; /* Ensure it uses flex to align its content */
+    align-items: center; /* Align its content vertically */
+    justify-content: center; /* Center content horizontally */
+}
+
+.select-button-container {
+    height: 100% !important;
+}
+
+.selector {
+    height: 100% !important;
+    vertical-align: middle !important;
+    font-size: 1.5rem !important;
+}
+
+</style>';
+}
 ?>
