@@ -262,9 +262,14 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
           <?php
           $sub = select('SELECT * FROM subMenuEntry');
           foreach ($sub as $entry) {
-              echo '<option value="' . htmlspecialchars($entry['smeId'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($entry['name'], ENT_QUOTES, 'UTF-8') . '</option>';
+            echo '<option value="' .
+              htmlspecialchars($entry['smeId'], ENT_QUOTES, 'UTF-8') .
+              '">' .
+              htmlspecialchars($entry['name'], ENT_QUOTES, 'UTF-8') .
+              '</option>';
           }
           ?>
+        <option id="newPage">New Page</option>
       </select>
     </div>
     <div class="col-1">
@@ -301,11 +306,11 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       </div>
       <div class="previewCarousel">
           <?php
-          $images = array(
-              "../assets/placeholder-image.webp",
-              "../assets/placeholder-image.webp",
-              "../assets/placeholder-image.webp",
-          );
+          $images = [
+            '../assets/placeholder-image.webp',
+            '../assets/placeholder-image.webp',
+            '../assets/placeholder-image.webp',
+          ];
           renderCarousel($images);
           ?>
       </div>
@@ -355,6 +360,8 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   let currentLinkElement;
   let currentContainerElement;
   let currentElement;
+  let articleName;
+  let smeId;
   let previousSpacing = {
     margin: 0,
     padding: 0,
@@ -709,95 +716,71 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   }
   function saveContent() {
     class JsonOutput {
-      constructor() {
-        this.articleID = '';
+      constructor(smeId, content) {
+        this.smeId = '';
         this.content = [];
       }
     }
 
     class Entry {
-      constructor(type, id, content) {
-        this.id = id;
+      constructor(type, id, entryContent) {
         this.type = type;
-        this.content = content;
+        this.id = id;
+        this.entryContent = entryContent;
       }
     }
 
     class Container {
-      constructor(type, id, content) {
-        this.type = type;
+      constructor(id, containerContent) {
         this.id = id;
-        this.content = content;
+        this.containerContent = containerContent;
       }
     }
 
     let output = new JsonOutput();
-
-    document.querySelectorAll('.previewText').forEach((element) => {
-      if (element.parentElement === document.getElementById('pagePreview')) {
-        let child = element.children[0];
-        let content = {
-          text: child.innerHTML,
-          style: child.style.cssText
-        };
-        let entry = new Entry('text', content);
-        output.content.push(entry);
-      }
-    });
-
-    document.querySelectorAll('.previewLink').forEach((element) => {
-      if (element.parentElement === document.getElementById('pagePreview')) {
-        let child = element.children[0];
-        let linkElement = {
-          text: child.innerHTML,
-          href: child.href,
-        };
-        let entry = new Entry('link', linkElement);
-        output.content.push(entry);
-      }
-    });
-
     document.querySelectorAll('.previewContainer').forEach((element) => {
-      if (element.parentElement === document.getElementById('pagePreview')) {
-        if (!element.classList.contains("loadedContainer")|| !element.classList.contains("loadedContainer")) {
-          let containerContent = [];
-          let child = element.children[0];
-          child.childNodes.forEach((row) => {
-            row.childNodes.forEach((col) => {
-              if (col.children.length !== 0) {
-                let subEntry = col.children[0].children[0];
-                if (subEntry.parentElement.classList.contains("previewText")) {
-                  let content = {
-                    text: subEntry.innerHTML,
-                    style: subEntry.style.cssText
-                  };
-                  containerContent.push(new Entry('text', subEntry.parentElement.id, content));
-                } else if (subEntry.parentElement.classList.contains("previewLink")) {
-                  let linkElement = {
-                    text: subEntry.innerHTML,
-                    href: subEntry.href,
-                  };
-                  containerContent.push(new Entry('link', subEntry.parentElement.id, linkElement));
-                } else if (subEntry.parentElement.classList.contains("previewImage")) {
-                  let content = {
-                    type: "image",
-                    src: subEntry.src,
-                    width: subEntry.style.width,
-                    height: subEntry.style.height
-                  };
-                  containerContent.push(new Entry('media', subEntry.parentElement.id, content));
-                }
+      if (element.parentElement.id === 'pagePreview') {
+        let container = new Container(element.id, []);
+        element.children[0].childNodes.forEach((row) => {
+          debugger
+          let rowContent = row.children[0].children[0];
+          let entry;
+          if (rowContent !== null && rowContent !== undefined) {
+            if (rowContent.nodeType === Node.ELEMENT_NODE) {
+              if (rowContent.classList.contains('previewText')) {
+                entry = new Entry('text', rowContent.id, {
+                  style: rowContent.children[0].style,
+                  innerHTML: rowContent.children[0].innerHTML.trim()
+                });
+              } else if (rowContent.classList.contains('previewLink')) {
+                entry = new Entry('link', rowContent.id, {
+                  href: rowContent.children[0].href,
+                  innerHTML: rowContent.children[0].innerHTML.trim(),
+                  style: rowContent.children[0].style
+                });
+              } else if (rowContent.classList.contains('previewImage')) {
+                entry = new Entry('image', rowContent.id, {
+                  src: rowContent.children[0].src,
+                  style: rowContent.children[0].style
+                });
+              } else if (rowContent.classList.contains('previewCarousel')) {
+                entry = new Entry('carousel', rowContent.id, {});
               } else {
-                containerContent.push(new Entry('empty', 'empty'));
+                debugger
+                entry = new Entry('empty');
               }
-            });
-          });
-          let container = new Container("container", element.id, containerContent);
-          output.content.push(container);
-        }
+            }
+          } else {
+            entry = new Entry('empty');
+          }
+          container.containerContent.push(entry);
+        });
+        output.smeId = smeId;
+        output.content.push(container);
       }
     });
-    console.log(JSON.stringify(output))
+
+    console.log(output)
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "insertApi.php", true);
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -814,7 +797,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       document.getElementById("pagePreview").innerHTML = "";
       return;
     }
-    let smeId = { smeId: event.target.value };
+    smeId = event.target.value;
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "pagePreviewContent.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -826,7 +809,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         });
       }
     };
-    xhr.send("smeId="+JSON.stringify(smeId));
+    xhr.send("smeId="+JSON.stringify({ smeId: smeId }));
   }
 
   function insertCarouselField() {

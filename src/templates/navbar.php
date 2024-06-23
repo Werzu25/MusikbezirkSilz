@@ -6,16 +6,30 @@ $content = '
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">';
 foreach ($MainEntries as $MainEntry) {
-  $SubEntries = select('SELECT * FROM subMenuEntry WHERE mmeId = ' . (int)$MainEntry['mmeId'] . ' AND RendererInNavbar = true');
-  $content .= '
+  $SubEntries = select(
+    'SELECT * FROM subMenuEntry WHERE mmeId = ' .
+      (int) $MainEntry['mmeId'] .
+      ' AND RendererInNavbar = true'
+  );
+  $content .=
+    '
                 <li class="nav-item dropdown mainEntry">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="mdi ' . htmlspecialchars($MainEntry['icon'], ENT_QUOTES, 'UTF-8') . '"> ' . htmlspecialchars($MainEntry['name'], ENT_QUOTES, 'UTF-8') . '</span>
+                        <span class="mdi ' .
+    htmlspecialchars($MainEntry['icon'], ENT_QUOTES, 'UTF-8') .
+    '"> ' .
+    htmlspecialchars($MainEntry['name'], ENT_QUOTES, 'UTF-8') .
+    '</span>
                     </a>
                     <ul class="dropdown-menu">';
   foreach ($SubEntries as $SubEntry) {
     $encodedName = urlencode($SubEntry['name']);
-    $content .= '<li><a class="dropdown-item" href="/MusikbezirkSilz/' . htmlspecialchars($encodedName, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($SubEntry['name'], ENT_QUOTES, 'UTF-8') . '</a></li>';
+    $content .=
+      '<li><a class="dropdown-item" href="/MusikbezirkSilz/' .
+      htmlspecialchars($encodedName, ENT_QUOTES, 'UTF-8') .
+      '">' .
+      htmlspecialchars($SubEntry['name'], ENT_QUOTES, 'UTF-8') .
+      '</a></li>';
   }
   $content .= '
                    </ul>

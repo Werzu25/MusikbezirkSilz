@@ -26,21 +26,25 @@ require_once 'components/media.php';
 $smeId = 1; // Default to Home if not found
 
 if (isset($_GET['subMenuName'])) {
-    $subMenuName = urldecode(htmlspecialchars($_GET['subMenuName'], ENT_QUOTES, 'UTF-8'));
-    $subMenuEntry = select('SELECT smeId FROM subMenuEntry WHERE name = "' . $subMenuName . '"');
-    if (!empty($subMenuEntry)) {
-        $smeId = $subMenuEntry[0]['smeId'];
-    }
+  $subMenuName = urldecode(htmlspecialchars($_GET['subMenuName'], ENT_QUOTES, 'UTF-8'));
+  $subMenuEntry = select('SELECT smeId FROM subMenuEntry WHERE name = "' . $subMenuName . '"');
+  if (!empty($subMenuEntry)) {
+    $smeId = $subMenuEntry[0]['smeId'];
+  }
 }
 
 $articles = select("SELECT * FROM articles WHERE smeId = $smeId");
 foreach ($articles as $article) {
-    $components = select('SELECT * FROM components WHERE artId =' . (int)$article['artId'] . ' ORDER BY displayOrder ASC');
-    echo '<div class="border rounded m-2 p-1 bg-body-tertiary mb-3 mt-3">';
-    foreach ($components as $component) {
-        render($component);
-    }
-    echo '</div>';
+  $components = select(
+    'SELECT * FROM components WHERE artId =' .
+      (int) $article['artId'] .
+      ' ORDER BY displayOrder ASC'
+  );
+  echo '<div class="border rounded m-2 p-1 bg-body-tertiary mb-3 mt-3">';
+  foreach ($components as $component) {
+    render($component);
+  }
+  echo '</div>';
 }
 
 require_once 'templates/footer.php';
