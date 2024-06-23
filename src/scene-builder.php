@@ -251,6 +251,40 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     </div>
 </div>
 
+
+<div class="modal fade" id="websiteInsert" tabindex="-1" aria-labelledby="websiteInsertLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="websiteInsertLabel">New Website</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="h2 mt-3 mb-3">
+                    Website Name
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="websiteName" aria-label="name Input" placeholder="New Website" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="h2 mt-3 mb-3">
+                    Website renderd in navbar
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Renderd in navbar
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertWebsite()">Add Website</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="container-fluid mt-1 mb-1">
   <div class="row">
     <div class="col-9">
