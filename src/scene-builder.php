@@ -190,43 +190,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   </div>
 </div>
 
-<div class="modal fade" id="imageInsert" tabindex="-1" aria-labelledby="imageInsertLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="imageInsertLabel">Insert Image</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="h2 mt-3 mb-3">
-          Image Path
-        </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="imagePathInput" aria-label="pathInput" placeholder="Image Path" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="h2 mt-3 mb-3">
-          Width
-        </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="widthImageInput" aria-label="widthImageInput" placeholder="Width" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="h2 mt-3 mb-3">
-          Height
-        </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="heightImageInput" aria-label="heightImageInput" placeholder="Height" aria-describedby="inputGroup-sizing-default">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insetImage()">Insert Image</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
 <div class="modal fade" id="carouselInsert" tabindex="-1" aria-labelledby="carouselInsertLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -349,7 +312,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
           ?>
       </div>
     </div>
-    <div class="verticalRuler bg-white h-100vh" id="pageDivider"></div>
+    <div class="verticalRuler bg-white" id="pageDivider"></div>
     <div class="spCol rounded bg-body-secondary" id="pagePreview">
     </div>
   </div>
@@ -377,7 +340,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     .verticalRuler {
         width: 2px;
         padding: 0;
-        height: 100%!important;
     }
     .verticalRuler:hover {
         cursor: ew-resize;
@@ -399,7 +361,10 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   let previousSpacing = {
     margin: 0,
     padding: 0,
+    width: 0,
+    height: 0
   };
+  
   document.getElementById('pageSelect').addEventListener('change' ,(e) => loadSite(e))
   pageDivider.addEventListener("mousedown", mouseDown);
   pageDivider.addEventListener('dragover',(e) => preventDefault(e));
@@ -604,28 +569,40 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   }
 
   function fullscreen() {
-      if (!isFullscreen) {
-        previousSpacing.margin = pagePreview.style.margin + "px";
-        previousSpacing.padding = pagePreview.style.padding + "px";
-        templateRenderer.style.display = "none";
-        pageDivider.style.display = "none";
-        pagePreview.style.width = "100vw";
-        pagePreview.style.height = "100vh";
-        pagePreview.style.boxSizing = "border-box";
-        pagePreview.style.margin = "0";
-        pagePreview.style.padding = "0";
-        isFullscreen = true;
-      } else if (isFullscreen) {
-          templateRenderer.style.display = "block";
-          pageDivider.style.display = "block";
-          pagePreview.style.width = pagePreviewWidth + "px";
-          pagePreview.style.height = "auto";
-          pagePreview.style.boxSizing = "content-box";
-          pagePreview.style.margin = previousSpacing.margin;
-          pagePreview.style.padding = previousSpacing.padding;
-          isFullscreen = false;
-      }
+    if (!isFullscreen) {
+      // Store the previous spacing and dimensions
+      previousSpacing.margin = getComputedStyle(pagePreview).getPropertyValue("margin").replace("px", "");
+      previousSpacing.padding = getComputedStyle(pagePreview).getPropertyValue("padding").replace("px", "");
+      previousSpacing.width = getComputedStyle(pagePreview).getPropertyValue("width").replace("px","") - previousSpacing.margin*2 - previousSpacing.padding*2;
+      previousSpacing.height = getComputedStyle(pagePreview).getPropertyValue("height").replace("px","") - previousSpacing.margin*2 - previousSpacing.padding*2;
+
+      console.log(previousSpacing);
+
+      // Set to fullscreen
+      templateRenderer.style.display = "none";
+      pageDivider.style.display = "none";
+      pagePreview.style.width = "100vw";
+      pagePreview.style.height = "100vh";
+      pagePreview.style.boxSizing = "border-box";
+      pagePreview.style.margin = "0px";
+      pagePreview.style.padding = "0px";
+      isFullscreen = true;
+    } else {
+      // Restore previous dimensions and spacing
+      pagePreview.style.width = previousSpacing.width + "px";
+      pagePreview.style.height = previousSpacing.height + "px";
+      pagePreview.style.margin = previousSpacing.margin + "px";
+      pagePreview.style.padding = previousSpacing.padding + "px";
+      pagePreview.style.boxSizing = "content-box";
+
+      // Restore other elements' visibility
+      templateRenderer.style.display = "block";
+      pageDivider.style.display = "block";
+
+      isFullscreen = false;
+    }
   }
+
 
   function insertLink() {
     let linkText = document.getElementById('linkText').value;
@@ -732,6 +709,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   function setContentEditable() {
     editing = !editing;
     if (editing) {
+      debugger
       document.getElementById('containerEditableButton').innerHTML = "Exit Container Edit Mode"
       document.querySelectorAll('.previewContainer').forEach((element) => {
         if (element.parentElement === document.getElementById('pagePreview')) {
@@ -783,19 +761,19 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
             if (rowContent.nodeType === Node.ELEMENT_NODE) {
               if (rowContent.classList.contains('previewText')) {
                 entry = new Entry('text', rowContent.id, {
-                  style: rowContent.children[0].style,
-                  innerHTML: rowContent.children[0].innerHTML.trim()
+                  style: rowContent.children[0].style.cssText,
+                  text: rowContent.children[0].innerHTML.trim()
                 });
               } else if (rowContent.classList.contains('previewLink')) {
                 entry = new Entry('link', rowContent.id, {
                   href: rowContent.children[0].href,
-                  innerHTML: rowContent.children[0].innerHTML.trim(),
-                  style: rowContent.children[0].style
+                  text: rowContent.children[0].innerHTML.trim(),
+                  style: rowContent.children[0].style.cssText
                 });
               } else if (rowContent.classList.contains('previewImage')) {
                 entry = new Entry('image', rowContent.id, {
-                  src: rowContent.children[0].src,
-                  style: rowContent.children[0].style
+                  content : rowContent.children[0].src,
+                  style: rowContent.children[0].style.cssText
                 });
               } else if (rowContent.classList.contains('previewCarousel')) {
                 entry = new Entry('carousel', rowContent.id, {});

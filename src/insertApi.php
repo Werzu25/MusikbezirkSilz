@@ -21,34 +21,39 @@ function insertData($data)
 {
     $smeId = $data['smeId'];
     $content = $data['content'];
+    deleteSubpageArticles($smeId); // Clean up old articles before inserting new ones
     foreach ($content as $container) {
         $artId = insertArticle($smeId);
+        $displayOrder = 1; // Initialize display order
         foreach ($container['containerContent'] as $component) {
-            insertComponent($artId, $component);
+            insertComponent($artId, $component, $displayOrder);
+            $displayOrder++;
         }
     }
 }
 
-// alle artikel mit componenten löschen
-function deleteSubpageArticles($smeID)
+// Delete all articles with components for a specific subpage entry
+function deleteSubpageArticles($smeId)
 {
-    $articleids = select("SELECT artId FROM components WHERE artId = $smeID");
-    foreach ($articleids as $articleid) {
-        query('DELETE FROM components WHERE artId = ' . $articleid['artId']);
+    $articleIds = select("SELECT artId FROM articles WHERE smeId = $smeId");
+    foreach ($articleIds as $article) {
+        query('DELETE FROM components WHERE artId = ' . $article['artId']);
     }
-    query("DELETE FROM articles WHERE smeId = $smeID");
+    query("DELETE FROM articles WHERE smeId = $smeId");
 }
 
+// Insert a new article
 function insertArticle($smeId)
 {
     query("INSERT INTO articles (smeId) VALUES ($smeId)");
     return select("SELECT artId FROM articles WHERE smeId = $smeId ORDER BY artId DESC LIMIT 1")[0]['artId'];
 }
 
-function insertComponent($artId, $component)
+// Insert a new component
+function insertComponent($artId, $component, $displayOrder)
 {
     $type = $component['type'];
-    $content = json_encode($component['entryContent'] ?? []);
-    query("INSERT INTO components (artId, type, content) VALUES ($artId, '$type', '$content')");
+    $content = json_encode($component['entryContent']);
+    query("INSERT INTO components (artId, type, content, displayOrder) VALUES ($artId, '$type', '$content', $displayOrder)");
 }
 ?>
