@@ -384,18 +384,17 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
 
 
   function setChildNodes(element) {
-      if (element.nodeType === Node.ELEMENT_NODE) {
-        resetEventBehavior(element);
-
-        if (element.id === "") {
-          element.id = Math.random().toString(36).substring(7);
-        }
-        if (element.childNodes.length !== 0) {
-          element.childNodes.forEach((child) => {
-            setChildNodes(child);
-          });
-        }
+    if (element.nodeType === Node.ELEMENT_NODE) {
+      resetEventBehavior(element);
+      if (element.id === "") {
+        element.id = Math.random().toString(36).substring(7);
       }
+      if (element.childNodes.length !== 0) {
+        element.childNodes.forEach((child) => {
+          setChildNodes(child);
+        });
+      }
+    }
   }
 
   function deleteElement(e) {
@@ -436,7 +435,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     });
     element.addEventListener('dragstart',(e) => pagePreviewDragStart(e));
     element.addEventListener('keydown', (e) => {
-      e.preventDefault();
       if (e.code === 'KeyAlt' && e.code === 'KeyW') {
         currentElement = e.target;
         new bootstrap.Modal(document.getElementById("dimensionChange")).toggle();
@@ -463,7 +461,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
         element.draggable = true;
       }
       element.addEventListener('keydown', (e) => {
-        e.preventDefault();
         if (e.code === 'KeyAlt' && e.code === 'KeyF') {
           currentElement = e.target;
           new bootstrap.Modal(document.getElementById("textInsert")).toggle();
@@ -483,21 +480,11 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       element.innerHTML = "";
       new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
       element.addEventListener('keydown', (e) => {
-        e.preventDefault();
         if (e.code === 'KeyAlt' && e.code === 'KeyL') {
           currentLinkElement = element;
           if (element.parentElement.querySelector("a") === null) {
             new bootstrap.Modal(document.getElementById("linkInsert")).toggle();
           }
-        }
-      });
-    }
-    if (element.classList.contains("previewCarousel")) {
-      element.addEventListener('keydown', (e) => {
-        e.preventDefault();
-        if (e.code === 'KeyAlt' && e.code === 'KeyI') {
-          currentElement = element;
-          new bootstrap.Modal(document.getElementById("carouselInsert")).toggle();
         }
       });
     }
@@ -538,6 +525,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     if (e.target.classList.contains("insertedElement") || e.target.classList.contains("insertedContainerElement")) {
       e.target.innerHTML = "";
     }
+    debugger
     if (e.target.classList.contains("insertedContainerElement") || element.classList.contains("previewContainer")) {
       e.target.appendChild(element);
       resetEventBehavior(element);
@@ -711,22 +699,18 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
   function setContentEditable() {
     editing = !editing;
     if (editing) {
-      debugger
       document.getElementById('containerEditableButton').innerHTML = "Exit Container Edit Mode"
-      document.querySelectorAll('.previewText').forEach((element) => {
-        if (element.parentElement !== document.getElementById('templateRenderer')) {
-          element.children[0].contentEditable = true;
-          debugger
-          element.draggable = false;
-          element.children[0].focus();
+      document.querySelectorAll('.previewContainer').forEach((element) => {
+        if (element.parentElement === document.getElementById('pagePreview')) {
+          element.contentEditable = true;
+          element.focus();
         }
       });
     } else {
       document.getElementById('containerEditableButton').innerHTML = "Enter Container Edit Mode"
-      document.querySelectorAll('.previewText').forEach((element) => {
-        if (element.parentElement !== document.getElementById('templateRenderer')) {
-          element.children[0].contentEditable = false;
-          element.draggable = true;
+      document.querySelectorAll('.previewContainer').forEach((element) => {
+        if (element.parentElement === document.getElementById('pagePreview')) {
+          element.contentEditable = false;
         }
       });
     }
