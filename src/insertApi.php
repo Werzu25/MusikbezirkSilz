@@ -21,6 +21,7 @@ function insertData($data)
 {
     $smeId = $data['smeId'];
     $content = $data['content'];
+    deleteSubpageArticles($smeId);
     deleteSubpageArticles($smeId); // Clean up old articles before inserting new ones
     foreach ($content as $container) {
         $artId = insertArticle($smeId);

@@ -382,9 +382,11 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     element.id = Math.random().toString(36).substring(7);
   });
 
+
   function setChildNodes(element) {
       if (element.nodeType === Node.ELEMENT_NODE) {
         resetEventBehavior(element);
+
         if (element.id === "") {
           element.id = Math.random().toString(36).substring(7);
         }
@@ -699,7 +701,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     let width = document.getElementById('widthImageInput').value;
     let height = document.getElementById('heightImageInput').value;
     let image = document.createElement('img');
-    image.src = "../assets/images/" + imagePath;
+    image.src = "/MusikbezirkSilz/assets/images/" + imagePath;
     image.style.width = width;
     image.style.height = height;
     currentElement.innerHTML = "";
@@ -729,6 +731,7 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       });
     }
   }
+
   function saveContent() {
     class JsonOutput {
       constructor(smeId, content) {
@@ -825,10 +828,6 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
       }
     };
     xhr.send("smeId="+JSON.stringify({ smeId: smeId }));
-  }
-
-  function insertCarouselField() {
-
   }
 </script>
 </html>
