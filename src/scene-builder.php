@@ -711,17 +711,20 @@ if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] !== true) {
     if (editing) {
       debugger
       document.getElementById('containerEditableButton').innerHTML = "Exit Container Edit Mode"
-      document.querySelectorAll('.previewContainer').forEach((element) => {
-        if (element.parentElement === document.getElementById('pagePreview')) {
-          element.contentEditable = true;
-          element.focus();
+      document.querySelectorAll('.previewText').forEach((element) => {
+        if (element.parentElement !== document.getElementById('templateRenderer')) {
+          element.children[0].contentEditable = true;
+          debugger
+          element.draggable = false;
+          element.children[0].focus();
         }
       });
     } else {
       document.getElementById('containerEditableButton').innerHTML = "Enter Container Edit Mode"
-      document.querySelectorAll('.previewContainer').forEach((element) => {
-        if (element.parentElement === document.getElementById('pagePreview')) {
-          element.contentEditable = false;
+      document.querySelectorAll('.previewText').forEach((element) => {
+        if (element.parentElement !== document.getElementById('templateRenderer')) {
+          element.children[0].contentEditable = false;
+          element.draggable = true;
         }
       });
     }
